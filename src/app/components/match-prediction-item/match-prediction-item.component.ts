@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import Match from '../models/match.model'
 
 @Component({
   selector: 'app-match-prediction-item',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./match-prediction-item.component.css']
 })
 export class MatchPredictionItemComponent implements OnInit {
+  @Input() match: Match
 
   constructor() { }
 

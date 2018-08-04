@@ -17,6 +17,7 @@ import { UserLoginComponent } from './components/auth/user-login/user-login.comp
 import { UserSignupComponent } from './components/auth/user-signup/user-signup.component';
 import { UserListItemComponent } from './components/users/user-list-item/user-list-item.component';
 import { UserListComponent } from './components/users/user-list/user-list.component';
+import { GameListItemComponent } from './components/game-list-item/game-list-item.component';
 
 
 const appRoutes: Routes = [
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     GameCreateComponent,
     MatchPredictionListComponent,
     UserListItemComponent,
-    UserListComponent
+    UserListComponent,
+    GameListItemComponent
   ],
   imports: [
     BrowserModule,
