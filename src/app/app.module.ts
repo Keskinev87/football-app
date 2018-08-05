@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component'
@@ -18,6 +19,7 @@ import { UserSignupComponent } from './components/auth/user-signup/user-signup.c
 import { UserListItemComponent } from './components/users/user-list-item/user-list-item.component';
 import { UserListComponent } from './components/users/user-list/user-list.component';
 import { GameListItemComponent } from './components/game-list-item/game-list-item.component';
+
 
 
 const appRoutes: Routes = [
@@ -51,7 +53,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
