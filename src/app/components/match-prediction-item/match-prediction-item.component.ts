@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import Match from '../models/match.model'
+import { Match } from '../models/match.model'
 
 @Component({
   selector: 'app-match-prediction-item',

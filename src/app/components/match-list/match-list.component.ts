@@ -1,20 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import Match from '../models/match.model'
+import { Subscription } from 'rxjs'
+
+import { Match } from '../models/match.model';
+import { MatchesService } from '../../services/matches.service';
+
 
 @Component({
   selector: 'app-match-list',
   templateUrl: './match-list.component.html',
-  styleUrls: ['./match-list.component.css']
+  styleUrls: ['./match-list.component.css'],
+  providers: [MatchesService]
 })
 export class MatchListComponent implements OnInit {
 
-  matches = [{id:1, leagueName:'Champions league', stage:'perliminary', dateStart:'2018-08-05', dateEnd: '2018-08-05', homeTeam:'Barcelona', awayTeam:'Real Madrid', homeTeamResult:null,
-  awayTeamResult: null, scorer: null}, {id:2, leagueName:'Champions league', stage:'perliminary', dateStart:'2018-08-05', dateEnd: '2018-08-05', homeTeam:'Juventus', awayTeam:'Bayern Munich', homeTeamResult:null,
-  awayTeamResult: null, scorer: null}]
+  matches: Match[]
+  private subscription: Subscription;
 
+  constructor(private matchService: MatchesService) {}
 
   ngOnInit() {
-
+    this.matches = this.matchService.getMatches();
+    this.subscription = this.matchService.matchesChanged
+      .subscribe(
+        (matches: Match[]) => {
+          this.matches = matches
+        }
+      )
   }
 
 }
