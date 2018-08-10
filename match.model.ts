@@ -1,87 +1,55 @@
 export default class Match {
     public id: number;
-    public leagueId: object;
-    public leagueName: string;
+    public competition: {
+		public id: number;
+		public name: string;
+	}
     public season: object {
 		id: number;
 		startDate: Date;
 		endDate: Date;
 		currentMatchday: number;
-		availableStages: Array<string>;
+		availableStages?: Array<string>;
 	};
-    public dateStart: Date;
-    public dateEnd: Date;
-	status: string;
-	minute: number;
-	attendance?: number;
-	matchday?: number;
-	stage: string;
-	group?: string;
-	lastUpdated: Date;
-	referees: Array<object> [{
-		id: number;
-		name: string;
-		nationality?: string;
-	}];
-    public homeTeam: object {
-		id: number;
-		name: string;
-		coach: object {
-			id:number;
-			name: string;
-			countryOfBirth: string;
-			nationality: string;
-		};
-		captain: object {
-			id: number;
-			name: string;
-			shirtNumber: number;
-		};
-		lineup: Array<object> [{
-				id:number;
-				name: string;
-				position: string;
-				shirtNumber: number;
-			};
-		];
-		bench: Array<object> [{
-			id:number;
-			name: string;
-			position: string;
-			shirtNumber: number;
-		}];
+    public utcDate: Date;
+	public status: string;
+	public minute: number;
+	public attendance: number;
+	public matchday: number;
+	public stage: string;
+	public group: string;
+	public lastUpdated: Date;
+    public homeTeam: {
+		public id: number;
+		public name: string;
 	};
-    public awayTeam: object {
-		id: number;
-		name: string;
-		coach: object {
-			id:number;
-			name: string;
-			countryOfBirth: string;
-			nationality: string;
-		};
-		captain: object {
-			id: number;
-			name: string;
-			shirtNumber: number;
-		};
-		lineup: Array<object> [{
-				id:number;
-				name: string;
-				position: string;
-				shirtNumber: number;
-			};
-		];
-		bench: Array<object> [{
-			id:number;
-			name: string;
-			position: string;
-			shirtNumber: number;
-		}];
+    public awayTeam: {
+		public id: number;
+		public name: string;
 	};
-    public score: Array<object>;
-	public goals: Array<object>;
-	public bookings: Array<object>;
-	public substitutions: Array<object>;
+    public score: {
+		public winner: string;
+		public duration: string;
+		public fullTime: {
+			public homeTeam: number;
+			public awayTeam: number;
+		},
+		public halftime: {
+			public homeTeam: number;
+			public awayTeam: number;
+		},
+		public extraTime: {
+			public homeTeam: number;
+			public homeTeam: number;
+		},
+		public penalties: {
+			public homeTeam: number;
+			public awayTeam: number;
+		}
+	}
+	public referees?: Array<object>;
+	public goals?: Array<object>;
+	public bookings?: Array<object>;
+	public substitutions?: Array<object>;
 }
 
