@@ -1,27 +1,59 @@
-// import { Headers, Http } from'@angular/http';
-import { Subject } from 'rxjs';
-
+import { Subject } from "rxjs";
 import { Match } from '../components/models/match.model'
 
 export class MatchesService {
-    matchesChanged = new Subject<Match[]>()
-    
-    private matches: Match[] = [
-       new Match(1, 2001,'Champions league', new Date('2018-08-05'),new Date('2018-08-05'), {name:'Barcelona'},{name:'Real Madrid'}, null,
-        null, null, null, 'perliminary'),
-        new Match(2, 2001,'Champions league', new Date('2018-08-05'),new Date('2018-08-05'), {name:'Juventus'},{name:'PSG'}, null,
-        null, null, null, 'perliminary')
-         
-    ]
+    matches = [ new Match (
+    238916, 
+    {
+        id: 2001,
+        name: "Chamions League"
+    },
+    {
+        id: 175,
+        startDate: new Date("2018-06-26"),
+        endDate: new Date("2018-08-28"),
+        currentMatchday: null,
+        availableStages:[]
+    },
+    new Date("2018-06-26T15:00:00Z"),
+    "FINISHED",
+    null,
+    "PRELIMINARY_SEMI_FINALS",
+    "Preliminary Semi-finals",
+    new Date("2018-07-12T11:09:55Z"),
+    {
+        id: 1879,
+        name: "FC Santa Coloma"
+    },
+    {
+        id: 7282,
+        name: "Drita KF Gjilan"
+    },
+    {
+        winner: "AWAY_TEAM",
+        duration: "EXTRA_TIME",
+        fullTime: {
+            homeTeam: 0,
+            awayTeam: 2
+        },
+        halfTime: {
+            homeTeam: 0,
+            awayTeam: 0
+        },
+        extraTime: {
+            homeTeam: 0,
+            awayTeam: 2
+        },
+        penalties: {
+            homeTeam: null,
+            awayTeam: null
+        }
+    },
+    [])
+    ];
 
     getMatches() {
-       
-        // const token = " f8a83daa19804e2a966103601127b9b5";
-        // const headers = new Headers({'X-Auth-Token': token})
-        // return this.http.get('http://api.football-data.org/v2/competitions/2001/matches?matchday=8')
-        return this.matches.slice();
-
+        return this.matches.slice()
     }
-    
 
 }
