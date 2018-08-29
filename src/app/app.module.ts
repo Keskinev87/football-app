@@ -20,20 +20,13 @@ import { UserListComponent } from './components/users/user-list/user-list.compon
 import { GameListItemComponent } from './components/games/game-list-item/game-list-item.component';
 
 import { MatchesService } from './services/matches.service'
-import { GamesService } from './services/games.service'
+import { GamesService } from './services/games.service';
+import { AppRouterModule } from './modules/app-router.module';
+import { GameNameComponent } from './components/games/game-create/creating-steps/game-name/game-name.component';
+import { ChooseCompetitionsComponent } from './components/games/game-create/creating-steps/choose-competitions/choose-competitions.component';
+import { ChooseMatchesComponent } from './components/games/game-create/creating-steps/choose-matches/choose-matches.component';
+import { ScoreRulesComponent } from './components/games/game-create/creating-steps/score-rules/score-rules.component';
 
-
-
-const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'pending-matches', component: MatchPredictionListComponent},
-  {path: 'games-list', component: GameListComponent},
-  {path: 'users-list', component: UserListComponent},
-  {path: 'game-create', component: GameCreateComponent},
-  {path: 'users', component: UserListComponent},
-  {path: 'login', component: UserLoginComponent},
-  {path: 'signup', component: UserSignupComponent}
-]
 
 @NgModule({
   declarations: [
@@ -51,12 +44,16 @@ const appRoutes: Routes = [
     MatchPredictionListComponent,
     UserListItemComponent,
     UserListComponent,
-    GameListItemComponent
+    GameListItemComponent,
+    GameNameComponent,
+    ChooseCompetitionsComponent,
+    ChooseMatchesComponent,
+    ScoreRulesComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    AppRouterModule
   ],
   providers: [MatchesService, GamesService],
   bootstrap: [AppComponent]
