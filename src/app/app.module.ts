@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http'
+import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component'
@@ -26,6 +26,9 @@ import { GameNameComponent } from './components/games/game-create/creating-steps
 import { ChooseCompetitionsComponent } from './components/games/game-create/creating-steps/choose-competitions/choose-competitions.component';
 import { ChooseMatchesComponent } from './components/games/game-create/creating-steps/choose-matches/choose-matches.component';
 import { ScoreRulesComponent } from './components/games/game-create/creating-steps/score-rules/score-rules.component';
+import { CompetitionsService } from './services/competition.service';
+import { CompetitionListItemComponent } from './components/competitions/competition-list-item/competition-list-item.component';
+import { CompetitionListComponent } from './components/competitions/competition-list/competition-list.component';
 
 
 @NgModule({
@@ -48,14 +51,17 @@ import { ScoreRulesComponent } from './components/games/game-create/creating-ste
     GameNameComponent,
     ChooseCompetitionsComponent,
     ChooseMatchesComponent,
-    ScoreRulesComponent
+    ScoreRulesComponent,
+    CompetitionListItemComponent,
+    CompetitionListComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRouterModule
+    AppRouterModule,
+    FormsModule
   ],
-  providers: [MatchesService, GamesService],
+  providers: [MatchesService, GamesService, CompetitionsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

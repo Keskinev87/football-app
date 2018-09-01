@@ -16,5 +16,13 @@ export class GameListComponent implements OnInit {
     this.games = this.gamesService.getGames()
   }
 
+  onChooseCompetitions() {
+
+  }
+
+  onAddMatches() {
+    
+  }
+
 }
 

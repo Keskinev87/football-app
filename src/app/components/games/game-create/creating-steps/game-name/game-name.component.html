@@ -1,8 +1,36 @@
-<p>
-  game-name works!
-</p>
-<div>
+<h2>Create new Game</h2>
+
+<form id='game-data' (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="form-group">
+    <label for="name">Name of the Game:</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="name"
+      autocomplete="false"
+      ngModel
+      name="name">
+  </div>
+  <div class="form-group">
+    <label for="secretCode">Secret Code:</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="secretCode"
+      ngModel
+      name="secretCode">
+  </div>
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea 
+      class="form-control" 
+      rows="5" 
+      id="description"
+      ngModel
+      name="description"></textarea>
+  </div>
+
   
-  <button class="btn btn-success" routerLink='choose-competitions' (click)="nextStep()">Forward</button>
-</div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
   

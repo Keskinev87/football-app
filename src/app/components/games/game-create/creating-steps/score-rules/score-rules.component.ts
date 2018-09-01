@@ -15,11 +15,4 @@ export class ScoreRulesComponent implements OnInit {
     
   }
 
-  previousStep(){
-    this.router.navigate([this.gamesService.navigateBackwards(this.route.snapshot.routeConfig.path)])
-  }
-
-  createGame() {
-    
-  }
 }

@@ -28,8 +28,8 @@ const appRoutes: Routes = [
     {path: 'users-list', component: UserListComponent},
     {path: 'game-create', component: GameCreateComponent, children:[
         {path: '', component: GameNameComponent},
-        {path: 'choose-competitions', component: ChooseCompetitionsComponent},
-        {path: 'choose-matches', component: ChooseMatchesComponent},
+        {path: ':gameid/choose-competitions', component: ChooseCompetitionsComponent},
+        {path: ':gameid/:competitionid/choose-matches', component: ChooseMatchesComponent},
         {path: 'score-rules', component: ScoreRulesComponent}
     ]},
     {path: 'users', component: UserListComponent},

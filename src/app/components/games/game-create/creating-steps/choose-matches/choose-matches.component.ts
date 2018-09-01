@@ -15,12 +15,4 @@ export class ChooseMatchesComponent implements OnInit {
     
   }
 
-  nextStep(){
-    this.router.navigate([this.gamesService.navigateForward(this.route.snapshot.routeConfig.path)])
-  }
-
-  previousStep(){
-    this.router.navigate([this.gamesService.navigateBackwards(this.route.snapshot.routeConfig.path)])
-  }
-
 }

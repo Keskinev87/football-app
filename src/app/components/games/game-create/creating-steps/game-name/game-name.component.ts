@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesService } from '../../../../../services/games.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-game-name',
@@ -15,7 +16,9 @@ export class GameNameComponent implements OnInit {
   
   }
 
-  nextStep(){
-    this.router.navigate([this.gamesService.navigateForward(this.route.snapshot.routeConfig.path)])
+
+  onSubmit(form: NgForm) {
+    this.gamesService.createNewGame(form.value.name, form.value.secretCode, form.value.description)
+    this.router.navigate(['/games-list'])
   }
 }

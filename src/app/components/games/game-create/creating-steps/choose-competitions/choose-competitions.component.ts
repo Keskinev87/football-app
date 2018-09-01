@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesService } from '../../../../../services/games.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CompetitionsService } from '../../../../../services/competition.service';
 
 @Component({
   selector: 'app-choose-competitions',
@@ -9,17 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ChooseCompetitionsComponent implements OnInit {
 
-  constructor(private gamesService: GamesService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private gamesService: GamesService, private competitionsService: CompetitionsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    
-  }
-
-  nextStep(){
-    this.router.navigate([this.gamesService.navigateForward(this.route.snapshot.routeConfig.path)])
-  }
-
-  previousStep(){
-    this.router.navigate([this.gamesService.navigateBackwards(this.route.snapshot.routeConfig.path)])
+    this.competitionsService.getCompetitions()
   }
 }
