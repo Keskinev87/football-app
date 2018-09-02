@@ -23,7 +23,6 @@ import { MatchesService } from './services/matches.service'
 import { GamesService } from './services/games.service';
 import { AppRouterModule } from './modules/app-router.module';
 import { GameNameComponent } from './components/games/game-create/creating-steps/game-name/game-name.component';
-import { ChooseCompetitionsComponent } from './components/games/game-create/creating-steps/choose-competitions/choose-competitions.component';
 import { ChooseMatchesComponent } from './components/games/game-create/creating-steps/choose-matches/choose-matches.component';
 import { ScoreRulesComponent } from './components/games/game-create/creating-steps/score-rules/score-rules.component';
 import { CompetitionsService } from './services/competition.service';
@@ -49,7 +48,6 @@ import { CompetitionListComponent } from './components/competitions/competition-
     UserListComponent,
     GameListItemComponent,
     GameNameComponent,
-    ChooseCompetitionsComponent,
     ChooseMatchesComponent,
     ScoreRulesComponent,
     CompetitionListItemComponent,

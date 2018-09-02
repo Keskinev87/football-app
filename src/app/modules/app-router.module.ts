@@ -16,9 +16,9 @@ import { UserListItemComponent } from '.././components/users/user-list-item/user
 import { UserListComponent } from '.././components/users/user-list/user-list.component';
 import { GameListItemComponent } from '.././components/games/game-list-item/game-list-item.component';
 import { GameNameComponent } from '../components/games/game-create/creating-steps/game-name/game-name.component';
-import { ChooseCompetitionsComponent } from '../components/games/game-create/creating-steps/choose-competitions/choose-competitions.component';
 import { ChooseMatchesComponent } from '../components/games/game-create/creating-steps/choose-matches/choose-matches.component';
 import { ScoreRulesComponent } from '../components/games/game-create/creating-steps/score-rules/score-rules.component';
+import { CompetitionListComponent } from '../components/competitions/competition-list/competition-list.component';
 
 
 const appRoutes: Routes = [
@@ -28,10 +28,10 @@ const appRoutes: Routes = [
     {path: 'users-list', component: UserListComponent},
     {path: 'game-create', component: GameCreateComponent, children:[
         {path: '', component: GameNameComponent},
-        {path: ':gameid/choose-competitions', component: ChooseCompetitionsComponent},
-        {path: ':gameid/:competitionid/choose-matches', component: ChooseMatchesComponent},
         {path: 'score-rules', component: ScoreRulesComponent}
     ]},
+    {path: 'competitions', component: CompetitionListComponent},
+    {path: ':gameid/:competitionid/choose-matches', component: ChooseMatchesComponent},
     {path: 'users', component: UserListComponent},
     {path: 'login', component: UserLoginComponent},
     {path: 'signup', component: UserSignupComponent}

@@ -8,12 +8,16 @@ import { CompetitionsService } from '../../../services/competition.service';
 })
 export class CompetitionListComponent implements OnInit {
 
-  public competitions = []
+  public competitions: any
 
-  constructor(private competitionsService: CompetitionsService) { }
+  constructor(private competitionService: CompetitionsService) { }
 
   ngOnInit() {
-    this.competitions = this.competitionsService.getCompetitions();
+    this.competitionService.getCompetitions()
+      .subscribe(
+        (response) => this.competitions = response.competitions,
+        (error) => console.log(error)
+      );
   }
 
 }
