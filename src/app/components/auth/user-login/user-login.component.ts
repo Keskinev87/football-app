@@ -24,25 +24,31 @@ export class UserLoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
-    let user = new User(form.value.password, form.value.email)
+    let user = new User(form.value.email, form.value.password)
     this.authService.loginUser(user).subscribe(
       (response: any) => {
         console.log(response)
-        // if (response.Error) {
-        //   this.error = true
-        //   this.errorMsg = response.Error
-        //   //TODO: Make it dissapear with animation
-        // }
-        // else if (response.Success) {
-        //   this.success = true
-        //   this.successMsg = response.Success
-        // }
-        // else {
-        //   this.error = true
-        //   this.errorMsg = 'Could not create user. Please contact support!'
-        // }
+        if (response.error) {
+          this.error = true
+          this.errorMsg = response.error
+          //TODO: Make it dissapear with animation
+        }
+        else if (response.success) {
+          if (this.error) this.error = false
+          this.success = true
+          this.successMsg = response.success
+          this.authService.saveToken(response.token)
+          console.log("tuk sam")
+        }
+        else {
+          this.error = true
+          this.errorMsg = response.error
+        }
       },
-      (error) => console.log(error)
+      (error) => {
+        this.error = true
+        this.errorMsg = error.error
+      }
     )
   }
 

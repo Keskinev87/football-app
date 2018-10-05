@@ -1,7 +1,7 @@
 export class User {
     constructor(
-        private password: string,
         public username: string,
+        private password: string,
         private fullName?: string,
         public otherData?: Array<object>,
         public games?: Array<number>

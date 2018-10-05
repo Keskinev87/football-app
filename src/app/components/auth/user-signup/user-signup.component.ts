@@ -24,24 +24,32 @@ export class UserSignupComponent implements OnInit {
   }
 
   onSignup(form: NgForm) {
-    let user = new User(form.value.fullName, form.value.password, form.value.email)
+    let user = new User(form.value.email, form.value.password, form.value.fullName)
     this.authService.signupUser(user).subscribe(
       (response: any) => {
-        if (response.Error) {
+        console.log(response)
+        if (response.error) {
+          if (this.success==true) this.success=false
           this.error = true
-          this.errorMsg = response.Error
+          this.errorMsg = response.error
           //TODO: Make it dissapear with animation
         }
-        else if (response.Success) {
+        else if (response.success) {
+          if (this.error) this.error = false
           this.success = true
-          this.successMsg = response.Success
+          this.successMsg = response.success
         }
         else {
+          if (this.success==true) this.success=false
           this.error = true
-          this.errorMsg = 'Could not create user. Please contact support!'
+          this.errorMsg = response.error
         }
       },
-      (error) => console.log(error)
+      (error) => {
+        if (this.success==true) this.success=false
+        this.error = true
+        this.errorMsg = error.error
+      }
     )
   }
 

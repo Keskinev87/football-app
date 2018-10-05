@@ -19,4 +19,14 @@ export class AuthService {
     loginUser(user: User) {
         return this.httpClient.post('http://localhost:3000/user/login', user, {observe:'body'})
     }
+
+    saveToken(token: string) {
+        localStorage.setItem('token', token)
+        console.log(token)
+    }
+
+    getToken() {
+        let token:string = localStorage.getItem('token')
+        return token
+    }
 }
