@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
 
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component'
 import { GameCreateComponent } from './components/games/game-create/game-create.component';
@@ -28,6 +29,7 @@ import { ScoreRulesComponent } from './components/games/game-create/creating-ste
 import { CompetitionsService } from './services/competition.service';
 import { CompetitionListItemComponent } from './components/competitions/competition-list-item/competition-list-item.component';
 import { CompetitionListComponent } from './components/competitions/competition-list/competition-list.component';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -59,7 +61,7 @@ import { CompetitionListComponent } from './components/competitions/competition-
     AppRouterModule,
     FormsModule
   ],
-  providers: [MatchesService, GamesService, CompetitionsService],
+  providers: [MatchesService, GamesService, CompetitionsService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

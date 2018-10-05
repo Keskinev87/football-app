@@ -1,8 +1,10 @@
-export default class User {
-    public id: string;
-    private name: string;
-    private password: string;
-    public email: string;
-    public otherData: Array<object>;
-    public games: Array<number>;
+export class User {
+    constructor(
+        private password: string,
+        public username: string,
+        private fullName?: string,
+        public otherData?: Array<object>,
+        public games?: Array<number>
+    ) {}
+    
 }
