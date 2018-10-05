@@ -29,4 +29,13 @@ export class AuthService {
         let token:string = localStorage.getItem('token')
         return token
     }
+
+    isAuthenticated() {
+        if (this.getToken != null) return true
+        else return false
+    }
+
+    logout() {
+        localStorage.removeItem('token')
+    }
 }
