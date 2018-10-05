@@ -3,17 +3,41 @@
   <form (ngSubmit)="onSignup(f)" #f="ngForm">
       <div class="form-group">
           <label for="fullName">Name</label>
-          <input class="form-control" type="text" id="fullName" name="fullName" ngModel>
+          <input class="form-control" 
+          type="text" 
+          id="fullName" 
+          name="fullName" 
+          ngModel
+          required
+          #fullName="ngModel">
       </div>
+      <span class="help-block" *ngIf="!fullName.valid && fullName.touched">Please enter your name!</span>
       <div class="form-group">
         <label for="email">Mail</label>
-        <input class="form-control"type="email" id="email" name="email" ngModel>
+        <input class="form-control"
+        type="email" 
+        id="email" 
+        name="email" 
+        ngModel
+        required
+        email
+        #email="ngModel">
       </div>
+      <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid e-mail!</span>
       <div class="form-group">
         <label for="password">Password</label>
-        <input class="form-control"type="password" id="password" name="password" ngModel>
+        <input class="form-control"
+        type="password" 
+        id="password" 
+        name="password" 
+        ngModel
+        required
+        #password="ngModel">
       </div>
-      <button class="btn btn-primary" type="submit">Sign Up</button>
+      <span class="help-block" *ngIf="!password.valid && password.touched">Please enter a password!</span>
+      <button class="btn btn-primary"
+        type="submit"
+        [disabled]="!f.valid">Sign Up</button>
       <div class="alert alert-success" *ngIf="success">
         {{successMsg}}
       </div>

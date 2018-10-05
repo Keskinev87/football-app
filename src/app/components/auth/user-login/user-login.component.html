@@ -7,13 +7,24 @@
               type="email" 
               id="email" 
               name="email" 
-              ngModel>
+              ngModel
+              required
+              email
+              #email="ngModel">
       </div>
+      <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid e-mail!</span>
       <div class="form-group">
         <label for="password">Password</label>
-        <input class="form-control"type="password" id="password" name="password" ngModel>
+        <input class="form-control"
+              type="password" 
+              id="password" 
+              name="password" 
+              ngModel
+              required
+              #password="ngModel">
       </div>
-      <button class="btn btn-primary" type="submit">Sign In</button>
+      <span class="help-block" *ngIf="!password.valid && password.touched">Please enter a password!</span>
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Sign In</button>
       <div class="alert alert-success" *ngIf="success">
         {{successMsg}}
       </div>
