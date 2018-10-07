@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  menuClicked: boolean = false
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    if (window.screen.width >= 992) { 
+      this.menuClicked = true;
+    }
+  }
+
+  onLogout() {
+    this.authService.logout()
+  }
+
+  openMenu() {
+    this.menuClicked = !this.menuClicked
   }
 
 }

@@ -10,6 +10,21 @@ import { NgForm } from '@angular/forms';
 })
 export class GameNameComponent implements OnInit {
 
+  gameOptions: Array<Object> = [
+    {
+      option: 'Standard',
+      description: 'Description 1'
+    },
+    {
+      option: 'Detailed',
+      description: 'Description 2'
+    },
+    {
+      option: 'Dynamic',
+      description: 'Description 3'
+    }
+  ]
+
   constructor(private gamesService: GamesService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
-import { Injectable } from "../../../node_modules/@angular/core";
-import { MatchesService } from "./matches.service";
 import { Game } from "../components/models/game.model"
+import { Injectable } from "../../../node_modules/@angular/core";
+
+@Injectable()
 
 export class GamesService {
 

@@ -16,7 +16,7 @@ export class CompetitionListComponent implements OnInit {
   ngOnInit() {
     this.competitionService.getCompetitions()
       .subscribe(
-        (response) => console.log(response),
+        (response: any) => this.competitions = response.competitions,
         (error) => console.log(error)
       );
   }

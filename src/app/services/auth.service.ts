@@ -1,11 +1,12 @@
-import { HttpClient, HttpHeaders, HttpResponse, HttpRequest } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { User } from '../components/models/user.model'
+import { Router } from '../../../node_modules/@angular/router';
 
 @Injectable()
 export class AuthService {
     
-    constructor( private httpClient: HttpClient) {
+    constructor( private httpClient: HttpClient, private router: Router) {
         
     }
 
@@ -22,7 +23,6 @@ export class AuthService {
 
     saveToken(token: string) {
         localStorage.setItem('token', token)
-        console.log(token)
     }
 
     getToken() {
@@ -31,11 +31,12 @@ export class AuthService {
     }
 
     isAuthenticated() {
-        if (this.getToken != null) return true
+        if (this.getToken() != null) return true
         else return false
     }
 
     logout() {
         localStorage.removeItem('token')
+        this.router.navigate(['/login'])
     }
 }

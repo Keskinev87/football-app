@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
 import { HomeComponent } from '.././components/home/home.component'
-import { GameCreateComponent } from '.././components/games/game-create/game-create.component';
 import { GameListComponent } from '.././components/games/game-list/game-list.component';
 import { GameViewComponent } from '.././components/games/game-view/game-view.component';
 import { HeaderComponent } from '.././components/header/header.component';
@@ -19,19 +18,27 @@ import { GameNameComponent } from '../components/games/game-create/creating-step
 import { ChooseMatchesComponent } from '../components/games/game-create/creating-steps/choose-matches/choose-matches.component';
 import { ScoreRulesComponent } from '../components/games/game-create/creating-steps/score-rules/score-rules.component';
 import { CompetitionListComponent } from '../components/competitions/competition-list/competition-list.component';
+import { AuthGuard } from '../services/authGuard.service';
 
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent, pathMatch:'full'},
-    {path: 'pending-matches', component: MatchPredictionListComponent},
-    {path: 'games-list', component: GameListComponent},
+    {path: 'pending-matches', component: MatchPredictionListComponent, canActivate:[AuthGuard]},
     {path: 'users-list', component: UserListComponent},
-    {path: 'game-create', component: GameCreateComponent, children:[
-        {path: '', component: GameNameComponent},
-        {path: 'score-rules', component: ScoreRulesComponent}
+    {path: 'games', canActivate:[AuthGuard], children:[
+        {path: '', component: GameListComponent, canActivate:[AuthGuard]},
+        {path: 'create', component: GameNameComponent, children:[
+            {path: 'competitions', component: CompetitionListComponent},
+            {path: 'matches', component: ChooseMatchesComponent},
+            {path: 'score-rules', component: ScoreRulesComponent}
+        ]},
+        {path: 'edit/:gameid', component: GameNameComponent, children:[
+            {path: 'competitions', component: CompetitionListComponent},
+            {path: 'matches', component: ChooseMatchesComponent},
+            {path: 'score-rules', component: ScoreRulesComponent}
+        ]}
     ]},
     {path: 'competitions', component: CompetitionListComponent},
-    {path: ':gameid/:competitionid/choose-matches', component: ChooseMatchesComponent},
     {path: 'users', component: UserListComponent},
     {path: 'login', component: UserLoginComponent},
     {path: 'signup', component: UserSignupComponent}

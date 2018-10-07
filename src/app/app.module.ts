@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component'
-import { GameCreateComponent } from './components/games/game-create/game-create.component';
 import { GameListComponent } from './components/games/game-list/game-list.component';
 import { GameViewComponent } from './components/games/game-view/game-view.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -30,6 +29,8 @@ import { CompetitionsService } from './services/competition.service';
 import { CompetitionListItemComponent } from './components/competitions/competition-list-item/competition-list-item.component';
 import { CompetitionListComponent } from './components/competitions/competition-list/competition-list.component';
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/authGuard.service';
+import { DropDownDirective } from './directives/dropdown.directive';
 
 
 @NgModule({
@@ -44,7 +45,6 @@ import { AuthService } from './services/auth.service';
     GameListComponent,
     UserLoginComponent,
     UserSignupComponent,
-    GameCreateComponent,
     MatchPredictionListComponent,
     UserListItemComponent,
     UserListComponent,
@@ -53,7 +53,8 @@ import { AuthService } from './services/auth.service';
     ChooseMatchesComponent,
     ScoreRulesComponent,
     CompetitionListItemComponent,
-    CompetitionListComponent
+    CompetitionListComponent,
+    DropDownDirective
   ],
   imports: [
     BrowserModule,
@@ -61,7 +62,7 @@ import { AuthService } from './services/auth.service';
     AppRouterModule,
     FormsModule
   ],
-  providers: [MatchesService, GamesService, CompetitionsService, AuthService],
+  providers: [MatchesService, GamesService, CompetitionsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../../models/user.model'
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -12,7 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class UserSignupComponent implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
   
   success: boolean = false
   error: boolean = false
@@ -27,7 +28,6 @@ export class UserSignupComponent implements OnInit {
     let user = new User(form.value.email, form.value.password, form.value.fullName)
     this.authService.signupUser(user).subscribe(
       (response: any) => {
-        console.log(response)
         if (response.error) {
           if (this.success==true) this.success=false
           this.error = true
@@ -35,9 +35,10 @@ export class UserSignupComponent implements OnInit {
           //TODO: Make it dissapear with animation
         }
         else if (response.success) {
-          if (this.error) this.error = false
-          this.success = true
+          if (this.error) this.error = false //if the user made an error and then succeeded, we should make the error message dissapear
+          this.success = true // show success message
           this.successMsg = response.success
+          this.router.navigate(['/login'])
         }
         else {
           if (this.success==true) this.success=false
