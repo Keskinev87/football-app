@@ -33,7 +33,7 @@
     <div class="panel panel-default col-md-3 col-md-offset-1" *ngFor="let option of gameOptions">
           <div class="panel-heading" align=center><label class="radio-inline" >{{option.option}}</label></div>
           <div class="panel-body center" align="center">
-            <input type="radio" name="optradio" ngModel [value]="option.option">
+            <input type="radio" name="type" ngModel [value]="option.option">
             <p>{{ option.description }}</p>
           </div>
     </div>
