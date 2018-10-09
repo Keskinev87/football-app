@@ -13,7 +13,7 @@ export class GameListComponent implements OnInit {
   constructor(private gamesService: GamesService) {}
 
   ngOnInit() {
-    this.games = this.gamesService.getGames()
+    
   }
 
   onChooseCompetitions() {

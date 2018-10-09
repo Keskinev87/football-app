@@ -49,7 +49,7 @@ export class UserSignupComponent implements OnInit {
       (error) => {
         if (this.success==true) this.success=false
         this.error = true
-        this.errorMsg = error.error
+        this.errorMsg = error.error.error //yes - this is correct. The error message from the server is double nested. At this point it was easier to fixit like this. 
       }
     )
   }

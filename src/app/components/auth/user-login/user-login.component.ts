@@ -28,26 +28,30 @@ export class UserLoginComponent implements OnInit {
     let user = new User(form.value.email, form.value.password)
     this.authService.loginUser(user).subscribe(
       (response: any) => {
-        if (response.error) {
-          this.error = true
-          this.errorMsg = response.error
-          //TODO: Make it dissapear with animation
-        }
-        else if (response.success) {
+        if (response.success) {
           if (this.error) this.error = false //if the user made a mistake and then secceeded, we remove the error msg
           this.success = true //show success message
           this.successMsg = response.success
-          this.authService.saveToken(response.token) //save the token to local memory
-          this.router.navigate(['/pending-matches'])
-        }
-        else {
+
+          if(response.token){
+            this.authService.saveToken(response.token) //Check if token was sent and save it to local memory
+            this.router.navigate(['/pending-matches'])
+          } else {
+            this.router.navigate(['/login'])
+          }
+          
+        } else if (response.error) {
+          this.error = true
+          this.errorMsg = response.error
+          //TODO: Make it dissapear with animation
+        } else {
           this.error = true
           this.errorMsg = response.error
         }
       },
       (error) => {
         this.error = true
-        this.errorMsg = error.error
+        this.errorMsg = error.error.error //yes - this is correct. The error message from the server is double nested. At this point it was easier to fixit like this. 
       }
     )
   }

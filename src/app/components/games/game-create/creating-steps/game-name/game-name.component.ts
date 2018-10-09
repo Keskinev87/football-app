@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GamesService } from '../../../../../services/games.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-game-name',
@@ -25,7 +26,7 @@ export class GameNameComponent implements OnInit {
     }
   ]
 
-  constructor(private gamesService: GamesService, private router:Router, private route: ActivatedRoute) { }
+  constructor(private gamesService: GamesService, private router:Router, private authService: AuthService) { }
 
   ngOnInit() {
   
@@ -33,7 +34,25 @@ export class GameNameComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    this.gamesService.createNewGame(form.value.name, form.value.secretCode, form.value.description)
-    this.router.navigate(['/games-list'])
+    let game = {
+      name: form.value.name,
+      type: form.value.type,
+      secretCode: form.value.secretCode,
+      description: form.value.description
+    }
+    let token = this.authService.getToken()
+    if(token){
+      this.gamesService.createNewGame(game, token).subscribe((response) => {
+        console.log(response)
+        this.router.navigate(['/competitions'])
+      }, (error) =>{
+        console.log(error)
+      })
+      
+    }
+    else {
+      this.router.navigate(['/login'])
+    }
+    
   }
 }

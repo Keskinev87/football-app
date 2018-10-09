@@ -1,25 +1,24 @@
 import { Game } from "../components/models/game.model"
 import { Injectable } from "../../../node_modules/@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+
 
 @Injectable()
 
 export class GamesService {
+    games: Array<Game>
 
-    games= [new Game('1', "Yavor's Game","www.abv.bg", 123, [], [],
-     {id:1, name: "Yavor"},"This is a test game", {id:1, name: "YavorAdmin"},[{id:"1a23", name:"Yavorcho",matchPredictions: [], longPredictions: [] }], [])]
+    constructor(private httpClient: HttpClient) {}
 
-    private newGame= new Game('','','',null,[],[],{},'',{},[],[]) ;
+    getGames() {
+        
+    }
 
-     getGames() {
-         return this.games.slice();
-     }
-
-     createNewGame(name:string, secretCode: number, description: string) {
-         this.newGame.name = name;
-         this.newGame.secretCode = secretCode;
-         this.newGame.description = description
-         this.games.push(this.newGame)
-         console.log(this.newGame)
+    createNewGame(game: Object, token: string) {
+            return this.httpClient.post('http://localhost:3000/game/create',
+                game,
+                {headers: new HttpHeaders().append("Authorization", "Bearer " + token),
+                observe:'body'})
          //TODO: Http request to server to save the game. 
-     }
+    }
 }
