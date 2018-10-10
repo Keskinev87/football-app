@@ -34,12 +34,14 @@ export class GameNameComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
+    //create game
     let game = {
       name: form.value.name,
       type: form.value.type,
       secretCode: form.value.secretCode,
       description: form.value.description
     }
+    //TODO: make authentication with interceptors
     let token = this.authService.getToken()
     if(token){
       this.gamesService.createNewGame(game, token).subscribe((response) => {

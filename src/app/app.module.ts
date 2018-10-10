@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
 
 
@@ -31,6 +31,7 @@ import { CompetitionListComponent } from './components/competitions/competition-
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/authGuard.service';
 import { DropDownDirective } from './directives/dropdown.directive';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 
 @NgModule({
@@ -62,7 +63,13 @@ import { DropDownDirective } from './directives/dropdown.directive';
     AppRouterModule,
     FormsModule
   ],
-  providers: [MatchesService, GamesService, CompetitionsService, AuthService, AuthGuard],
+  providers: [
+    MatchesService,
+    GamesService,
+    CompetitionsService, 
+    AuthService, 
+    AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
