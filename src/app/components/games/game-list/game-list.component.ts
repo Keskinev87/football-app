@@ -17,7 +17,6 @@ export class GameListComponent implements OnInit {
 
   ngOnInit() {
     this.gamesState = this.store.select('gamesStore')
-    console.log(this.gamesState)
   }
 
   onChooseCompetitions() {
