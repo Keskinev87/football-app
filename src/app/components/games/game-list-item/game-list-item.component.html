@@ -1,8 +1,9 @@
 <div class="panel panel-primary">
   <div class="panel-heading">{{game.name}}</div>
   <div class="panel-body">
-    <p>Rank: 1</p>
+    <p>Secret Code: {{game.secretCode}}</p>
     <p>Players:{{ game.users.length }}</p>
+    <p>Description:{{game.description}}</p>
     <p>Next match:{{ game.matches[0] }}</p>
     <button class="btn btn-success" (click)="onChooseCompetitions()">Choose Competitions</button>
     <button class="btn btn-success" (click)="onAddMatches()">Add Matches</button>

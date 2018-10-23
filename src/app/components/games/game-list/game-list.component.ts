@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GamesService } from '../../../services/games.service'
+import { Store } from '@ngrx/store';
+import { Game } from '../../models/game.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game-list',
@@ -8,12 +11,13 @@ import { GamesService } from '../../../services/games.service'
   styleUrls: ['./game-list.component.css']
 })
 export class GameListComponent implements OnInit {
-  games = []
+  gamesState: Observable<{games: Game[]}>
 
-  constructor(private gamesService: GamesService) {}
+  constructor(private store: Store<{gamesStore: {games: Game[]}}>) {}
 
   ngOnInit() {
-    
+    this.gamesState = this.store.select('gamesStore')
+    console.log(this.gamesState)
   }
 
   onChooseCompetitions() {

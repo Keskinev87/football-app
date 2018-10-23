@@ -32,6 +32,8 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/authGuard.service';
 import { DropDownDirective } from './directives/dropdown.directive';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { gamesReducer } from './components/games/games.reducers';
 
 
 @NgModule({
@@ -61,7 +63,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     BrowserModule,
     HttpClientModule,
     AppRouterModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({gamesStore: gamesReducer})
   ],
   providers: [
     MatchesService,
