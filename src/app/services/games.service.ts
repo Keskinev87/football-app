@@ -17,8 +17,7 @@ export class GamesService {
     createNewGame(game: Object, token: string) {
             return this.httpClient.post('http://localhost:3000/game/create',
                 game,
-                {headers: new HttpHeaders().append("Authorization", "Bearer " + token),
-                observe:'body'})
+                {observe:'body'})
          //TODO: Http request to server to save the game. 
     }
 }
