@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./game-list.component.css']
 })
 export class GameListComponent implements OnInit {
+
+  
   gamesState: Observable<{games: Game[]}>
 
   constructor(private store: Store<{gamesStore: {games: Game[]}}>) {}
