@@ -30,7 +30,7 @@
       name="description"></textarea>
   </div>
   <div class="form-group">
-    <div class="panel panel-default col-md-3 col-md-offset-1" *ngFor="let option of gameOptions">
+    <div class="panel panel-default col-md-3 col-md-offset-1" *ngFor="let option of (gamesState | async).gameOptions">
           <div class="panel-heading" align=center><label class="radio-inline" >{{option.option}}</label></div>
           <div class="panel-body center" align="center">
             <input type="radio" name="type" ngModel [value]="option.option">

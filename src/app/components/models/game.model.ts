@@ -9,10 +9,10 @@ export class Game {
     public shareableUrl?: string,
     public leagues?: Array<object>,
     public matches?: Array<object>,
-    public creator?: object,
-	public admin?: object,
-	public users?: Array<object>,
-    public other?: Array<object>
+    public creator?: string,
+	public admin?: string,
+	public users?: Array<string>,
+    public other?: Array<string>
     ) {}
 
 }

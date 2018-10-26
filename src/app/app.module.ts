@@ -33,7 +33,7 @@ import { AuthGuard } from './services/authGuard.service';
 import { DropDownDirective } from './directives/dropdown.directive';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { StoreModule } from '@ngrx/store';
-import { gamesReducer } from './components/games/games.reducers';
+import { reducers } from './app.reducers';
 
 
 @NgModule({
@@ -64,7 +64,7 @@ import { gamesReducer } from './components/games/games.reducers';
     HttpClientModule,
     AppRouterModule,
     FormsModule,
-    StoreModule.forRoot({gamesStore: gamesReducer})
+    StoreModule.forRoot(reducers)
   ],
   providers: [
     MatchesService,

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { GamesService } from '../../../../../services/games.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../../../../../services/auth.service';
 import { Store } from '@ngrx/store'
 import { Game } from '../../../../models/game.model'
 import * as GamesActions from '../../../games.actions'
+import * as fromApp from '../../../../../app.reducers'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game-name',
@@ -14,25 +13,12 @@ import * as GamesActions from '../../../games.actions'
 })
 export class GameNameComponent implements OnInit {
 
-  gameOptions: Array<Object> = [
-    {
-      option: 'Standard',
-      description: 'Description 1'
-    },
-    {
-      option: 'Detailed',
-      description: 'Description 2'
-    },
-    {
-      option: 'Dynamic',
-      description: 'Description 3'
-    }
-  ]
+  gamesState: Observable<any>
 
-  constructor(private gamesService: GamesService, private router:Router, private authService: AuthService, private store: Store<{gamesStore: {games: Game[]}}>) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
-  
+    this.gamesState = this.store.select('games')
   }
 
 
@@ -41,11 +27,11 @@ export class GameNameComponent implements OnInit {
     let game = new Game (
       form.value.name,
       form.value.type,
-      form.value.secretCode,
-      form.value.description
+      form.value.description,
+      form.value.secretCode
     )
 
-    this.store.dispatch(new GamesActions.AddGame(game))
+    this.store.dispatch(new GamesActions.CreateGame(game))
     
 
     // let token = this.authService.getToken()
