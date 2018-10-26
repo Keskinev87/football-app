@@ -20,7 +20,6 @@ import { UserListComponent } from './components/users/user-list/user-list.compon
 import { GameListItemComponent } from './components/games/game-list-item/game-list-item.component';
 
 import { MatchesService } from './services/matches.service'
-import { GamesService } from './services/games.service';
 import { AppRouterModule } from './modules/app-router.module';
 import { GameNameComponent } from './components/games/game-create/creating-steps/game-name/game-name.component';
 import { ChooseMatchesComponent } from './components/games/game-create/creating-steps/choose-matches/choose-matches.component';
@@ -68,7 +67,6 @@ import { reducers } from './app.reducers';
   ],
   providers: [
     MatchesService,
-    GamesService,
     CompetitionsService, 
     AuthService, 
     AuthGuard,

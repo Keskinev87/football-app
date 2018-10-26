@@ -8,9 +8,9 @@
       </button>
       <a class="navbar-brand" routerLink='/'>WebSiteName</a>
     </div>
-    <div class="collapse navbar-collapse show" id="myNavbar" *ngIf="menuClicked">
+    <div class="collapse navbar-collapse show" id="myNavbar">
       <ul class="nav navbar-nav">
-        <ng-template [ngIf]="authService.isAuthenticated()">
+        <ng-template [ngIf]="(authState | async).isAuthenticated">
           <li routerLinkActive="active"><a routerLink='pending-matches'>Pending Matches</a></li>
           <li routerLinkActive="active"><a routerLink='games'>Games</a></li>
           <li routerLinkActive="active"><a routerLink='games/create'>Create Game</a></li>
@@ -20,11 +20,11 @@
       </ul>
       
         <ul class="nav navbar-nav navbar-right">
-          <ng-template [ngIf]="!authService.isAuthenticated()">
+          <ng-template [ngIf]="!(authState | async).isAuthenticated">
           <li routerLinkActive="active"><a routerLink="signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
           <li routerLinkActive="active"><a routerLink="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           </ng-template>
-          <ng-template [ngIf]="authService.isAuthenticated()">
+          <ng-template [ngIf]="(authState | async).isAuthenticated">
           <li><a style="cursor: pointer" (click)="onLogout()"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
           </ng-template>
         </ul>
