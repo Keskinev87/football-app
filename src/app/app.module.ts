@@ -33,6 +33,8 @@ import { DropDownDirective } from './directives/dropdown.directive';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './app.reducers';
+import { EffectsModule } from "@ngrx/effects"
+import { AuthEffects } from "./components/auth/auth-store/auth.effects"
 
 
 @NgModule({
@@ -63,7 +65,8 @@ import { reducers } from './app.reducers';
     HttpClientModule,
     AppRouterModule,
     FormsModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [
     MatchesService,

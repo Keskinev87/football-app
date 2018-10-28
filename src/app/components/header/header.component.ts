@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   
-  authState: Observable<fromAuth.State>
+  authState: Observable<{isAuthenticated: boolean}>
   menuClicked: boolean = false
 
   constructor(private authService: AuthService, private store: Store<fromApp.AppState>) {}
