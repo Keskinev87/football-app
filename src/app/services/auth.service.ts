@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { User } from '../components/models/user.model'
 import { Router } from '../../../node_modules/@angular/router';
+import * as jwt_decode from 'jwt-decode'
 
 @Injectable()
 export class AuthService {
@@ -10,33 +11,21 @@ export class AuthService {
         
     }
 
-    signupUser(user: User ) {
-        return this.httpClient.post('http://localhost:3000/user/register', user, {observe:'body'})
-
-        // const req = new HttpRequest<any>('POST', 'http://localhost:3000/user/register', user)
-        // return this.httpClient.request(req)
+    isTokenExpired(token: string) {
+        if(!token) return true;
+        const date = this.getTokenExpirationDate(token);
+        if(date === undefined) return false;
+        return !(date.valueOf() > new Date().valueOf());
     }
 
-    loginUser(user: User) {
-        return this.httpClient.post('http://localhost:3000/user/login', user, {observe:'body'})
-    }
+    getTokenExpirationDate(token: string): Date {
+        console.log("here I am")
+        const decoded = jwt_decode(token);
+        console.log(decoded)
+        if (decoded.exp === undefined) return null;
 
-    saveToken(token: string) {
-        localStorage.setItem('token', token)
-    }
-
-    getToken() {
-        let token:string = localStorage.getItem('token')
-        return token
-    }
-
-    isAuthenticated() {
-        if (this.getToken() != null) return true
-        else return false
-    }
-
-    logout() {
-        localStorage.removeItem('token')
-        this.router.navigate(['/login'])
+        const date = new Date(0); 
+        date.setUTCSeconds(decoded.exp);
+        return date;
     }
 }

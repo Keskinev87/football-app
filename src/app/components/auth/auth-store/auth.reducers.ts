@@ -7,8 +7,7 @@ export interface State {
     isAuthenticated: boolean,
     error: boolean,
     errorMsg: string,
-    success: boolean,
-    successMsg: string
+    success: boolean
 }
 
 const initialState = {
@@ -24,6 +23,21 @@ const initialState = {
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
     
     switch (action.type) {
+        case(AuthActions.SIGNIN):
+            return {
+                ...state,
+                isAuthenticated: true,
+                error: false,
+                errorMsg: '',
+                success: true,
+            }
+        case (AuthActions.SIGNIN_FAILED):
+            return {
+                ...state,
+                isAuthenticated: false,
+                error: true,
+                errorMsg: action.payload
+            }
         case(AuthActions.SIGNUP):
             return {
                 ...state,
@@ -39,21 +53,26 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
                 error: true,
                 errorMsg: action.payload
             }
-        case(AuthActions.SIGNIN):
-            return {
-                ...state,
-                isAuthenticated: true
-            }
         case(AuthActions.LOGOUT):
+            localStorage.removeItem('token')
             return {
                 ...state,
-                isAuthenticated: false
+                isAuthenticated: false,
+                token: ''
             }
         case(AuthActions.SET_TOKEN):
             return {
                 ...state,
                 token: action.payload
-            }    
+            }
+        case(AuthActions.CHECK_STATUS):
+            return {
+                ...state
+            }
+        case(AuthActions.DO_NOTHING):
+            return {
+                ...state
+            }
         default:
                 return state;
     }

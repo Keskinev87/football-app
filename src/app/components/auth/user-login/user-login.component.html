@@ -25,11 +25,8 @@
       </div>
       <span class="help-block" *ngIf="!password.valid && password.touched">Please enter a password!</span>
       <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Sign In</button>
-      <div class="alert alert-success" *ngIf="success">
-        {{successMsg}}
-      </div>
-      <div class="alert alert-warning" *ngIf="error">
-        {{errorMsg}}
+      <div class="alert alert-warning" *ngIf="(signinState | async).error">
+        {{(signinState | async).errorMsg}}
       </div>
   </form>
 </div>

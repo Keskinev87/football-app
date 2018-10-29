@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../app.reducers'
-import * as fromAuth from '../auth/auth-store/auth.reducers'
+import * as AuthActions from '../auth/auth-store/auth.actions'
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,14 +15,14 @@ export class HeaderComponent implements OnInit {
   authState: Observable<{isAuthenticated: boolean}>
   menuClicked: boolean = false
 
-  constructor(private authService: AuthService, private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
     this.authState = this.store.select('auth')
   }
 
   onLogout() {
-    this.authService.logout()
+    this.store.dispatch(new AuthActions.Logout())
   }
 
   openMenu() {

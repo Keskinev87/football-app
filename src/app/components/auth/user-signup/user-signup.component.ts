@@ -19,7 +19,6 @@ export class UserSignupComponent implements OnInit {
   signupState: Observable<{
     success: boolean,
     error: boolean,
-    successMsg: string,
     errorMsg: string
   }>
 
