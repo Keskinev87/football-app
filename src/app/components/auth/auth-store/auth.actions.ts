@@ -7,6 +7,7 @@ export const SIGNIN_FAILED = "SIGNIN_FAILED" //If the SIGNIN failed
 export const SIGNUP = "SIGNUP" // This will be executed only if the server returns OK. 
 export const TRY_SIGNUP = "TRY_SIGNUP" // This will be executed when the user clicks "Signup". If the signup is successfull, "SIGNUP" will be dispatched
 export const SIGNUP_FAILED = "SIGNUP_FAILED" // This will be executed if "TRY_SIGNUP" returns error
+export const TRY_LOGOUT = " TRY_LOGOUT" // Will be executed on logout.
 export const LOGOUT = "LOGOUT" // If the Logout is successfull
 export const CHECK_STATUS = "CHECK_STATUS" // THIS GETS FIRED WHEN THE APP STARTS. Checks if there is a token in the localstorage and if the token is expired.
 // If there is no token or it has expired, the "isAuthenticated" will remain false. This is done through the auth.effects.ts
@@ -46,6 +47,10 @@ export class Signup implements Action {
     readonly type = SIGNUP
 }
 
+export class TryLogout implements Action {
+    readonly type = TRY_LOGOUT
+}
+
 export class Logout implements Action {
     readonly type = LOGOUT
 }
@@ -71,4 +76,4 @@ export class DoNothing implements Action {
 }
 
 
-export type AuthActions = Signin | Signup | Logout | SetToken | TrySignup | SignupFailed | GetToken | CheckStatus | SigninFailed | TrySignin | DoNothing
+export type AuthActions = Signin | Signup | Logout | SetToken | TrySignup | SignupFailed | GetToken | CheckStatus | SigninFailed | TrySignin | DoNothing | TryLogout

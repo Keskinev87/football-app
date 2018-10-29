@@ -54,7 +54,6 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
                 errorMsg: action.payload
             }
         case(AuthActions.LOGOUT):
-            localStorage.removeItem('token')
             return {
                 ...state,
                 isAuthenticated: false,

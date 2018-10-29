@@ -7,6 +7,7 @@ import { User } from "../../models/user.model";
 import { HttpClient } from '@angular/common/http';
 import { of } from "rxjs";
 import { AuthService } from "../../../services/auth.service";
+import { Router } from "@angular/router";
 
 
 
@@ -21,11 +22,16 @@ export class AuthEffects {
             return action.payload
         })).pipe(switchMap((user: User) => {
             return this.httpClient.post('http://localhost:3000/user/register', user, {observe:'body'}).pipe(
-                map((body) => new AuthActions.Signup()),
+                map((body: any) =>{
+                    this.router.navigate(['/login'])
+                    return {
+                        type: AuthActions.SIGNUP
+                    }
+                }),
                 catchError(error => {
                     return of(new AuthActions.SignupFailed(error.error.error))
                 })
-            )
+            )    
         }))
 
     
@@ -33,12 +39,12 @@ export class AuthEffects {
     authSignin = this.actions$
         .ofType(AuthActions.TRY_SIGNIN)
         .pipe(map((action: AuthActions.TrySignin) => {
-            console.log("here2")
             return action.payload
         }))
         .pipe(switchMap((user: User) => {
             return this.httpClient.post('http://localhost:3000/user/login', user, {observe:'body'}).pipe(mergeMap((body: any) => {
                 localStorage.setItem('token', body.token)
+                this.router.navigate(['/pending-matches'])
                 return [
                     {
                         type: AuthActions.SIGNIN
@@ -72,10 +78,21 @@ export class AuthEffects {
                 }]
             } 
         }))
+
+    @Effect()
+    logout = this.actions$
+        .ofType(AuthActions.TRY_LOGOUT)
+        .pipe(map(() => {
+            localStorage.removeItem('token')
+            this.router.navigate(['/'])
+            return {
+                type: AuthActions.LOGOUT
+            }
+        }))
         
 
 
-    constructor(private actions$: Actions, private httpClient: HttpClient, private helpers: AuthService) {}
+    constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router) {}
 
 
             
