@@ -30,7 +30,7 @@ const initialState = {
     editedGame: undefined,
     editedGameId: '',
     error: false,
-    errroMsg: ''
+    errorMsg: ''
 };
 
 

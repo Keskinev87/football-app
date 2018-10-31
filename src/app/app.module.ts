@@ -35,6 +35,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './app.reducers';
 import { EffectsModule } from "@ngrx/effects"
 import { AuthEffects } from "./components/auth/auth-store/auth.effects"
+import { GameEffects } from './components/games/games-store/games.effect';
 
 
 
@@ -67,7 +68,7 @@ import { AuthEffects } from "./components/auth/auth-store/auth.effects"
     AppRouterModule,
     FormsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects, GameEffects])
   ],
   providers: [
     MatchesService,

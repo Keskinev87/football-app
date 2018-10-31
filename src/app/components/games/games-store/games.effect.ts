@@ -5,8 +5,7 @@ import { environment } from '../../../../environments/environment'
 import * as GameActions from './games.actions'
 import { Effect, Actions } from "@ngrx/effects";
 import { map, switchMap, catchError } from "rxjs/operators";
-import Game from "games.model";
-import { Store } from "@ngrx/store";
+import { Game }  from "../../models/game.model";
 import { of } from "rxjs";
 
 
@@ -18,8 +17,8 @@ export class GameEffects {
         .ofType(GameActions.BEGIN_CREATE_GAME)
         .pipe(map((action: GameActions.BeginCreateGame) => {
             return action.payload
-        })).pipe(map((game: Game) => {
-            this.httpClient.post(environment.apiUrl + 'game/create', game, {observe: 'body'}).pipe(map((body: any) => {
+        })).pipe(switchMap((game: Game) => {
+            return this.httpClient.post(environment.apiUrl + '/game/create', game, {observe: 'body'}).pipe(map((body: any) => {
                     return {
                         type: GameActions.CREATE_GAME,
                         payload: body.games
@@ -28,7 +27,7 @@ export class GameEffects {
                 return of(new GameActions.CreateGameFailed())
             }))
         }))
-
+        
 
     constructor(private actions$: Actions, private httpClient: HttpClient) {}
 }

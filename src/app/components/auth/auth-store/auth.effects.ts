@@ -43,7 +43,7 @@ export class AuthEffects {
             return action.payload
         }))
         .pipe(switchMap((user: User) => {
-            return this.httpClient.post(environment.apiUrl + 'user/login', user, {observe:'body'}).pipe(mergeMap((body: any) => {
+            return this.httpClient.post(environment.apiUrl + '/user/login', user, {observe:'body'}).pipe(mergeMap((body: any) => {
                 localStorage.setItem('token', body.token)
                 this.router.navigate(['/pending-matches'])
                 return [
@@ -72,6 +72,9 @@ export class AuthEffects {
             if (token) {
                 return [{
                     type: AuthActions.SIGNIN
+                },{
+                    type: AuthActions.SET_TOKEN,
+                    payload: token
                 }]
             } else {
                 return [{

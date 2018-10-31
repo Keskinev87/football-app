@@ -40,11 +40,9 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
         case(AuthActions.SIGNUP):
             return {
                 ...state,
-                isAuthenticated: true,
                 error: false,
                 errorMsg: '',
-                success: true,
-                successMsg: "Registration Successfull!"
+                success: true
             }
         case(AuthActions.SIGNUP_FAILED):
             return {
