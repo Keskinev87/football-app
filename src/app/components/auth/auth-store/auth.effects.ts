@@ -7,6 +7,7 @@ import { User } from "../../models/user.model";
 import { HttpClient } from '@angular/common/http';
 import { of } from "rxjs";
 import { AuthService } from "../../../services/auth.service";
+import { environment } from '../../../../environments/environment'
 import { Router } from "@angular/router";
 
 
@@ -21,7 +22,7 @@ export class AuthEffects {
         .pipe(map((action: AuthActions.TrySignup) => {
             return action.payload
         })).pipe(switchMap((user: User) => {
-            return this.httpClient.post('http://localhost:3000/user/register', user, {observe:'body'}).pipe(
+            return this.httpClient.post(environment.apiUrl + '/user/register', user, {observe:'body'}).pipe(
                 map((body: any) =>{
                     this.router.navigate(['/login'])
                     return {
@@ -42,7 +43,7 @@ export class AuthEffects {
             return action.payload
         }))
         .pipe(switchMap((user: User) => {
-            return this.httpClient.post('http://localhost:3000/user/login', user, {observe:'body'}).pipe(mergeMap((body: any) => {
+            return this.httpClient.post(environment.apiUrl + 'user/login', user, {observe:'body'}).pipe(mergeMap((body: any) => {
                 localStorage.setItem('token', body.token)
                 this.router.navigate(['/pending-matches'])
                 return [

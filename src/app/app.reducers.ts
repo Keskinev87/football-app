@@ -1,6 +1,6 @@
 import { ActionReducerMap } from '@ngrx/store'
 
-import * as fromGames from './components/games/games.reducers'
+import * as fromGames from './components/games/games-store/games.reducers'
 import * as fromAuth from './components/auth/auth-store/auth.reducers'
 
 export interface AppState {
@@ -11,4 +11,4 @@ export interface AppState {
 export const reducers: ActionReducerMap<AppState> = {
     games: fromGames.gamesReducer,
     auth: fromAuth.authReducer
-}
+} 

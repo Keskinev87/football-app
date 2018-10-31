@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store'
 import { Game } from '../../../../models/game.model'
-import * as GamesActions from '../../../games.actions'
+import * as GamesActions from '../../../games-store/games.actions'
 import * as fromApp from '../../../../../app.reducers'
 import { Observable } from 'rxjs';
 
@@ -31,7 +31,7 @@ export class GameNameComponent implements OnInit {
       form.value.secretCode
     )
 
-    this.store.dispatch(new GamesActions.CreateGame(game))
+    this.store.dispatch(new GamesActions.BeginCreateGame(game))
     
 
     // let token = this.authService.getToken()

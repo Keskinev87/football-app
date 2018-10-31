@@ -15,8 +15,7 @@ const initialState = {
     isAuthenticated: false,
     error: false,
     errorMsg:'',
-    success: false,
-    successMsg:''
+    success: false
 };
 
 

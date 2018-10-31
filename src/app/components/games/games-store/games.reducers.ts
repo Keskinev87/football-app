@@ -1,15 +1,18 @@
 import * as GameActions from './games.actions';
-import { Game } from "../models/game.model";
+import { Game } from '../../models/game.model';
 
 export interface State {
-    games: Game[],
+    games: (Game[] ),
     gameOptions: any,
     editedGame: Game,
-    editedGameId: String
+    editedGameId: string,
+    error: boolean,
+    errorMsg: string
 }
 
+
 const initialState = {
-    games: [ new Game("Test 199","Standard","TEst",8899,"5bc4a2f2ad83f21858e732a2",'',[],[],"5bbd07e68cb64b1534358a77","5bbd07e68cb64b1534358a77")],
+    games: [],
     gameOptions: [
         {
           option: 'Standard',
@@ -24,8 +27,10 @@ const initialState = {
           description: 'Description 3'
         }
     ],
-    editedGame: null,
-    editedGameId: ''
+    editedGame: undefined,
+    editedGameId: '',
+    error: false,
+    errroMsg: ''
 };
 
 
@@ -36,6 +41,12 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 ...state,
                 games: [...state.games, action.payload]
             };
+        case GameActions.CREATE_GAME_FAILED:
+            return {
+                ...state,
+                error: true,
+                errorMsg: "Server Error"
+            }
         case GameActions.ADD_COMPETITION:
             return {
                 ...state,
