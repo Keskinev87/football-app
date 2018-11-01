@@ -7,7 +7,8 @@ export interface State {
     isAuthenticated: boolean,
     error: boolean,
     errorMsg: string,
-    success: boolean
+    success: boolean,
+    loading: boolean
 }
 
 const initialState = {
@@ -15,13 +16,21 @@ const initialState = {
     isAuthenticated: false,
     error: false,
     errorMsg:'',
-    success: false
+    success: false,
+    loading: false
 };
 
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
     
     switch (action.type) {
+        case(AuthActions.TRY_SIGNIN):
+            return {
+                ...state,
+                loading: true,
+                error:false,
+                errorMsg:''
+            }
         case(AuthActions.SIGNIN):
             return {
                 ...state,
@@ -29,26 +38,37 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
                 error: false,
                 errorMsg: '',
                 success: true,
+                loading: false
             }
         case (AuthActions.SIGNIN_FAILED):
             return {
                 ...state,
                 isAuthenticated: false,
                 error: true,
-                errorMsg: action.payload
+                errorMsg: action.payload,
+                loading: false
+            }
+        case (AuthActions.TRY_SIGNUP):
+            return {
+                ...state,
+                loading: true,
+                error:false,
+                errorMsg:''
             }
         case(AuthActions.SIGNUP):
             return {
                 ...state,
                 error: false,
                 errorMsg: '',
-                success: true
+                success: true,
+                loading: false
             }
         case(AuthActions.SIGNUP_FAILED):
             return {
                 ...state,
                 error: true,
-                errorMsg: action.payload
+                errorMsg: action.payload,
+                loading: false
             }
         case(AuthActions.LOGOUT):
             return {
@@ -68,6 +88,14 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
         case(AuthActions.DO_NOTHING):
             return {
                 ...state
+            }
+        case(AuthActions.RESET_STATE):
+            return {
+                ...state,
+                error: false,
+                errorMsg:'',
+                success: false,
+                loading: false
             }
         default:
                 return state;

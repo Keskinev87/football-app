@@ -13,7 +13,8 @@ export const CHECK_STATUS = "CHECK_STATUS" // THIS GETS FIRED WHEN THE APP START
 // If there is no token or it has expired, the "isAuthenticated" will remain false. This is done through the auth.effects.ts
 export const SET_TOKEN = "SET_TOKEN" // Sets the token in localstorage
 export const GET_TOKEN = "GET_TOKEN" // Gets the token from localstorage
-export const DO_NOTHING = "DO_NOTHIG"
+export const DO_NOTHING = "DO_NOTHING"
+export const RESET_STATE = "RESET_STATE" //will be dispatched upon destroying a component. Otherwise an error might affect other components.
 
 export class TrySignin implements Action {
     readonly type = TRY_SIGNIN
@@ -75,5 +76,9 @@ export class DoNothing implements Action {
     readonly type = DO_NOTHING
 }
 
+export class ResetState implements Action {
+    readonly type = RESET_STATE
+}
 
-export type AuthActions = Signin | Signup | Logout | SetToken | TrySignup | SignupFailed | GetToken | CheckStatus | SigninFailed | TrySignin | DoNothing | TryLogout
+
+export type AuthActions = Signin | Signup | Logout | SetToken | TrySignup | SignupFailed | GetToken | CheckStatus | SigninFailed | TrySignin | DoNothing | TryLogout | ResetState

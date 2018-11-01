@@ -36,6 +36,8 @@ import { reducers } from './app.reducers';
 import { EffectsModule } from "@ngrx/effects"
 import { AuthEffects } from "./components/auth/auth-store/auth.effects"
 import { GameEffects } from './components/games/games-store/games.effect';
+import { LoaderComponentComponent } from './components/shared/loader-component/loader-component.component';
+import { SmallLoaderComponentComponent } from './components/shared/small-loader-component/small-loader-component.component';
 
 
 
@@ -60,7 +62,9 @@ import { GameEffects } from './components/games/games-store/games.effect';
     ScoreRulesComponent,
     CompetitionListItemComponent,
     CompetitionListComponent,
-    DropDownDirective
+    DropDownDirective,
+    LoaderComponentComponent,
+    SmallLoaderComponentComponent
   ],
   imports: [
     BrowserModule,

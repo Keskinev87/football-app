@@ -30,7 +30,7 @@ export class AuthEffects {
                     }
                 }),
                 catchError(error => {
-                    return of(new AuthActions.SignupFailed(error.error.error))
+                    return of(new AuthActions.SignupFailed(error.error.error || "No connection to the server!"))
                 })
             )    
         }))
@@ -57,7 +57,7 @@ export class AuthEffects {
                 ]
             }),catchError((error: any) => {
                 console.log("error")
-                return of(new AuthActions.SigninFailed(error.error.error))
+                return of(new AuthActions.SigninFailed(error.error.error || "No connection to the server!"))
             })
             )
         }))

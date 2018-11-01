@@ -37,7 +37,9 @@
       <span class="help-block" *ngIf="!password.valid && password.touched">Your password must be at least 6 characters long!</span>
       <button class="btn btn-primary"
         type="submit"
-        [disabled]="!f.valid">Sign Up</button>
+        [disabled]="!f.valid"
+        *ngIf="!(signupState | async).loading">Sign Up</button>
+      <app-small-loader-component *ngIf="(signupState | async).loading"></app-small-loader-component>
       <div class="alert alert-warning" *ngIf="(signupState | async).error">
         {{(signupState | async).errorMsg}}
       </div>

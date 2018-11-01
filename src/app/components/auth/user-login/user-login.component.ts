@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../../models/user.model'
 import { Observable } from 'rxjs';
@@ -13,19 +13,24 @@ import * as AuthActions from '../auth-store/auth.actions'
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<fromApp.AppState>) {}
   
   signinState: Observable<{
     success: boolean,
     error: boolean,
-    errorMsg: string
+    errorMsg: string,
+    loading: boolean
   }>
   
 
   ngOnInit() {
     this.signinState = this.store.select('auth')
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new AuthActions.ResetState())
   }
 
   onLogin(form: NgForm) {
