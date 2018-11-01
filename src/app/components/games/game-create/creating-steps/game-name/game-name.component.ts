@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store'
 import { Game } from '../../../../models/game.model'
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   templateUrl: './game-name.component.html',
   styleUrls: ['./game-name.component.css']
 })
-export class GameNameComponent implements OnInit {
+export class GameNameComponent implements OnInit, OnDestroy {
 
   gamesState: Observable<any>
 
@@ -21,6 +21,9 @@ export class GameNameComponent implements OnInit {
     this.gamesState = this.store.select('games')
   }
 
+  ngOnDestroy() {
+    this.store.dispatch(new GamesActions.ResetState())
+  }
 
   onSubmit(form: NgForm) {
     //create game
@@ -31,7 +34,7 @@ export class GameNameComponent implements OnInit {
       form.value.secretCode
     )
 
-    this.store.dispatch(new GamesActions.BeginCreateGame(game))
+    this.store.dispatch(new GamesActions.TryCreateGame(game))
     
 
     // let token = this.authService.getToken()

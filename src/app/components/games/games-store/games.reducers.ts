@@ -7,7 +7,8 @@ export interface State {
     editedGame: Game,
     editedGameId: string,
     error: boolean,
-    errorMsg: string
+    errorMsg: string,
+    loading: boolean
 }
 
 
@@ -30,27 +31,44 @@ const initialState = {
     editedGame: undefined,
     editedGameId: '',
     error: false,
-    errorMsg: ''
+    errorMsg: '',
+    loading: false
 };
 
 
 export function gamesReducer(state = initialState, action: GameActions.GameActions) {
     switch (action.type) {
+        case GameActions.TRY_CREATE_GAME:
+            return {
+                ...state,
+                loading: true
+            }
         case GameActions.CREATE_GAME: 
             return {
                 ...state,
-                games: [...state.games, action.payload]
+                games: [...state.games, action.payload],
+                loading: false
             };
         case GameActions.CREATE_GAME_FAILED:
             return {
                 ...state,
                 error: true,
-                errorMsg: "Server Error"
+                errorMsg: "Server Error",
+                loading: false
             }
         case GameActions.ADD_COMPETITION:
             return {
                 ...state,
                 games: [...state.games, action.payload]
+            }
+        case GameActions.RESET_STATE:
+            return {
+                ...state,
+                editedGame: undefined,
+                editedGameId: '',
+                error: false,
+                errorMsg: '',
+                loading: false
             }
         default: 
             return state;

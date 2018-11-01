@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Game } from "../../models/game.model";
 
-export const BEGIN_CREATE_GAME = "BEGIN_CREATE_GAME"
+export const TRY_CREATE_GAME = "TRY_CREATE_GAME"
 export const CREATE_GAME = "CREATE_GAME";
 export const CREATE_GAME_FAILED = "CREATE_GAME_FAILED"
 export const ADD_COMPETITION = "ADD_COMPETITION"
@@ -17,9 +17,10 @@ export const GET_GAME_BY_ID = "GET_GAME_BY_ID"
 // export const JOIN_GAME_BY_CODE = "JOIN_GAME_BY_CODE"
 // export const JOIN_GAME_BY_LINK = "JOIN_GAME_BY_LINK"
 // export const JOIN_PUBLIC_GAME = "JOIN_PUBLIC_GAME"
+export const RESET_STATE =  "RESET_STATE"
 
-export class BeginCreateGame implements Action {
-    readonly type = BEGIN_CREATE_GAME
+export class TryCreateGame implements Action {
+    readonly type = TRY_CREATE_GAME
 
     constructor (public payload: Game) {}
 }
@@ -68,4 +69,8 @@ export class GetGameById implements Action {
     constructor (public payload: { id: string }) {}
 };
 
-export type GameActions = BeginCreateGame| CreateGame | CreateGameFailed | AddCompetition | RemoveCompetition | AddMatchesByCompetitionId | AddMatchByMatchId | GetAllGamesByCreatorId | GetAllGamesByUserId | GetGameById;
+export class ResetState implements Action {
+    readonly type = RESET_STATE
+}
+
+export type GameActions = TryCreateGame| CreateGame | CreateGameFailed | AddCompetition | RemoveCompetition | AddMatchesByCompetitionId | AddMatchByMatchId | GetAllGamesByCreatorId | GetAllGamesByUserId | GetGameById | ResetState

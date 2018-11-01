@@ -1,6 +1,7 @@
 <h2>Create new Game</h2>
 
 <form id='game-data' (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <fieldset [disabled]="(gamesState | async).loading">
   <div class="form-group">
     <label for="name">Name of the Game:</label>
     <input 
@@ -31,14 +32,15 @@
   </div>
   <div class="form-group">
     <div class="panel panel-default col-md-3 col-md-offset-1" *ngFor="let option of (gamesState | async).gameOptions">
-          <div class="panel-heading" align=center><label class="radio-inline" >{{option.option}}</label></div>
+          <div class="panel-heading" align="center"><label class="radio-inline" >{{option.option}}</label></div>
           <div class="panel-body center" align="center">
             <input type="radio" name="type" ngModel [value]="option.option">
             <p>{{ option.description }}</p>
           </div>
     </div>
   </div>
-  
-  <button type="submit" class="btn btn-default">Submit</button>
+</fieldset>
+  <app-small-loader-component *ngIf="(gamesState | async).loading"></app-small-loader-component>
+  <button type="submit" class="btn btn-default" *ngIf="!(gamesState | async).loading">Submit</button>
 </form>
   

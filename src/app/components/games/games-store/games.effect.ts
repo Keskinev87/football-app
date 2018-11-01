@@ -14,8 +14,8 @@ export class GameEffects {
 
     @Effect()
     gameCreate = this.actions$
-        .ofType(GameActions.BEGIN_CREATE_GAME)
-        .pipe(map((action: GameActions.BeginCreateGame) => {
+        .ofType(GameActions.TRY_CREATE_GAME)
+        .pipe(map((action: GameActions.TryCreateGame) => {
             return action.payload
         })).pipe(switchMap((game: Game) => {
             return this.httpClient.post(environment.apiUrl + '/game/create', game, {observe: 'body'}).pipe(map((body: any) => {

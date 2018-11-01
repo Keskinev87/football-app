@@ -1,6 +1,7 @@
 <div class="col-lg-4 col-md-5 col-sm-10 col-xs-12 col-lg-offset-1 col-md-offset-2">
   <h3>Please register</h3>
   <form (ngSubmit)="onSignup(f)" #f="ngForm">
+    <fieldset [disabled]="(signupState | async).loading">
       <div class="form-group">
           <label for="fullName">Name</label>
           <input class="form-control" 
@@ -35,6 +36,7 @@
         #password="ngModel">
       </div>
       <span class="help-block" *ngIf="!password.valid && password.touched">Your password must be at least 6 characters long!</span>
+    </fieldset>
       <button class="btn btn-primary"
         type="submit"
         [disabled]="!f.valid"
@@ -43,6 +45,5 @@
       <div class="alert alert-warning" *ngIf="(signupState | async).error">
         {{(signupState | async).errorMsg}}
       </div>
-      
   </form>
 </div>
