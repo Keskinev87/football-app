@@ -15,6 +15,7 @@ import { UserListItemComponent } from '.././components/users/user-list-item/user
 import { UserListComponent } from '.././components/users/user-list/user-list.component';
 import { GameListItemComponent } from '.././components/games/game-list-item/game-list-item.component';
 import { GameNameComponent } from '../components/games/game-create/creating-steps/game-name/game-name.component';
+import { EditGameCompetitionsComponent} from '../components/games/game-create/creating-steps/edit-game-competitions/edit-game-competitions.component'
 import { ChooseMatchesComponent } from '../components/games/game-create/creating-steps/choose-matches/choose-matches.component';
 import { ScoreRulesComponent } from '../components/games/game-create/creating-steps/score-rules/score-rules.component';
 import { CompetitionListComponent } from '../components/competitions/competition-list/competition-list.component';
@@ -27,8 +28,9 @@ const appRoutes: Routes = [
     {path: 'users-list', component: UserListComponent},
     {path: 'games', canActivate:[AuthGuard], children:[
         {path: '', component: GameListComponent, canActivate:[AuthGuard]},
-        {path: 'create', component: GameNameComponent, children:[
-            {path: 'competitions', component: CompetitionListComponent},
+        {path: 'create', children:[
+            {path: 'choose-name', component: GameNameComponent},
+            {path: 'competitions', component: EditGameCompetitionsComponent},
             {path: 'matches', component: ChooseMatchesComponent},
             {path: 'score-rules', component: ScoreRulesComponent}
         ]},

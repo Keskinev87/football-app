@@ -1,8 +1,9 @@
 import * as GameActions from './games.actions';
 import { Game } from '../../models/game.model';
+import { Observable } from 'rxjs'
 
 export interface State {
-    games: (Game[] ),
+    games: Game[],
     gameOptions: any,
     editedGame: Game,
     editedGameId: string,
@@ -12,8 +13,8 @@ export interface State {
 }
 
 
-const initialState = {
-    games: [],
+const initialState: State = {
+    games: undefined,
     gameOptions: [
         {
           option: 'Standard',
@@ -36,8 +37,26 @@ const initialState = {
 };
 
 
-export function gamesReducer(state = initialState, action: GameActions.GameActions) {
+export function gamesReducer(state = initialState, action: GameActions.GameActions): State {
     switch (action.type) {
+        case GameActions.TRY_GET_ALL_GAMES_BY_USER_ID:
+            return {
+                ...state,
+                loading: true
+            }
+        case GameActions.GET_ALL_GAMES_BY_USER_ID:
+            return {
+                ...state,
+                loading: false,
+                games: action.payload
+            }
+        case GameActions.GET_GAMES_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: true,
+                errorMsg: "TODO: write messages for errors in other storage"
+            }
         case GameActions.TRY_CREATE_GAME:
             return {
                 ...state,
@@ -58,8 +77,7 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
             }
         case GameActions.ADD_COMPETITION:
             return {
-                ...state,
-                games: [...state.games, action.payload]
+                ...state
             }
         case GameActions.RESET_STATE:
             return {

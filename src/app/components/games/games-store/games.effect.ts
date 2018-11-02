@@ -7,6 +7,7 @@ import { Effect, Actions } from "@ngrx/effects";
 import { map, switchMap, catchError } from "rxjs/operators";
 import { Game }  from "../../models/game.model";
 import { of } from "rxjs";
+import { Router } from "@angular/router";
 
 
 @Injectable()
@@ -19,15 +20,32 @@ export class GameEffects {
             return action.payload
         })).pipe(switchMap((game: Game) => {
             return this.httpClient.post(environment.apiUrl + '/game/create', game, {observe: 'body'}).pipe(map((body: any) => {
+                    this.router.navigate(['/games/create/competitions'])
                     return {
                         type: GameActions.CREATE_GAME,
                         payload: body.games
                     }
-            }), catchError(() => {
-                return of(new GameActions.CreateGameFailed())
+            }), catchError((error) => {
+                return of(new GameActions.CreateGameFailed(error.code))
             }))
         }))
-        
+         
+    @Effect()
+    getGamesByUserId = this.actions$
+        .ofType(GameActions.TRY_GET_ALL_GAMES_BY_USER_ID)
+        .pipe(switchMap(() => {
+            console.log("here")
+            return this.httpClient.get<Game[]>(environment.apiUrl + "/game/getAll", {observe: 'body'}).pipe(map((games) => {
+                console.log(games)
+                    return {
+                        type: GameActions.GET_ALL_GAMES_BY_USER_ID,
+                        payload: games
+                    }
+            }), catchError(error => {
+                return of(new GameActions.GetGamesFailed())
+            }))
+        }))
 
-    constructor(private actions$: Actions, private httpClient: HttpClient) {}
+
+    constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router) {}
 }

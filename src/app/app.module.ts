@@ -38,7 +38,8 @@ import { AuthEffects } from "./components/auth/auth-store/auth.effects"
 import { GameEffects } from './components/games/games-store/games.effect';
 import { LoaderComponentComponent } from './components/shared/loader-component/loader-component.component';
 import { SmallLoaderComponentComponent } from './components/shared/small-loader-component/small-loader-component.component';
-
+import { EditGameCompetitionsComponent } from './components/games/game-create/creating-steps/edit-game-competitions/edit-game-competitions.component';
+import { CompetitionsEffects } from "./components/competitions/competitions-store/competitions.effects"
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { SmallLoaderComponentComponent } from './components/shared/small-loader-
     CompetitionListComponent,
     DropDownDirective,
     LoaderComponentComponent,
-    SmallLoaderComponentComponent
+    SmallLoaderComponentComponent,
+    EditGameCompetitionsComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,7 @@ import { SmallLoaderComponentComponent } from './components/shared/small-loader-
     AppRouterModule,
     FormsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, GameEffects])
+    EffectsModule.forRoot([AuthEffects, GameEffects, CompetitionsEffects])
   ],
   providers: [
     MatchesService,
