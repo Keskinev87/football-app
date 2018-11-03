@@ -7,6 +7,7 @@ export const CREATE_GAME_FAILED = "CREATE_GAME_FAILED"
 export const BEGIN_EDIT_GAME = "BEGIN_EDIT_GAME"
 export const ADD_COMPETITION = "ADD_COMPETITION"
 export const REMOVE_COMPETITION = "REMOVE_COMPETITION"
+export const UPDATE_GAME = "UPDATE_GAME"
 export const ADD_MATCHES_BY_COMPETITION_ID = "ADD_MATCHES_BY_COMPETITION"
 export const ADD_MATCH_BY_MATCH_ID = "ADD_MATCH_BY_MATCH_ID"
 export const TRY_GET_ALL_GAMES_BY_USER_ID = "TRY_GET_ALL_GAMES_BY_USER_ID"
@@ -55,6 +56,12 @@ export class RemoveCompetition implements Action {
     readonly type = REMOVE_COMPETITION
     constructor (public payload: number) {}
 };
+
+export class UpdateGame implements Action {
+    readonly type = UPDATE_GAME
+
+    constructor(public payload: Game) {}
+}
 
 export class AddMatchesByCompetitionId implements Action {
     readonly type = ADD_MATCHES_BY_COMPETITION_ID

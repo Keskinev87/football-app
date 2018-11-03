@@ -1,4 +1,5 @@
-
 <ul class="list-group">
   <app-competition-item *ngFor="let competition of (competitionState | async).competitions" [competition] = "competition"></app-competition-item> 
 </ul>
+
+<button type="button" class="btn btn-success" (click)="onSave()">SAVE</button>

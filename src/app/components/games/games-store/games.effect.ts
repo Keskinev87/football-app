@@ -52,6 +52,16 @@ export class GameEffects {
             }))
         }))
 
+    @Effect()
+    //TODO: Complete the method after creating /game/edit 
+    updateGame = this.actions$
+        .ofType(GameActions.UPDATE_GAME)
+        .pipe(map((action: GameActions.UpdateGame) => {
+            return action.payload
+        })).pipe(switchMap((game:Game) => {
+            return this.httpClient.post(environment.apiUrl + "")
+        }))
+
 
     constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router) {}
 }

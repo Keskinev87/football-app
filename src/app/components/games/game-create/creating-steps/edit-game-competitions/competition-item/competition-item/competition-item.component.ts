@@ -15,7 +15,6 @@ export class CompetitionItemComponent implements OnInit {
   @Input() competition: Competition
   selected: boolean = false // this is bound to style properties of the component
   
-  
 
   constructor(private store: Store<fromApp.AppState>) { }
 

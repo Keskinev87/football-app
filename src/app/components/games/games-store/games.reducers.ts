@@ -19,15 +19,15 @@ const initialState: State = {
         {
           option: 'Standard',
           description: 'Description 1'
-        },
-        {
-          option: 'Detailed',
-          description: 'Description 2'
-        },
-        {
-          option: 'Dynamic',
-          description: 'Description 3'
         }
+        // {
+        //   option: 'Detailed',
+        //   description: 'Description 2'
+        // },
+        // {
+        //   option: 'Dynamic',
+        //   description: 'Description 3'
+        // }
     ],
     editedGame: undefined,
     editedGameId: '',
@@ -82,29 +82,25 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 editedGameId: action.payload
             }
         case GameActions.ADD_COMPETITION:
-            console.log("Game to be changed: " + state.editedGameId )
             const game = state.games.find(x => x._id == state.editedGameId)
-            console.log("Adding Competition: " + game)
             game.competitions.push(action.payload)
             var games = [...state.games]
-            console.log(game)
             games[state.editedGameId] = game
             return {
                 ...state,
-                games: games 
+                games: games,
+                editedGame: game
             }
         case GameActions.REMOVE_COMPETITION:
-            console.log("Game to be changed: " + state.editedGameId )
             const reqGame = state.games.find(x => x._id == state.editedGameId)
-            console.log("Adding Competition: " + reqGame)
             const index = reqGame.competitions.indexOf(action.payload)
             reqGame.competitions.splice(index, 1)
             var games = [...state.games]
-            console.log(reqGame)
             games[state.editedGameId] = reqGame
             return {
                 ...state,
-                games: games 
+                games: games,
+                editedGame: game
             }
         case GameActions.RESET_STATE:
             return {
