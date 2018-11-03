@@ -25,13 +25,5 @@ export class GameListComponent implements OnInit, OnDestroy {
     this.store.dispatch(new GamesActions.ResetState())
   }
 
-  onChooseCompetitions() {
-
-  }
-
-  onAddMatches() {
-    
-  }
-
 }
 

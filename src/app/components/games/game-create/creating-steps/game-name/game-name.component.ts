@@ -22,7 +22,7 @@ export class GameNameComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new GamesActions.ResetState())
+    
   }
 
   onSubmit(form: NgForm) {

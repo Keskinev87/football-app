@@ -4,6 +4,7 @@ import { Game } from "../../models/game.model";
 export const TRY_CREATE_GAME = "TRY_CREATE_GAME"
 export const CREATE_GAME = "CREATE_GAME";
 export const CREATE_GAME_FAILED = "CREATE_GAME_FAILED"
+export const BEGIN_EDIT_GAME = "BEGIN_EDIT_GAME"
 export const ADD_COMPETITION = "ADD_COMPETITION"
 export const REMOVE_COMPETITION = "REMOVE_COMPETITION"
 export const ADD_MATCHES_BY_COMPETITION_ID = "ADD_MATCHES_BY_COMPETITION"
@@ -13,6 +14,7 @@ export const GET_ALL_GAMES_BY_USER_ID = "GET_ALL_GAMES_BY_USER_ID"
 export const GET_ALL_GAMES_BY_CREATOR_ID = "GET_ALL_GAMES_BY_CREATOR_ID"
 export const GET_GAME_BY_ID = "GET_GAME_BY_ID"
 export const GET_GAMES_FAILED = "GET_GAMES_FAILED"
+
 //TODO: 
 // export const EDIT_GAME = "EDIT_GAME"
 // export const DELETE_GAME = "DELETE_GAME"
@@ -38,14 +40,20 @@ export class CreateGameFailed implements Action {
     constructor (public payload: number) {}
 }
 
+export class BeginEditGame implements Action {
+    readonly type = BEGIN_EDIT_GAME
+
+    constructor (public payload: string) {}
+}
+
 export class AddCompetition implements Action {
     readonly type = ADD_COMPETITION
-    constructor (public payload: { id: number } ) {}
+    constructor (public payload: number ) {}
 };
 
 export class RemoveCompetition implements Action {
     readonly type = REMOVE_COMPETITION
-    constructor (public payload: { id: number }) {}
+    constructor (public payload: number) {}
 };
 
 export class AddMatchesByCompetitionId implements Action {
@@ -86,4 +94,4 @@ export class ResetState implements Action {
     readonly type = RESET_STATE
 }
 
-export type GameActions = TryCreateGame| CreateGame | CreateGameFailed | AddCompetition | RemoveCompetition | AddMatchesByCompetitionId | AddMatchByMatchId | GetAllGamesByCreatorId | GetAllGamesByUserId | GetGameById | ResetState | TryGetAllGamesByUserId | GetGamesFailed
+export type GameActions = TryCreateGame| CreateGame | CreateGameFailed | BeginEditGame | AddCompetition | RemoveCompetition | AddMatchesByCompetitionId | AddMatchByMatchId | GetAllGamesByCreatorId | GetAllGamesByUserId | GetGameById | ResetState | TryGetAllGamesByUserId | GetGamesFailed

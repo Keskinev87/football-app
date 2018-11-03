@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 
 export interface State {
     competitions: any,
-    loading: boolean
+    loading: boolean,
+    gameEditedId: string
 }
 
 const initialState: State = {
     competitions: undefined,
-    loading: false
+    loading: false,
+    gameEditedId: ''
 }
 
 export function competitionsReducer (state = initialState, action: CompetitionsActions.CompetitionsActions):State {

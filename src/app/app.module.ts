@@ -39,7 +39,8 @@ import { GameEffects } from './components/games/games-store/games.effect';
 import { LoaderComponentComponent } from './components/shared/loader-component/loader-component.component';
 import { SmallLoaderComponentComponent } from './components/shared/small-loader-component/small-loader-component.component';
 import { EditGameCompetitionsComponent } from './components/games/game-create/creating-steps/edit-game-competitions/edit-game-competitions.component';
-import { CompetitionsEffects } from "./components/competitions/competitions-store/competitions.effects"
+import { CompetitionsEffects } from "./components/competitions/competitions-store/competitions.effects";
+import { CompetitionItemComponent } from './components/games/game-create/creating-steps/edit-game-competitions/competition-item/competition-item/competition-item.component'
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { CompetitionsEffects } from "./components/competitions/competitions-stor
     DropDownDirective,
     LoaderComponentComponent,
     SmallLoaderComponentComponent,
-    EditGameCompetitionsComponent
+    EditGameCompetitionsComponent,
+    CompetitionItemComponent
   ],
   imports: [
     BrowserModule,

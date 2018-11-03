@@ -3,8 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../../environments/environment'
 
 import * as GameActions from './games.actions'
+import * as CompetitionsActions from '../../competitions/competitions-store/competitions.actions'
 import { Effect, Actions } from "@ngrx/effects";
-import { map, switchMap, catchError } from "rxjs/operators";
+import { map, switchMap, mergeMap, catchError } from "rxjs/operators";
 import { Game }  from "../../models/game.model";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
@@ -19,12 +20,17 @@ export class GameEffects {
         .pipe(map((action: GameActions.TryCreateGame) => {
             return action.payload
         })).pipe(switchMap((game: Game) => {
-            return this.httpClient.post(environment.apiUrl + '/game/create', game, {observe: 'body'}).pipe(map((body: any) => {
+            return this.httpClient.post(environment.apiUrl + '/game/create', game, {observe: 'body'}).pipe(mergeMap((game: Game) => {
+                console.log(game)
+                console.log(game._id)
                     this.router.navigate(['/games/create/competitions'])
-                    return {
+                    return [{
                         type: GameActions.CREATE_GAME,
-                        payload: body.games
-                    }
+                        payload: game
+                    }, {
+                        type: GameActions.BEGIN_EDIT_GAME,
+                        payload: game._id
+                    }]
             }), catchError((error) => {
                 return of(new GameActions.CreateGameFailed(error.code))
             }))

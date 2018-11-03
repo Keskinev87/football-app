@@ -11,7 +11,17 @@ export class GameListItemComponent implements OnInit {
 
   constructor() { }
 
+  clicked: boolean = false
+
   ngOnInit() {
   }
 
+  onChooseCompetitions() {
+    this.clicked = !this.clicked
+    console.log("Choose competitions")
+  }
+
+  onAddMatches() {
+    console.log("Add matches")
+  }
 }

@@ -16,6 +16,7 @@ export class EditGameCompetitionsComponent implements OnInit {
 
   ngOnInit() {
     this.competitionState = this.store.select('competitions')
+    
   }
 
 }

@@ -1,3 +1,4 @@
-<ul>
-  <li *ngFor="let competition of (competitionState | async).competitions">{{competition.name}}</li> 
+
+<ul class="list-group">
+  <app-competition-item *ngFor="let competition of (competitionState | async).competitions" [competition] = "competition"></app-competition-item> 
 </ul>

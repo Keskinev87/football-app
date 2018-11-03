@@ -1,0 +1,5 @@
+<li class="list-group-item">
+  {{competition.name}}
+  <button type="button" class="btn btn-success" (click) = "onAddCompetition()" *ngIf="!selected">Add competition</button>
+  <button type="button" class="btn btn-danger" (click) = "onRemoveCompetition()" *ngIf = "selected">Remove Competition</button>
+</li>
