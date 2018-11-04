@@ -2,6 +2,7 @@ export class Competition {
     
     constructor(
         public id: number,
+        public _id: string,
         public area: {
             id: number;
             name: string;

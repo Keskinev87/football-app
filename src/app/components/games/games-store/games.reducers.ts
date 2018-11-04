@@ -79,28 +79,33 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
         console.log("Game Reducer :" + action.payload)
             return {
                 ...state,
-                editedGameId: action.payload
+                editedGame: action.payload
+            }
+        case GameActions.UPDATE_GAME:
+            return {
+                ...state,
+                loading: true
             }
         case GameActions.ADD_COMPETITION:
-            const game = state.games.find(x => x._id == state.editedGameId)
+            const game = state.editedGame
             game.competitions.push(action.payload)
             var games = [...state.games]
-            games[state.editedGameId] = game
+            games[state.editedGame._id] = game
             return {
                 ...state,
-                games: games,
-                editedGame: game
+                games: games
             }
         case GameActions.REMOVE_COMPETITION:
-            const reqGame = state.games.find(x => x._id == state.editedGameId)
+            const reqGame = state.editedGame
             const index = reqGame.competitions.indexOf(action.payload)
             reqGame.competitions.splice(index, 1)
+            console.log(reqGame)
             var games = [...state.games]
-            games[state.editedGameId] = reqGame
+            games[state.editedGame._id] = reqGame
+            console.log(games)
             return {
                 ...state,
-                games: games,
-                editedGame: game
+                games: games
             }
         case GameActions.RESET_STATE:
             return {

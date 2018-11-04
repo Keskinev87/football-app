@@ -24,13 +24,13 @@ export class CompetitionItemComponent implements OnInit {
 
   onAddCompetition() {
     console.log(this.competition.id)
-    this.store.dispatch(new GamesActions.AddCompetition(this.competition.id))
+    this.store.dispatch(new GamesActions.AddCompetition(this.competition._id))
     this.selected = true
   }
 
   onRemoveCompetition() {
     console.log("Remove competition")
-    this.store.dispatch(new GamesActions.RemoveCompetition(this.competition.id))
+    this.store.dispatch(new GamesActions.RemoveCompetition(this.competition._id))
     this.selected = false
   }
 

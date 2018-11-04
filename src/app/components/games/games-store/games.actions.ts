@@ -44,17 +44,17 @@ export class CreateGameFailed implements Action {
 export class BeginEditGame implements Action {
     readonly type = BEGIN_EDIT_GAME
 
-    constructor (public payload: string) {}
+    constructor (public payload: Game) {}
 }
 
 export class AddCompetition implements Action {
     readonly type = ADD_COMPETITION
-    constructor (public payload: number ) {}
+    constructor (public payload: string ) {}
 };
 
 export class RemoveCompetition implements Action {
     readonly type = REMOVE_COMPETITION
-    constructor (public payload: number) {}
+    constructor (public payload: string) {}
 };
 
 export class UpdateGame implements Action {
@@ -101,4 +101,4 @@ export class ResetState implements Action {
     readonly type = RESET_STATE
 }
 
-export type GameActions = TryCreateGame| CreateGame | CreateGameFailed | BeginEditGame | AddCompetition | RemoveCompetition | AddMatchesByCompetitionId | AddMatchByMatchId | GetAllGamesByCreatorId | GetAllGamesByUserId | GetGameById | ResetState | TryGetAllGamesByUserId | GetGamesFailed
+export type GameActions = TryCreateGame| CreateGame | CreateGameFailed | BeginEditGame | AddCompetition | UpdateGame | RemoveCompetition | AddMatchesByCompetitionId | AddMatchByMatchId | GetAllGamesByCreatorId | GetAllGamesByUserId | GetGameById | ResetState | TryGetAllGamesByUserId | GetGamesFailed

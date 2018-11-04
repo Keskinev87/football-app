@@ -29,7 +29,7 @@ export class GameEffects {
                         payload: game
                     }, {
                         type: GameActions.BEGIN_EDIT_GAME,
-                        payload: game._id
+                        payload: game
                     }]
             }), catchError((error) => {
                 return of(new GameActions.CreateGameFailed(error.code))
@@ -59,7 +59,25 @@ export class GameEffects {
         .pipe(map((action: GameActions.UpdateGame) => {
             return action.payload
         })).pipe(switchMap((game:Game) => {
-            return this.httpClient.post(environment.apiUrl + "")
+            console.log("Effect")
+            console.log(game)
+            return this.httpClient.post(environment.apiUrl + "/game/addCompetitions", game, {observe: 'body'}).pipe(map((resGame: Game) => {
+                if (resGame) {
+                    console.log("Res game")
+                    console.log(resGame)
+                    this.router.navigate(['/games'])
+                    return {
+                        type: GameActions.RESET_STATE
+                    }
+                } else {
+                    console.log("error")
+                    return {
+                        type: GameActions.GET_GAMES_FAILED
+                    }
+                }
+            }), catchError(error => {
+                return of(new GameActions.GetGamesFailed())
+            }))
         }))
 
 

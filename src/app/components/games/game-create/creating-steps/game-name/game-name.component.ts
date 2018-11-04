@@ -29,7 +29,7 @@ export class GameNameComponent implements OnInit, OnDestroy {
     //create game
     let game = new Game (
       form.value.name,
-      form.value.type,
+      "standard",
       form.value.description,
       form.value.secretCode
     )
