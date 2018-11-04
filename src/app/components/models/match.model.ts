@@ -1,10 +1,5 @@
 export class Match {
-	constructor(
-		public id: number,
-		public competition: {
-			id: number;
-			name: string;
-		},
+	constructor(public id: number,public competition: {id: number;name: string;},
 		public season: {
 			id: number;
 			startDate: Date;
@@ -49,6 +44,5 @@ export class Match {
 		public referees?: Array<object>,
 		public goals?: Array<object>,
 		public bookings?: Array<object>,
-		public substitutions?: Array<object>
-	) {}
+		public substitutions?: Array<object>) {}
 }

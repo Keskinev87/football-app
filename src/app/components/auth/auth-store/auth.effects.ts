@@ -2,6 +2,9 @@ import { Effect, Actions } from "@ngrx/effects"
 import { Injectable } from "@angular/core";
 
 import * as AuthActions from "./auth.actions";
+import * as GamesActions from "../../games/games-store/games.actions"
+import * as CompetitionsActions from "../../competitions/competitions-store/competitions.actions"
+import * as MatchActions from "../../matches/match-store/match.actions"
 import { map, switchMap, mergeMap, catchError } from "rxjs/operators";
 import { User } from "../../models/user.model";
 import { HttpClient } from '@angular/common/http';
@@ -75,6 +78,12 @@ export class AuthEffects {
                 },{
                     type: AuthActions.SET_TOKEN,
                     payload: token
+                },{
+                    type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
+                },{
+                    type: CompetitionsActions.TRY_GET_COMPETITIONS
+                },{
+                    type: MatchActions.TRY_GET_MATCHES
                 }]
             } else {
                 return [{
@@ -83,6 +92,7 @@ export class AuthEffects {
             } 
         }))
 
+        
     @Effect()
     logout = this.actions$
         .ofType(AuthActions.TRY_LOGOUT)

@@ -16,9 +16,8 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new AuthActions.CheckStatus())
-    this.store.dispatch(new GamesActions.TryGetAllGamesByUserId())
-    this.store.dispatch(new CompetitionsActions.TryGetCompetitions())
+    this.store.dispatch(new AuthActions.CheckStatus()) //this goes through the auth.effect. If successfull, the effect will emit actions to load the state of games, competitions and matches.  
+    
   }
 
 }
