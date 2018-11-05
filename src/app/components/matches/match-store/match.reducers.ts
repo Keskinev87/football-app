@@ -1,5 +1,5 @@
 import * as MatchActions from './match.actions'
-import Match from 'match.model';
+import { Match } from '../../models/match.model'
 
 
 export interface State {

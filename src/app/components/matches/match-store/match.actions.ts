@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import Match from "match.model";
+import { Match } from '../../models/match.model'
 
 
 export const TRY_GET_MATCHES = "TRY_GET_MATCHES"

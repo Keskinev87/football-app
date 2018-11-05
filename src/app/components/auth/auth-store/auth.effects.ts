@@ -78,11 +78,14 @@ export class AuthEffects {
                 },{
                     type: AuthActions.SET_TOKEN,
                     payload: token
-                },{
-                    type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
-                },{
-                    type: CompetitionsActions.TRY_GET_COMPETITIONS
-                },{
+                },
+                // {
+                //     type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
+                // },
+                // {
+                //     type: CompetitionsActions.TRY_GET_COMPETITIONS
+                // },
+                {
                     type: MatchActions.TRY_GET_MATCHES
                 }]
             } else {

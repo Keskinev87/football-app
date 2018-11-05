@@ -42,6 +42,8 @@ import { EditGameCompetitionsComponent } from './components/games/game-create/cr
 import { CompetitionsEffects } from "./components/competitions/competitions-store/competitions.effects";
 import { CompetitionItemComponent } from './components/games/game-create/creating-steps/edit-game-competitions/competition-item/competition-item/competition-item.component'
 import { MatchEffects } from './components/matches/match-store/match.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { environment } from '../environments/environment'
 
 
 @NgModule({
@@ -77,7 +79,8 @@ import { MatchEffects } from './components/matches/match-store/match.effects';
     AppRouterModule,
     FormsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, GameEffects, CompetitionsEffects, MatchEffects])
+    EffectsModule.forRoot([AuthEffects, GameEffects, CompetitionsEffects, MatchEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
     MatchesService,
