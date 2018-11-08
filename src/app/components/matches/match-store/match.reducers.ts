@@ -32,6 +32,12 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
                 ...state,
                 loading: false
             }
+        case MatchActions.RESET_STATE: 
+            return {
+                matches: undefined,
+                error: false,
+                loading: false
+            }
         default: 
             return state;
         }

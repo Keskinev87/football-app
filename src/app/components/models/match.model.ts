@@ -1,5 +1,10 @@
 export class Match {
-	constructor(public id: number,public competition: {id: number;name: string;},
+	constructor(
+		public id: number,
+		public competition: {
+			id: number;
+			name: string;
+		},
 		public season: Object,
 		public utcDate: Date,
 		public status: string,

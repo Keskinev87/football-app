@@ -1,12 +1,12 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-      <small class="text-info">Date: 28.08.2018</small>
-      <small class="text-info">Hour: 14:00</small>
+      <small class="text-info">{{match.utcDate}}</small>
+      <small class="text-info">Hour: {{match.utcDate}}</small>
     </div>
     <div class="panel-body">
       <div class="col-md-2 col-xs-2 text-center">
           <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/a/a1/Logo_FC_Barcelona.svg/1011px-Logo_FC_Barcelona.svg.png" class="img-responsive center-block" width="40">
-          <p>FCB</p>
+          <p>{{match.homeTeam.name}}</p>
       </div>
       <div class="col-md-8 col-xs-8">
         <div class="row">
@@ -26,7 +26,7 @@
       </div>
         <div class="col-md-2 col-xs-2 text-center">
           <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/a/a1/Logo_FC_Barcelona.svg/1011px-Logo_FC_Barcelona.svg.png" class="img-responsive center-block" width="40">
-          <p>FCB</p>
+          <p>{{match.awayTeam.name}}</p>
         </div>
     </div>
 

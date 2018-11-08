@@ -1,2 +1,2 @@
-<app-match-prediction-item *ngFor="let match of matches" [match]="match"></app-match-prediction-item>
+<app-match-prediction-item *ngFor="let match of (matchState | async) " [match]="match"></app-match-prediction-item>
 

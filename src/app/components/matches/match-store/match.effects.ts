@@ -15,9 +15,13 @@ export class MatchEffects {
 @Effect()
 getMatches = this.actions$
     .ofType(MatchActions.TRY_GET_MATCHES)
-    .pipe(switchMap(() => {
+    .pipe(map((action: MatchActions.TryGetMatches) => {
+        return action.payload
+    }))
+    .pipe(switchMap((competitionIds: Array<number>) => {
         console.log("Match loader ")
-        return this.httpClient.get<Match[]>(environment.apiUrl + "/matches/getByCompetitionId", {observe: 'body'}).pipe(map((matches: Match[]) => {
+        console.log(competitionIds)
+        return this.httpClient.post<Match[]>(environment.apiUrl + "/matches/getByCompetitionId", competitionIds, {observe: 'body'}).pipe(map((matches: Match[]) => {
             console.log("Match loader ")
             console.log(matches)
             if(matches) {
@@ -37,6 +41,7 @@ getMatches = this.actions$
             return of(new MatchActions.GetMatchesFailed())
         }))
     }))
+        
 
 
 constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router) {}

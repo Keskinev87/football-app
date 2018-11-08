@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import * as MatchActions from '../match-store/match.actions'
+import * as fromMatch from '../match-store/match.reducers'
+import * as fromApp from '../../../app.reducers'
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Match } from '../../models/match.model';
+import { map, filter } from 'rxjs/operators';
+import  * as moment  from 'moment'
 
 @Component({
   selector: 'app-match-prediction-list',
@@ -6,13 +14,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./match-prediction-list.component.css']
 })
 export class MatchPredictionListComponent implements OnInit {
-  matches = [{id:1, leagueName:'Champions league', stage:'perliminary', dateStart:'2018-08-05', dateEnd: '2018-08-05', homeTeam:'Barcelona', awayTeam:'Real Madrid', homeTeamResult:null,
-  awayTeamResult: null, scorer: null}, {id:2, leagueName:'Champions league', stage:'perliminary', dateStart:'2018-08-05', dateEnd: '2018-08-05', homeTeam:'Juventus', awayTeam:'Bayern Munich', homeTeamResult:null,
-  awayTeamResult: null, scorer: null}]
   
-  constructor() { }
+  matchState: Observable<any>
+  
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
+    let today = new Date()
+      let todaysDate = today.getTime()
+      let tomorrow = new Date() 
+      tomorrow.setDate(today.getDate() + 1)
+      let tomorrowsDate = tomorrow.getTime()
+
+    this.matchState = this.store.select('matches').pipe(map((state:any) => {
+      console.log(state)
+      return state.matches 
+    })).pipe(map((matches: Match[]) => {
+      console.log(matches)
+      let resMatches = []
+      for (let match of matches) {
+        let utcDate = new Date(match.utcDate)
+
+        let matchDate = utcDate.getTime()
+    
+        if (matchDate >= todaysDate && matchDate <= tomorrowsDate) {
+          resMatches.push(match)
+        }
+      }
+      console.log(resMatches)
+      return resMatches
+    }))
+          
+        
+   
   }
 
 }
