@@ -56,6 +56,12 @@ export class AuthEffects {
                     {
                         type: AuthActions.SET_TOKEN,
                         payload: body.token
+                    },
+                    {
+                        type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
+                    },
+                    {
+                        type: CompetitionsActions.TRY_GET_COMPETITIONS
                     }
                 ]
             }),catchError((error: any) => {
@@ -79,14 +85,11 @@ export class AuthEffects {
                     type: AuthActions.SET_TOKEN,
                     payload: token
                 },
-                // {
-                //     type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
-                // },
-                // {
-                //     type: CompetitionsActions.TRY_GET_COMPETITIONS
-                // },
                 {
-                    type: MatchActions.TRY_GET_MATCHES
+                    type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
+                },
+                {
+                    type: CompetitionsActions.TRY_GET_COMPETITIONS
                 }]
             } else {
                 return [{
@@ -99,12 +102,18 @@ export class AuthEffects {
     @Effect()
     logout = this.actions$
         .ofType(AuthActions.TRY_LOGOUT)
-        .pipe(map(() => {
+        .pipe(mergeMap(() => {
             localStorage.removeItem('token')
             this.router.navigate(['/'])
-            return {
+            return [{
                 type: AuthActions.LOGOUT
-            }
+            },{
+                type: GamesActions.RESET_STATE
+            },{
+                type: CompetitionsActions.RESET_STATE
+            }, {
+                type: MatchActions.RESET_STATE
+            }]
         }))
         
 

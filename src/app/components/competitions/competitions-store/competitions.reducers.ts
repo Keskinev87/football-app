@@ -35,7 +35,8 @@ export function competitionsReducer (state = initialState, action: CompetitionsA
             }
         case CompetitionsActions.RESET_STATE:
             return {
-                ...state,
+                competitions: undefined,
+                gameEditedId: '',
                 loading: false
             }
         default: 

@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment'
 
 import * as GameActions from './games.actions'
 import * as CompetitionsActions from '../../competitions/competitions-store/competitions.actions'
+import * as MatchActions from '../../matches/match-store/match.actions'
 import { Effect, Actions } from "@ngrx/effects";
 import { map, switchMap, mergeMap, catchError } from "rxjs/operators";
 import { Game }  from "../../models/game.model";
@@ -40,13 +41,19 @@ export class GameEffects {
     getGamesByUserId = this.actions$
         .ofType(GameActions.TRY_GET_ALL_GAMES_BY_USER_ID)
         .pipe(switchMap(() => {
-            console.log("here")
-            return this.httpClient.get<Game[]>(environment.apiUrl + "/game/getAll", {observe: 'body'}).pipe(map((games) => {
-                console.log(games)
-                    return {
+            return this.httpClient.get<Game[]>(environment.apiUrl + "/game/getAll", {observe: 'body'}).pipe(mergeMap((games) => {
+                let competitionIds = []
+                for (let game of games) {
+                    competitionIds = competitionIds.concat(game.competitions)
+                }
+                    return [{
                         type: GameActions.GET_ALL_GAMES_BY_USER_ID,
                         payload: games
-                    }
+                    },
+                    {
+                        type: MatchActions.TRY_GET_MATCHES,
+                        payload: competitionIds
+                    }]
             }), catchError(error => {
                 return of(new GameActions.GetGamesFailed())
             }))
@@ -54,9 +61,9 @@ export class GameEffects {
 
     @Effect()
     //TODO: Complete the method after creating /game/edit 
-    updateGame = this.actions$
-        .ofType(GameActions.UPDATE_GAME)
-        .pipe(map((action: GameActions.UpdateGame) => {
+    updateGameCompetitions = this.actions$
+        .ofType(GameActions.UPDATE_GAME_COMPETITIONS)
+        .pipe(map((action: GameActions.UpdateGameCompetitions) => {
             return action.payload
         })).pipe(switchMap((game:Game) => {
             console.log("Effect")

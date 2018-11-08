@@ -43,7 +43,8 @@ import { CompetitionsEffects } from "./components/competitions/competitions-stor
 import { CompetitionItemComponent } from './components/games/game-create/creating-steps/edit-game-competitions/competition-item/competition-item/competition-item.component'
 import { MatchEffects } from './components/matches/match-store/match.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
+import { FilterPengingMatchesPipe } from './pipes/filter-penging-matches.pipe'
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { environment } from '../environments/environment'
     LoaderComponentComponent,
     SmallLoaderComponentComponent,
     EditGameCompetitionsComponent,
-    CompetitionItemComponent
+    CompetitionItemComponent,
+    FilterPengingMatchesPipe
   ],
   imports: [
     BrowserModule,

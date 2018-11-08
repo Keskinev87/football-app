@@ -81,7 +81,7 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 ...state,
                 editedGame: action.payload
             }
-        case GameActions.UPDATE_GAME:
+        case GameActions.UPDATE_GAME_COMPETITIONS:
             return {
                 ...state,
                 loading: true
@@ -107,9 +107,22 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 ...state,
                 games: games
             }
-        case GameActions.RESET_STATE:
+        case GameActions.FINISH_EDIT:
             return {
                 ...state,
+                editedGame: undefined,
+                editedGameId: '',
+                error: false,
+                errorMsg: '',
+                loading: false
+            }
+        case GameActions.RESET_STATE:
+            return {
+                games: undefined,
+                gameOptions: [{
+                    option: 'Standard',
+                    description: 'Description 1'
+                }],
                 editedGame: undefined,
                 editedGameId: '',
                 error: false,

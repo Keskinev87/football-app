@@ -7,7 +7,7 @@ export const CREATE_GAME_FAILED = "CREATE_GAME_FAILED"
 export const BEGIN_EDIT_GAME = "BEGIN_EDIT_GAME"
 export const ADD_COMPETITION = "ADD_COMPETITION"
 export const REMOVE_COMPETITION = "REMOVE_COMPETITION"
-export const UPDATE_GAME = "UPDATE_GAME"
+export const UPDATE_GAME_COMPETITIONS = "UPDATE_GAME"
 export const ADD_MATCHES_BY_COMPETITION_ID = "ADD_MATCHES_BY_COMPETITION"
 export const ADD_MATCH_BY_MATCH_ID = "ADD_MATCH_BY_MATCH_ID"
 export const TRY_GET_ALL_GAMES_BY_USER_ID = "TRY_GET_ALL_GAMES_BY_USER_ID"
@@ -15,6 +15,7 @@ export const GET_ALL_GAMES_BY_USER_ID = "GET_ALL_GAMES_BY_USER_ID"
 export const GET_ALL_GAMES_BY_CREATOR_ID = "GET_ALL_GAMES_BY_CREATOR_ID"
 export const GET_GAME_BY_ID = "GET_GAME_BY_ID"
 export const GET_GAMES_FAILED = "GET_GAMES_FAILED"
+export const FINISH_EDIT = "FINISH_EDIT"
 
 //TODO: 
 // export const EDIT_GAME = "EDIT_GAME"
@@ -49,16 +50,16 @@ export class BeginEditGame implements Action {
 
 export class AddCompetition implements Action {
     readonly type = ADD_COMPETITION
-    constructor (public payload: string ) {}
+    constructor (public payload: number ) {}
 };
 
 export class RemoveCompetition implements Action {
     readonly type = REMOVE_COMPETITION
-    constructor (public payload: string) {}
+    constructor (public payload: number) {}
 };
 
-export class UpdateGame implements Action {
-    readonly type = UPDATE_GAME
+export class UpdateGameCompetitions implements Action {
+    readonly type = UPDATE_GAME_COMPETITIONS
 
     constructor(public payload: Game) {}
 }
@@ -101,4 +102,23 @@ export class ResetState implements Action {
     readonly type = RESET_STATE
 }
 
-export type GameActions = TryCreateGame| CreateGame | CreateGameFailed | BeginEditGame | AddCompetition | UpdateGame | RemoveCompetition | AddMatchesByCompetitionId | AddMatchByMatchId | GetAllGamesByCreatorId | GetAllGamesByUserId | GetGameById | ResetState | TryGetAllGamesByUserId | GetGamesFailed
+export class FinishEdit implements Action {
+    readonly type = FINISH_EDIT
+}
+
+export type GameActions = TryCreateGame
+                            | CreateGame 
+                            | CreateGameFailed 
+                            | BeginEditGame 
+                            | AddCompetition 
+                            | UpdateGameCompetitions 
+                            | RemoveCompetition 
+                            | AddMatchesByCompetitionId 
+                            | AddMatchByMatchId 
+                            | GetAllGamesByCreatorId 
+                            | GetAllGamesByUserId 
+                            | GetGameById 
+                            | ResetState
+                            | FinishEdit 
+                            | TryGetAllGamesByUserId 
+                            | GetGamesFailed

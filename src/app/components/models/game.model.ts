@@ -6,7 +6,7 @@ export class Game {
         public secretCode: number,
         public _id?: string,
         public shareableUrl?: string,
-        public competitions?: Array<string>,
+        public competitions?: Array<number>,
         public matches?: Array<object>,
         public creator?: string,
         public admin?: string,

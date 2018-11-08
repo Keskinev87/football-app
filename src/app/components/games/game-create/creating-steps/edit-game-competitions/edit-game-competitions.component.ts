@@ -33,7 +33,7 @@ export class EditGameCompetitionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new GamesActions.ResetState())
+    this.store.dispatch(new GamesActions.FinishEdit())
   }
 
   onSave() {
@@ -47,7 +47,7 @@ export class EditGameCompetitionsComponent implements OnInit, OnDestroy {
     // }))
     this.gamesState.pipe(take(1)).subscribe((state) => {
       console.log(state.editedGame)
-      this.store.dispatch(new GamesActions.UpdateGame(state.editedGame))
+      this.store.dispatch(new GamesActions.UpdateGameCompetitions(state.editedGame))
     })
 
     // this.store.select('games')
