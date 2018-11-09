@@ -79,6 +79,7 @@ export class AuthEffects {
         .pipe(mergeMap(() => {
             let token = localStorage.getItem('token')
             if (token) {
+                setTimeout(function(){ console.log("success")}, 3000);
                 return [{
                     type: AuthActions.SIGNIN
                 },{
@@ -92,8 +93,9 @@ export class AuthEffects {
                     type: CompetitionsActions.TRY_GET_COMPETITIONS
                 }]
             } else {
+                this.router.navigate(['/login'])
                 return [{
-                    type: AuthActions.DO_NOTHING
+                    type: AuthActions.SIGNIN_FAILED
                 }]
             } 
         }))

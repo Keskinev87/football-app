@@ -41,7 +41,6 @@ const appRoutes: Routes = [
         ]}
     ]},
     {path: 'competitions', component: CompetitionListComponent},
-    {path: 'users', component: UserListComponent},
     {path: 'login', component: UserLoginComponent},
     {path: 'signup', component: UserSignupComponent}
 ]

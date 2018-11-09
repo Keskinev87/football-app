@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Match } from '../../models/match.model';
 import { map, filter } from 'rxjs/operators';
-import  * as moment  from 'moment'
 
 @Component({
   selector: 'app-match-prediction-list',
@@ -20,29 +19,36 @@ export class MatchPredictionListComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    let today = new Date()
-      let todaysDate = today.getTime()
+    
+      let todaysDate = new Date().getTime()
       let tomorrow = new Date() 
-      tomorrow.setDate(today.getDate() + 1)
+      tomorrow.setDate(new Date().getDate() + 1)
       let tomorrowsDate = tomorrow.getTime()
 
-    this.matchState = this.store.select('matches').pipe(map((state:any) => {
+    this.matchState = this.store.select('matches')
+    .pipe(map((state:any) => {
       console.log(state)
       return state.matches 
     })).pipe(map((matches: Match[]) => {
       console.log(matches)
       let resMatches = []
-      for (let match of matches) {
-        let utcDate = new Date(match.utcDate)
-
-        let matchDate = utcDate.getTime()
-    
-        if (matchDate >= todaysDate && matchDate <= tomorrowsDate) {
-          resMatches.push(match)
+      if(matches) {
+        for (let match of matches) {
+          let utcDate = new Date(match.utcDate)
+  
+          let matchDate = utcDate.getTime()
+      
+          if (matchDate >= todaysDate && matchDate <= tomorrowsDate) {
+            resMatches.push(match)
+          }
         }
+        console.log(resMatches)
+        return resMatches
       }
-      console.log(resMatches)
-      return resMatches
+      else {
+        return resMatches
+      }
+      
     }))
           
         

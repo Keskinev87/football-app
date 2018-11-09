@@ -19,6 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
             .pipe(switchMap((authState: fromAuth.State) => {
                 const reqCopy = req.clone({ headers: new HttpHeaders().append("Authorization", "JWT " + authState.token)})
                 console.log(authState.token)
+                console.log(reqCopy)
                 return next.handle(reqCopy)
             }))
         

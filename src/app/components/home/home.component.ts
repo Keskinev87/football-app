@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as fromAuth from '../auth/auth-store/auth.reducers'
 
 @Component({
   selector: 'app-home',

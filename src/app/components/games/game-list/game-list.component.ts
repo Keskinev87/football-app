@@ -15,10 +15,16 @@ export class GameListComponent implements OnInit {
   
   gamesState: Observable<any>
 
+  gameJoin: boolean = false
+
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
     this.gamesState = this.store.select('games')
+  }
+
+  onJoinGame() {
+    this.gameJoin = true
   }
 
 

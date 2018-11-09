@@ -8,14 +8,12 @@
       </button>
       <a class="navbar-brand" routerLink='/'>WebSiteName</a>
     </div>
-    <div class="collapse navbar-collapse show" id="myNavbar">
+    <div class="collapse navbar-collapse" [class.show]="showMenu" id="myNavbar">
       <ul class="nav navbar-nav">
         <ng-template [ngIf]="(authState | async).isAuthenticated">
           <li routerLinkActive="active"><a routerLink='pending-matches'>Pending Matches</a></li>
           <li routerLinkActive="active"><a routerLink='games'>Games</a></li>
           <li routerLinkActive="active"><a routerLink='games/create/choose-name'>Create Game</a></li>
-          <li routerLinkActive="active"><a routerLink="users-list">Users</a></li>
-          <li routerLinkActive="active"><a routerLink="admin">Admin</a></li>
         </ng-template>
       </ul>
       

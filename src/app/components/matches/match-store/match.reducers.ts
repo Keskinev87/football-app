@@ -9,7 +9,7 @@ export interface State {
 }
 
 const initialState = {
-    matches: undefined,
+    matches: [],
     error: false,
     loading: false
 };

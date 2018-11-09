@@ -5,6 +5,8 @@ import * as fromApp from './app.reducers'
 import * as AuthActions from './components/auth/auth-store/auth.actions'
 import * as GamesActions from './components/games/games-store/games.actions'
 import * as CompetitionsActions from './components/competitions/competitions-store/competitions.actions'
+import { Observable, interval } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +18,9 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new AuthActions.CheckStatus()) //this goes through the auth.effect. If successfull, the effect will emit actions to load the state of games, competitions and matches.  
     
+    this.store.dispatch(new AuthActions.CheckStatus()) //this goes through the auth.effect. If successfull, the effect will emit actions to load the state of games, competitions and matches.  
+  
   }
 
 }

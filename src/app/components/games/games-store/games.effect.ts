@@ -87,6 +87,32 @@ export class GameEffects {
             }))
         }))
 
+    @Effect()
+    joinGameByCode = this.actions$
+        .ofType(GameActions.TRY_JOIN_GAME_BY_CODE)
+        .pipe(map((action: GameActions.TryJoinGameByCode) => {
+            return action.payload
+        }))
+        .pipe(switchMap((code: object) => {
+            console.log("Effect here")
+            console.log(code)
+            return this.httpClient.post(environment.apiUrl + "/game/joinWithCode", code, {observe: 'body'}).pipe(map((resGame: Game) => {
+                if(resGame) {
+                    return {
+                        type: GameActions.JOIN_GAME_BY_CODE_SUCCESS
+                    }
+                }
+                else {
+                    return {
+                        type: GameActions.JOIN_GAME_BY_CODE_FAIL
+                    }
+                }
+            }), catchError(error => {
+                return of(new GameActions.JoinGameByCodeFail())
+            }))
+        }))
+        
+
 
     constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router) {}
 }

@@ -129,6 +129,22 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 errorMsg: '',
                 loading: false
             }
+        case GameActions.TRY_JOIN_GAME_BY_CODE:
+            return {
+                ...state,
+                loading: true
+            }
+        case GameActions.JOIN_GAME_BY_CODE_SUCCESS:
+            return {
+                ...state,
+                games: [...state.games, action.payload],
+                loading: false
+            }
+        case GameActions.JOIN_GAME_BY_CODE_FAIL:
+            return {
+                ...state,
+                loading: false,
+            }
         default: 
             return state;
         }

@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class HeaderComponent implements OnInit {
   
   authState: Observable<{isAuthenticated: boolean}>
-  menuClicked: boolean = false
+  showMenu: boolean = false
 
   constructor(private store: Store<fromApp.AppState>) {}
 
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openMenu() {
-    this.menuClicked = !this.menuClicked
+    this.showMenu = !this.showMenu
   }
 
 }

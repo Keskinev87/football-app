@@ -44,7 +44,7 @@ import { CompetitionItemComponent } from './components/games/game-create/creatin
 import { MatchEffects } from './components/matches/match-store/match.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '../environments/environment';
-import { FilterPengingMatchesPipe } from './pipes/filter-penging-matches.pipe'
+import { GamesJoinComponent } from './components/games/games-join/games-join.component';
 
 
 @NgModule({
@@ -73,7 +73,7 @@ import { FilterPengingMatchesPipe } from './pipes/filter-penging-matches.pipe'
     SmallLoaderComponentComponent,
     EditGameCompetitionsComponent,
     CompetitionItemComponent,
-    FilterPengingMatchesPipe
+    GamesJoinComponent
   ],
   imports: [
     BrowserModule,

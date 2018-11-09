@@ -20,7 +20,9 @@ export const FINISH_EDIT = "FINISH_EDIT"
 //TODO: 
 // export const EDIT_GAME = "EDIT_GAME"
 // export const DELETE_GAME = "DELETE_GAME"
-// export const JOIN_GAME_BY_CODE = "JOIN_GAME_BY_CODE"
+export const TRY_JOIN_GAME_BY_CODE = "TRY_JOIN_GAME_BY_CODE"
+export const JOIN_GAME_BY_CODE_SUCCESS = "JOIN_GAME_BY_CODE_SUCCESS"
+export const JOIN_GAME_BY_CODE_FAIL = "JOIN_GAME_BY_CODE_FAIL"
 // export const JOIN_GAME_BY_LINK = "JOIN_GAME_BY_LINK"
 // export const JOIN_PUBLIC_GAME = "JOIN_PUBLIC_GAME"
 export const RESET_STATE =  "RESET_STATE"
@@ -98,6 +100,22 @@ export class GetGamesFailed implements Action {
     readonly type = GET_GAMES_FAILED
 }
 
+export class TryJoinGameByCode implements Action {
+    readonly type = TRY_JOIN_GAME_BY_CODE
+
+    constructor (public payload: object) {}
+}
+
+export class JoinGameByCodeSuccess implements Action {
+    readonly type = JOIN_GAME_BY_CODE_SUCCESS
+
+    constructor(public payload: Game) {}
+}
+
+export class JoinGameByCodeFail implements Action {
+    readonly type = JOIN_GAME_BY_CODE_FAIL
+}
+
 export class ResetState implements Action {
     readonly type = RESET_STATE
 }
@@ -122,3 +140,6 @@ export type GameActions = TryCreateGame
                             | FinishEdit 
                             | TryGetAllGamesByUserId 
                             | GetGamesFailed
+                            | TryJoinGameByCode
+                            | JoinGameByCodeSuccess
+                            | JoinGameByCodeFail

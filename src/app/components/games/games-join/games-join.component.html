@@ -1,0 +1,22 @@
+<form (ngSubmit)="onCodeEnter(f)" #f="ngForm">
+    <fieldset [disabled]="(gamesState | async).loading">
+      <div class="form-group">
+          <label for="gameCode">Please Enter The Code</label>
+          <input class="form-control" 
+          type="text" 
+          id="gameCode" 
+          name="gameCode" 
+          required
+          ngModel
+          #gameCode="ngModel">
+      </div>
+    </fieldset>
+
+    <app-small-loader-component *ngIf="(gamesState | async).loading"></app-small-loader-component>
+
+    <button class="btn btn-primary"
+        type="submit"
+        [disabled]="!f.valid"
+        *ngIf = "!(gamesState | async).loading">Join
+    </button>
+</form>
