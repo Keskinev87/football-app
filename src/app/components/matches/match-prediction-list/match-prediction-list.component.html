@@ -1,2 +1,5 @@
-<app-match-prediction-item *ngFor="let match of (matchState | async) " [match]="match"></app-match-prediction-item>
+<h2>Games</h2>
 
+<app-match-prediction-game *ngFor="let game of (gamesState | async).games " [game]="game"></app-match-prediction-game>
+<app-loader-component *ngIf="(gamesState | async).loading"></app-loader-component>
+<p *ngIf="!(gamesState | async).games">Sorry! No games available.</p>

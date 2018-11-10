@@ -99,7 +99,8 @@ export class GameEffects {
             return this.httpClient.post(environment.apiUrl + "/game/joinWithCode", code, {observe: 'body'}).pipe(map((resGame: Game) => {
                 if(resGame) {
                     return {
-                        type: GameActions.JOIN_GAME_BY_CODE_SUCCESS
+                        type: GameActions.JOIN_GAME_BY_CODE_SUCCESS,
+                        payload: resGame
                     }
                 }
                 else {

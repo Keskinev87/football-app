@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+          <small class="text-info col-lg-3 col-md-3 col-sm-3 col-xs-3">{{match.utcDate | date }}</small>
+          <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1 inline text-center">
+              <small>{{match.score.fullTime.hometeam || "-"}}</small>
+              <small>|</small>
+              <small>{{match.score.fullTime.awayteam || "-"}}</small>
+          </div>
+          <small class="text-info col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-3 col-xs-offset-1 pull-right">{{match.utcDate | date:'shortTime'}}</small>
+      </div>
+     
+      <!-- <small class="text-info align-right">Competition: {{match.competition.name}}</small> -->
+    </div>
+    <div class="panel-body">
+        
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-2 text-center">
+              <p>{{match.homeTeam.name}}</p>
+          </div>
+         
+          <form (ngSubmit)="onPredict(f)" #f="ngForm">
+              <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                <input 
+                  type="number" 
+                  class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xs-5" 
+                  id="homeTeam"
+                  name="homeTeam" 
+                  ngModel
+                  required
+                  #homeTeam="ngModel">
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                <small>-</small>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+              <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                <input 
+                  type="number" 
+                  class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xs-5" 
+                  id="awayTeam"
+                  name="awayTeam" 
+                  ngModel
+                  required
+                  #homeTeam="ngModel">
+              </div>
+          </form> 
+          
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-2 text-center">
+              <p>{{match.awayTeam.name}}</p>
+          </div>
+        
+    </div>
+    
+
+</div>

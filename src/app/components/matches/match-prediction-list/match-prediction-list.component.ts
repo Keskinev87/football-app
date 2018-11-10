@@ -5,7 +5,8 @@ import * as fromApp from '../../../app.reducers'
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Match } from '../../models/match.model';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, switchMap } from 'rxjs/operators';
+import { Game } from '../../models/game.model';
 
 @Component({
   selector: 'app-match-prediction-list',
@@ -14,42 +15,27 @@ import { map, filter } from 'rxjs/operators';
 })
 export class MatchPredictionListComponent implements OnInit {
   
-  matchState: Observable<any>
+  gamesState: Observable<{
+    games: Game[]
+  }>
   
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    
-      let todaysDate = new Date().getTime()
-      let tomorrow = new Date() 
-      tomorrow.setDate(new Date().getDate() + 1)
-      let tomorrowsDate = tomorrow.getTime()
+    //This component loads the pending matches. Pending matches are matches, that: 
+    //a. Belong to a competition from a game, that the user participates in
+    //b. Are today or tomorrow
+    //c. Are not with status "FINISHED"
 
-    this.matchState = this.store.select('matches')
-    .pipe(map((state:any) => {
-      console.log(state)
-      return state.matches 
-    })).pipe(map((matches: Match[]) => {
-      console.log(matches)
-      let resMatches = []
-      if(matches) {
-        for (let match of matches) {
-          let utcDate = new Date(match.utcDate)
-  
-          let matchDate = utcDate.getTime()
+    //1. Declare the date filters
       
-          if (matchDate >= todaysDate && matchDate <= tomorrowsDate) {
-            resMatches.push(match)
-          }
-        }
-        console.log(resMatches)
-        return resMatches
-      }
-      else {
-        return resMatches
-      }
-      
-    }))
+
+    //1. Get the games of the user 
+
+      this.gamesState = this.store.select('games')
+       
+    // The games will be passed to "match-prediciton-game" component. From there, we will get the pending matches for each game
+    
           
         
    

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Match } from '../../models/match.model'
+import { Match } from '../../../models/match.model'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-match-prediction-item',
@@ -12,6 +13,12 @@ export class MatchPredictionItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onPredict(form: NgForm) {
+    console.log("Predict")
+    console.log(form.value.homeTeam)
+    console.log(form.value.awayTeam)
   }
 
 }
