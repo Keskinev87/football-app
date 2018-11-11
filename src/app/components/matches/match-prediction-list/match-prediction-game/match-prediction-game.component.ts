@@ -23,7 +23,8 @@ export class MatchPredictionGameComponent implements OnInit {
     //declare the date filters
     let todaysDate = new Date().getTime()
     let tomorrow = new Date() 
-    tomorrow.setDate(new Date().getDate() + 1)
+    tomorrow.setDate(new Date().getDate() + 10)
+    console.log(tomorrow)
     let tomorrowsDate = tomorrow.getTime()
     //extract the competition ids from the game.We will filter the matches by those too. 
     let competitionIds = this.game.competitions

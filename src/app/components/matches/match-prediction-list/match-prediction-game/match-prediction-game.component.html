@@ -1,5 +1,5 @@
 <div class="well">
     <h3>{{game.name}}</h3>
-    <app-match-prediction-item *ngFor="let match of (matchState | async)" [match] = "match"></app-match-prediction-item>
+    <app-match-prediction-item *ngFor="let match of (matchState | async)" [match] = "match" [game] = "game"></app-match-prediction-item>
 </div>
 
