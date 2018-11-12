@@ -17,7 +17,7 @@
           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-2 text-center">
               <p>{{match.homeTeam.name}}</p>
           </div>
-            <app-match-prediction [match] = "match" [game] = "game"></app-match-prediction>
+            <app-match-prediction [match] = "match" [game] = "game" [prediction] = "(predictionState | async).prediction" [isEdit] = "(predictionState | async).isEdit"></app-match-prediction>
           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-2 text-center">
               <p>{{match.awayTeam.name}}</p>
           </div>

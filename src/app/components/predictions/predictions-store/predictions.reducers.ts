@@ -47,6 +47,22 @@ export function predictionsReducer (state = initialState, action: PredictionsAct
                 ...state,
                 loading: false
             }
+        case PredictionsActions.TRY_EDIT_PREDICTION:
+            return{
+                ...state,
+                loading: true
+            }
+        case PredictionsActions.EDIT_PREDICTION_SUCCESS:
+            return {
+                ...state,
+                loading: false
+                //TODO: update the prediction in the local state too
+            }
+        case PredictionsActions.EDIT_PREDICTION_FAIL:
+            return {
+                ...state,
+                loading: false 
+            }
         default: 
             return {
                 ...state
