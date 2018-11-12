@@ -1,0 +1,26 @@
+<form (ngSubmit)="onPredict(f)" #f="ngForm">
+  <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+    <input 
+      type="number" 
+      class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xs-5" 
+      id="homeTeam"
+      name="homeTeam" 
+      ngModel
+      required
+      #homeTeam="ngModel">
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+    <small>-</small>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+  <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+    <input 
+      type="number" 
+      class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xs-5" 
+      id="awayTeam"
+      name="awayTeam" 
+      ngModel
+      required
+      #awayTeam="ngModel">
+  </div>
+</form> 

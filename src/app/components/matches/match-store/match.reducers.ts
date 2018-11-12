@@ -32,10 +32,6 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
                 ...state,
                 loading: false
             }
-        case MatchActions.TRY_MAKE_PREDICTION:
-            return {
-                ...state
-            }
         case MatchActions.RESET_STATE: 
             return {
                 matches: undefined,

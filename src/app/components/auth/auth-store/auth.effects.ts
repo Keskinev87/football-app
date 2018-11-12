@@ -5,13 +5,14 @@ import * as AuthActions from "./auth.actions";
 import * as GamesActions from "../../games/games-store/games.actions"
 import * as CompetitionsActions from "../../competitions/competitions-store/competitions.actions"
 import * as MatchActions from "../../matches/match-store/match.actions"
+import * as PredictionsActions from "../../predictions/predictions-store/predictions.actions"
 import { map, switchMap, mergeMap, catchError } from "rxjs/operators";
 import { User } from "../../models/user.model";
 import { HttpClient } from '@angular/common/http';
 import { of } from "rxjs";
-import { AuthService } from "../../../services/auth.service";
 import { environment } from '../../../../environments/environment'
 import { Router } from "@angular/router";
+ 
 
 
 
@@ -91,6 +92,9 @@ export class AuthEffects {
                 },
                 {
                     type: CompetitionsActions.TRY_GET_COMPETITIONS
+                },
+                {
+                    type: PredictionsActions.TRY_GET_PREDICTIONS
                 }]
             } else {
                 this.router.navigate(['/login'])

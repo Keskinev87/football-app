@@ -11,7 +11,7 @@ import { GameViewComponent } from './components/games/game-view/game-view.compon
 import { HeaderComponent } from './components/header/header.component';
 import { MatchListItemComponent } from './components/matches/match-list-item/match-list-item.component';
 import { MatchListComponent } from './components/matches/match-list/match-list.component';
-import { MatchPredictionItemComponent } from './components/matches/match-prediction-list/match-prediction-item/match-prediction-item.component';
+import { MatchPredictionItemComponent } from './components/matches/match-prediction-list/match-prediction-game/match-prediction-item/match-prediction-item.component';
 import { MatchPredictionListComponent } from './components/matches/match-prediction-list/match-prediction-list.component';
 import { UserLoginComponent } from './components/auth/user-login/user-login.component';
 import { UserSignupComponent } from './components/auth/user-signup/user-signup.component';
@@ -46,6 +46,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '../environments/environment';
 import { GamesJoinComponent } from './components/games/games-join/games-join.component';
 import { MatchPredictionGameComponent } from './components/matches/match-prediction-list/match-prediction-game/match-prediction-game.component';
+import { PredictionsEffects } from './components/predictions/predictions-store/predictions.effects';
+import { MatchPredictionComponent } from './components/predictions/match-prediction/match-prediction.component';
 
 
 @NgModule({
@@ -75,7 +77,8 @@ import { MatchPredictionGameComponent } from './components/matches/match-predict
     EditGameCompetitionsComponent,
     CompetitionItemComponent,
     GamesJoinComponent,
-    MatchPredictionGameComponent
+    MatchPredictionGameComponent,
+    MatchPredictionComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +86,7 @@ import { MatchPredictionGameComponent } from './components/matches/match-predict
     AppRouterModule,
     FormsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, GameEffects, CompetitionsEffects, MatchEffects]),
+    EffectsModule.forRoot([AuthEffects, GameEffects, CompetitionsEffects, MatchEffects, PredictionsEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [

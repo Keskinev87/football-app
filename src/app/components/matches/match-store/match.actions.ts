@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Match } from '../../models/match.model'
 import { Competition } from "../../models/competition.model";
-import Prediction from "../../models/prediction.model";
+import { Prediction } from "../../models/prediction.model";
 
 
 export const TRY_GET_MATCHES = "TRY_GET_MATCHES"

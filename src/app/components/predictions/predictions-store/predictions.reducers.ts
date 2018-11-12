@@ -7,7 +7,7 @@ export interface State {
 }
 
 const initialState: State = {
-    predictions: undefined,
+    predictions: [],
     loading: false
 }
 
@@ -24,8 +24,26 @@ export function predictionsReducer (state = initialState, action: PredictionsAct
                 loading: false
             }
         case PredictionsActions.SAVE_PREDICTION_SUCCESS:
+        console.log("Reducer Prediction: " + action.payload)
+        console.log(state.predictions)
             return {
-                //TODO: Update the state with the prediction
+                ...state,
+                predictions:[...state.predictions, action.payload],
+                loading: false
+            }
+        case PredictionsActions. TRY_GET_PREDICTIONS:
+            return {
+                ...state,
+                loading: true
+            }
+        case PredictionsActions.GET_PREDICTIONS_SUCCESS: 
+            return {
+                ...state,
+                predictions: action.payload,
+                loading: false
+            }
+        case PredictionsActions.GET_PREDICTIONS_FAIL:
+            return {
                 ...state,
                 loading: false
             }

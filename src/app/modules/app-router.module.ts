@@ -7,7 +7,7 @@ import { GameViewComponent } from '.././components/games/game-view/game-view.com
 import { HeaderComponent } from '.././components/header/header.component';
 import { MatchListItemComponent } from '.././components/matches/match-list-item/match-list-item.component';
 import { MatchListComponent } from '.././components/matches/match-list/match-list.component';
-import { MatchPredictionItemComponent } from '.././components/matches/match-prediction-list/match-prediction-item/match-prediction-item.component';
+import { MatchPredictionItemComponent } from '.././components/matches/match-prediction-list/match-prediction-game/match-prediction-item/match-prediction-item.component';
 import { MatchPredictionListComponent } from '.././components/matches/match-prediction-list/match-prediction-list.component';
 import { UserLoginComponent } from '.././components/auth/user-login/user-login.component';
 import { UserSignupComponent } from '.././components/auth/user-signup/user-signup.component';
