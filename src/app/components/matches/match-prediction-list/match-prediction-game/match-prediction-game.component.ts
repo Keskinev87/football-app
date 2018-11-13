@@ -21,13 +21,17 @@ export class MatchPredictionGameComponent implements OnInit {
 
   ngOnInit() {
     //declare the date filters
-    let todaysDate = new Date().getTime()
+    let yesterday = new Date()
+    yesterday.setDate(new Date().getDate() - 1)
+    let yesterdaysDate = yesterday.getTime()
+
     let tomorrow = new Date() 
-    tomorrow.setDate(new Date().getDate() + 10)
+    tomorrow.setDate(new Date().getDate() + 2)
     console.log(tomorrow)
     let tomorrowsDate = tomorrow.getTime()
     //extract the competition ids from the game.We will filter the matches by those too. 
     let competitionIds = this.game.competitions
+   
 
     //get the matches form the state and filter them
     this.matchState = this.store.select('matches')
@@ -39,10 +43,8 @@ export class MatchPredictionGameComponent implements OnInit {
       let resMatches = []
       if(matches) {
         for (let match of matches) {
-          let utcDate = new Date(match.utcDate)
-          let matchDate = utcDate.getTime()
-      
-          if (matchDate >= todaysDate && matchDate <= tomorrowsDate && competitionIds.includes(match.competition.id)) {
+
+          if (match.dateMiliseconds >= yesterdaysDate && match.dateMiliseconds <= tomorrowsDate && competitionIds.includes(match.competition.id)) {
             resMatches.push(match)
           }
         }

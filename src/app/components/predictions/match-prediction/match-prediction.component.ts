@@ -30,7 +30,7 @@ export class MatchPredictionComponent implements OnInit {
 
   onPredict(form: NgForm) {
     console.log("Predict")
-    let newPrediction: Prediction = new Prediction(this.match.id, form.value.homeTeam, form.value.awayTeam, this.game._id)
+    let newPrediction: Prediction = new Prediction(this.match.id, form.value.homeTeamScore, form.value.awayTeamScore, this.game._id)
     this.store.dispatch(new PredictionActions.TrySavePrediction(newPrediction))
   }
 

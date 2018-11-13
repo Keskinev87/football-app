@@ -18,5 +18,6 @@ export class Match {
 		public referees?: Array<object>,
 		public goals?: Array<object>,
 		public bookings?: Array<object>,
-		public substitutions?: Array<object>) {}
+		public substitutions?: Array<object>,
+		public dateMiliseconds?: number) {}
 }
