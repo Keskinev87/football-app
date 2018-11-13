@@ -5,6 +5,7 @@ export class Prediction {
     public homeTeamScore: number,
     public awayTeamScore: number,
     public gameId: string,
+    public _id?: string,
     public userId?: string,
     public scorer?: number
     ) {}

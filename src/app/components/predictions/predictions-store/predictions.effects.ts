@@ -43,6 +43,24 @@ export class PredictionsEffects {
                 return of(new PredictionsActions.GetPredictionsFail())
             }))
         }))
+
+    @Effect()
+    editPrediction = this.actions$
+        .ofType(PredictionsActions.TRY_EDIT_PREDICTION)
+        .pipe(map((action:PredictionsActions.TryEditPrediction) => {
+            return action.payload
+        }))
+        .pipe(switchMap((prediction: Prediction) => {
+            return this.httpClient.post(environment.apiUrl + '/predictions/editMatchPrediction', prediction, {observe: 'body'})
+                .pipe(map((prediction: Prediction) => {
+                    return {
+                        type: PredictionsActions.EDIT_PREDICTION_SUCCESS,
+                        payload: prediction
+                    }
+                }), catchError(error => {
+                    return of(new PredictionsActions.EditPredictionFail())
+                }))
+        }))
     
 
 

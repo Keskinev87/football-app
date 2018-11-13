@@ -1,14 +1,15 @@
 <form (ngSubmit)="onPredict(f)" #f="ngForm" *ngIf="!isEdit">
   <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
     <input 
-      type="number" 
+      type="text" 
       class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xs-5"
-      id="homeTeam"
-      name="homeTeam" 
+      id="homeTeamScoreNew"
+      name="homeTeamScoreNew" 
       ngModel
       required
       #homeTeam="ngModel">
   </div>
+  <span class="help-block" *ngIf="!homeTeamScore.valid && homeTeamScore.touched">Please enter a number!</span>
   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
     <div class='row'>
         <small display="block">-</small>
@@ -17,12 +18,13 @@
   </div>
   <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
     <input 
-      type="number" 
+      type="text" 
       class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xs-5"
       id="awayTeam"
       name="awayTeam"
       ngModel 
       required
+      number
       #awayTeam="ngModel">
   </div>
 </form> 
@@ -30,26 +32,30 @@
 <form (ngSubmit)="onEdit(f)" #f="ngForm" *ngIf="isEdit">
     <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
       <input 
-        type="number" 
-        class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xs-5"
+        type="text" 
+        class="form-control input-sm"
         id="homeTeamScore"
         name="homeTeamScore" 
         required
-        [(ngModel)] = 'prediction.homeTeamScore'>
+        pattern="[0-9]"
+        [(ngModel)] = 'prediction.homeTeamScore'
+        #homeTeamScore="ngModel">
     </div>
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
       <div class='row'>
           <small display="block">-</small>
       </div>
-      <button type="submit" class="btn btn-success" [style.display]="isEdit ? '' : 'none'">Edit</button>
+      <button type="submit" class="btn btn-success" [disabled]="!f.valid">Edit</button>
     </div>
     <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
       <input 
-        type="number" 
-        class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xs-5"
+        type="text" 
+        class="form-control input-sm"
         id="awayTeamScore"
         name="awayTeamScore"
         required
-        [(ngModel)] = 'prediction.awayTeamScore'>
+        pattern="[0-9]"
+        [(ngModel)] = 'prediction.awayTeamScore'
+        #awayTeamScore="ngModel">
     </div>
   </form> 

@@ -53,11 +53,30 @@ export function predictionsReducer (state = initialState, action: PredictionsAct
                 loading: true
             }
         case PredictionsActions.EDIT_PREDICTION_SUCCESS:
+            const newPrediction = action.payload
+            const index = state.predictions.findIndex(x => x._id == newPrediction._id)
+            var predictions = state.predictions
+            predictions[index] = newPrediction
             return {
                 ...state,
+                predictions: predictions,
                 loading: false
                 //TODO: update the prediction in the local state too
             }
+                
+
+            //     const reqGame = state.editedGame
+            // const index = reqGame.competitions.indexOf(action.payload)
+            // reqGame.competitions.splice(index, 1)
+            // console.log(reqGame)
+            // var games = [...state.games]
+            // games[state.editedGame._id] = reqGame
+            // console.log(games)
+            // return {
+            //     ...state,
+            //     games: games
+            // }
+            // }
         case PredictionsActions.EDIT_PREDICTION_FAIL:
             return {
                 ...state,
