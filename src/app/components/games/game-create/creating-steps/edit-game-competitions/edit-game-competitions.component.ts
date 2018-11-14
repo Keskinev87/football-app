@@ -21,7 +21,7 @@ export class EditGameCompetitionsComponent implements OnInit, OnDestroy {
     editedGame: Game,
     editedGameId: string,
     error: boolean,
-    errorMsg: string,
+    errorCode: number,
     loading: boolean
   }>
 
@@ -47,7 +47,7 @@ export class EditGameCompetitionsComponent implements OnInit, OnDestroy {
     // }))
     this.gamesState.pipe(take(1)).subscribe((state) => {
       console.log(state.editedGame)
-      this.store.dispatch(new GamesActions.UpdateGameCompetitions(state.editedGame))
+      this.store.dispatch(new GamesActions.TryUpdateGameCompetitions(state.editedGame))
     })
 
     // this.store.select('games')

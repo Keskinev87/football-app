@@ -33,6 +33,8 @@ export class GameEffects {
                         payload: game
                     }]
             }), catchError((error) => {
+                console.log("Code")
+                console.log(error.status)
                 return of(new GameActions.CreateGameFailed(error.code))
             }))
         }))
@@ -55,14 +57,14 @@ export class GameEffects {
                         payload: competitionIds
                     }]
             }), catchError(error => {
-                return of(new GameActions.GetGamesFailed())
+                return of(new GameActions.GetGamesFailed(error.status))
             }))
         }))
 
     @Effect()
     //TODO: Complete the method after creating /game/edit 
     updateGameCompetitions = this.actions$
-        .ofType(GameActions.UPDATE_GAME_COMPETITIONS)
+        .ofType(GameActions.TRY_UPDATE_GAME_COMPETITIONS)
         .pipe(map((action: GameActions.UpdateGameCompetitions) => {
             return action.payload
         })).pipe(switchMap((game:Game) => {
@@ -72,9 +74,10 @@ export class GameEffects {
                 if (resGame) {
                     console.log("Res game")
                     console.log(resGame)
-                    this.router.navigate(['/games'])
+                    this.router.navigate(['/games/create/score-rules'])
                     return {
-                        type: GameActions.RESET_STATE
+                        type: GameActions.UPDATE_GAME_COMPETITIONS,
+                        payload: resGame
                     }
                 } else {
                     console.log("error")
@@ -83,7 +86,7 @@ export class GameEffects {
                     }
                 }
             }), catchError(error => {
-                return of(new GameActions.GetGamesFailed())
+                return of(new GameActions.GetGamesFailed(error.code))
             }))
         }))
 

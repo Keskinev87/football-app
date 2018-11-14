@@ -1,4 +1,104 @@
-<p>
-  score-rules works!
-</p>
+
+<ul class="nav nav-tabs">
+  <li class="tab-selector" [class.active]="shortTermTab" (click)="onChangeTab()"><a>Match Score Predictions</a></li>
+  <li class="tab-selector" [class.active]="!shortTermTab" (click)="onChangeTab()"><a>Long-term Predictions</a></li>
+</ul>
+<form id='game-data' (ngSubmit)="onSubmit(f)" #f="ngForm">
+<div class="tab-content">
+  <div id="short-term" class="tab-pane fade in" [class.active]="shortTermTab">
+    <h3>Match Score Rules</h3>
+    <div class="col-lg-4 col-md-6 col-sm-10 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-1">
+     
+          <div class="form-group">
+            <label for="name">Points for exact match (you play 1:1, the match ends 1:1)</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              id="exactMatch"
+              name="exactMatch" 
+              required
+              pattern="^[0-9]*$"
+              [(ngModel)] = 'rules.exactMatch'
+              #exactMatch="ngModel">
+    
+            <label for="name">Points for exact goal difference (You play 2:0, the match ends 3:1)</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              id="goalDiff"
+              name="goalDiff" 
+              required
+              pattern="^[0-9]*$"
+              [(ngModel)] = 'rules.goalDiff'
+              #exactMatch="ngModel">
+    
+            <label for="name">Points for one goal difference (You play 1:0, the match ends 2:0) </label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              id="oneGoalDiff"
+              name="oneGoalDiff" 
+              required
+              pattern="^[0-9]*$"
+              [(ngModel)] = 'rules.oneGoalDiff'
+              #exactMatch="ngModel">
+    
+            <label for="name">Points for guessing the winner (Any other outcome, where you guessed the winner)</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              id="guessedWinner"
+              name="guessedWinner" 
+              required
+              pattern="^[0-9]*$"
+              [(ngModel)] = 'rules.guessedWinner'
+              #exactMatch="ngModel">
+    
+            <label for="name">Points for guessing there will be no goals (0:0)</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              id="zeroZero"
+              name="zeroZero" 
+              required
+              pattern="^[0-9]*$"
+              [(ngModel)] = 'rules.zeroZero'
+              #exactMatch="ngModel">
+          </div>
+
+    </div>
+  </div>
+  <div class="tab-pane fade in" [class.active]="!shortTermTab">
+    <h3>Long-term predictions</h3>
+    <div class="col-lg-4 col-md-6 col-sm-10 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-1">
+  
+        <div class="form-group">
+          <label for="name">Points for exact match (you play 1:1, the match ends 1:1)</label>
+          <input 
+            type="text" 
+            class="form-control input-sm"
+            id="teamChampion"
+            name="teamChampion" 
+            required
+            pattern="^[0-9]*$"
+            [(ngModel)] = 'rules.teamChampion'
+            #teamChampion="ngModel">
+  
+          <label for="name">Points for exact goal difference (You play 2:0, the match ends 3:1)</label>
+          <input 
+            type="text" 
+            class="form-control input-sm"
+            id="topScorer"
+            name="topScorer" 
+            required
+            pattern="^[0-9]*$"
+            [(ngModel)] = 'rules.topScorer'
+            #topScorer="ngModel">
+
+        </div>
+    <button type="submit" class="btn btn-default" *ngIf="!(gamesState | async).loading" [disabled]="!f.valid">Submit</button>
+  </div>
+</div>
+</div>
+</form>
 

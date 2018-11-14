@@ -14,7 +14,7 @@ export class GamesJoinComponent implements OnInit {
 
   gamesState: Observable<{
     error: boolean,
-    errorMsg: string,
+    errorCode: number,
     loading: boolean
   }>
 

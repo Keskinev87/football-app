@@ -1,6 +1,8 @@
 import * as GameActions from './games.actions';
 import { Game } from '../../models/game.model';
 import { Observable } from 'rxjs'
+import { Injectable } from '@angular/core';
+import { Actions } from '@ngrx/effects';
 
 export interface State {
     games: Game[],
@@ -8,7 +10,7 @@ export interface State {
     editedGame: Game,
     editedGameId: string,
     error: boolean,
-    errorMsg: string,
+    errorCode: number,
     loading: boolean
 }
 
@@ -32,10 +34,9 @@ const initialState: State = {
     editedGame: undefined,
     editedGameId: '',
     error: false,
-    errorMsg: '',
+    errorCode: null,
     loading: false
 };
-
 
 export function gamesReducer(state = initialState, action: GameActions.GameActions): State {
     switch (action.type) {
@@ -55,7 +56,7 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 ...state,
                 loading: false,
                 error: true,
-                errorMsg: "TODO: write messages for errors in other storage"
+                errorCode: action.payload
             }
         case GameActions.TRY_CREATE_GAME:
             return {
@@ -72,7 +73,7 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
             return {
                 ...state,
                 error: true,
-                errorMsg: "Server Error",
+                errorCode: action.payload,
                 loading: false
             }
         case GameActions.BEGIN_EDIT_GAME:
@@ -81,10 +82,29 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 ...state,
                 editedGame: action.payload
             }
-        case GameActions.UPDATE_GAME_COMPETITIONS:
+        case GameActions.TRY_UPDATE_GAME_COMPETITIONS:
             return {
                 ...state,
                 loading: true
+            }
+        case GameActions.UPDATE_GAME_COMPETITIONS:
+            
+            const gameIndex = state.games.findIndex(x => x._id == action.payload._id)
+            let updatedGames = state.games
+            updatedGames[gameIndex] = action.payload
+
+            return {
+                ...state,
+                loading: true,
+                games: updatedGames,
+                editedGame: action.payload
+            }
+        case GameActions.UPDATE_GAME_COMPETITIONS_FAILED: 
+            return {
+                ...state, 
+                loading: false,
+                error: true,
+                errorCode: action.payload
             }
         case GameActions.ADD_COMPETITION:
             const game = state.editedGame
@@ -107,13 +127,47 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 ...state,
                 games: games
             }
+        case GameActions.BEGIN_EDIT_GAME_RULES:
+            return {
+                ...state,
+                editedGame: action.payload
+            }
+        case GameActions.TRY_SAVE_GAME_RULES:
+            return {
+                ...state,
+                loading: true
+            }
+        case GameActions.SAVE_GAME_RULES_SUCCESS:
+            return {
+                ...state,
+                loading: false
+                //TODO: save the rules 
+            }
+        case GameActions.TRY_UPDATE_GAME_RULES:
+            return {
+                ...state, 
+                loading: true
+            }
+        case GameActions.UPDATE_GAME_RULES_SUCCESS: 
+            return {
+                ...state,
+                loading: false
+                //TODO: update the rules
+            }
+        case GameActions.SAVE_EDIT_GAME_RULES_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: true,
+                errorCode: action.payload
+            }
         case GameActions.FINISH_EDIT:
             return {
                 ...state,
                 editedGame: undefined,
                 editedGameId: '',
                 error: false,
-                errorMsg: '',
+                errorCode: null,
                 loading: false
             }
         case GameActions.RESET_STATE:
@@ -126,7 +180,7 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 editedGame: undefined,
                 editedGameId: '',
                 error: false,
-                errorMsg: '',
+                errorCode: null,
                 loading: false
             }
         case GameActions.TRY_JOIN_GAME_BY_CODE:

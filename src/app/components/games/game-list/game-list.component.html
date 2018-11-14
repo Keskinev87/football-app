@@ -2,7 +2,7 @@
   <h1>Games</h1>
   <button type="button" class="btn btn-success" (click)="onJoinGame()">Join Game</button> <br>
   <app-games-join *ngIf="gameJoin"></app-games-join>
-  <button type="button" class="btn btn-primary">Create New Game</button> <br>
+  <button type="button" class="btn btn-primary" (click)="onCreateNewGame()">Create New Game</button> <br>
   <app-game-list-item *ngFor="let game of (gamesState | async).games" [game]="game">
   </app-game-list-item>
 </div>

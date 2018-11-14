@@ -4,6 +4,8 @@ import { Game } from '../../models/game.model';
 import { Observable } from 'rxjs';
 import * as fromApp from '../../../app.reducers'
 import * as GamesActions from '../games-store/games.actions'
+import { ErrorMsgService } from 'src/app/services/errorMsg.service';
+
 
 @Component({
   selector: 'app-game-list',
@@ -17,7 +19,7 @@ export class GameListComponent implements OnInit {
 
   gameJoin: boolean = false
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>, public errMsgService: ErrorMsgService) {}
 
   ngOnInit() {
     this.gamesState = this.store.select('games')
@@ -25,6 +27,10 @@ export class GameListComponent implements OnInit {
 
   onJoinGame() {
     this.gameJoin = true
+  }
+
+  onCreateNewGame() {
+    console.log(this.errMsgService.getErrMsg(401, 'games'))
   }
 
 
