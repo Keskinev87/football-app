@@ -33,7 +33,7 @@ export class EditGameCompetitionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new GamesActions.FinishEdit())
+    
   }
 
   onSave() {

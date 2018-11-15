@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Game } from 'src/app/components/models/game.model';
-import { Store } from '@ngrx/store';
+import { Store, State } from '@ngrx/store';
 import * as fromApp from '../../../../../app.reducers'
+import * as GamesActions from '../../../games-store/games.actions'
 import { NgForm } from '@angular/forms';
+import { ScoreRules } from '../../../../models/scoreRules.model'
+import { take, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-score-rules',
@@ -12,23 +15,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./score-rules.component.css']
 })
 export class ScoreRulesComponent implements OnInit {
-  gamesState: Observable<{games: Game[],
-    gameOptions: any,
-    editedGame: Game,
-    editedGameId: string,
-    error: boolean,
-    errorCode: number,
-    loading: boolean
-  }>
-
-  rules: Object = {
-    exactMatch: null,
-    goalDiff: null,
-    oneGoalDiff: null,
-    guessedWinner: null,
-    zeroZero: null,
-    finalWinner: '',
-  }
+  gamesState: Observable<any>
 
   shortTermTab: boolean = true
 
@@ -39,7 +26,15 @@ export class ScoreRulesComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value)
+    let rules = new ScoreRules(form.value.exactMatch, form.value.goalDiff, form.value.oneGoalDiff, form.value.guessedWinner, form.value.zeroZero, form.value.finalWinner, form.value.topScorer)
+    console.log(rules)
+    this.gamesState.pipe(take(1)).subscribe((state) => {
+      let reqGame = state.editedGame
+      reqGame.scoreRules = rules
+      console.log(reqGame)
+      return this.store.dispatch(new GamesActions.TrySaveGameRules(reqGame))
+    })
+    
   }
 
   onChangeTab() {

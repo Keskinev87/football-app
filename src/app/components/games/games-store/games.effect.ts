@@ -70,20 +70,23 @@ export class GameEffects {
         })).pipe(switchMap((game:Game) => {
             console.log("Effect")
             console.log(game)
-            return this.httpClient.post(environment.apiUrl + "/game/addCompetitions", game, {observe: 'body'}).pipe(map((resGame: Game) => {
+            return this.httpClient.post(environment.apiUrl + "/game/addCompetitions", game, {observe: 'body'}).pipe(mergeMap((resGame: Game) => {
                 if (resGame) {
                     console.log("Res game")
                     console.log(resGame)
                     this.router.navigate(['/games/create/score-rules'])
-                    return {
+                    return [{
                         type: GameActions.UPDATE_GAME_COMPETITIONS,
                         payload: resGame
-                    }
+                    }, {
+                        type: GameActions.BEGIN_EDIT_GAME_RULES,
+                        payload: resGame
+                    }]
                 } else {
                     console.log("error")
-                    return {
+                    return [{
                         type: GameActions.GET_GAMES_FAILED
-                    }
+                    }]
                 }
             }), catchError(error => {
                 return of(new GameActions.GetGamesFailed(error.code))
@@ -115,7 +118,24 @@ export class GameEffects {
                 return of(new GameActions.JoinGameByCodeFail())
             }))
         }))
-        
+
+    @Effect() 
+    saveGameRules = this.actions$
+        .ofType(GameActions.TRY_SAVE_GAME_RULES)
+        .pipe(map((action: GameActions.TrySaveGameRules) => {
+            return action.payload
+        }))
+        .pipe(switchMap((game: Game) => {
+            return this.httpClient.post(environment.apiUrl + "/game/saveGameRules", game, {observe: 'body'}).pipe(map((resGame:Game) => {
+                    return {
+                        type: GameActions.SAVE_GAME_RULES_SUCCESS,
+                        payload: resGame
+                    }
+            }),catchError(error => {
+                return of(new GameActions.SaveEditGameRulesFailed(error.status))
+            }))
+
+        }))
 
 
     constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router) {}

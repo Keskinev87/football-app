@@ -18,6 +18,7 @@ export class GameNameComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
+    this.store.dispatch(new GamesActions.ResetEditState())
     this.gamesState = this.store.select('games')
   }
 

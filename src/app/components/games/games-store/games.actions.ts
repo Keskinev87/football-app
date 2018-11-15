@@ -33,7 +33,7 @@ export const GET_ALL_GAMES_BY_USER_ID = "GET_ALL_GAMES_BY_USER_ID"
 export const GET_ALL_GAMES_BY_CREATOR_ID = "GET_ALL_GAMES_BY_CREATOR_ID"
 export const GET_GAME_BY_ID = "GET_GAME_BY_ID"
 export const GET_GAMES_FAILED = "GET_GAMES_FAILED"
-export const FINISH_EDIT = "FINISH_EDIT"
+export const RESET_EDIT_STATE = "RESET_EDIT_STATE"
 
 
 //actions for joining a game
@@ -191,8 +191,8 @@ export class ResetState implements Action {
     readonly type = RESET_STATE
 }
 
-export class FinishEdit implements Action {
-    readonly type = FINISH_EDIT
+export class ResetEditState implements Action {
+    readonly type = RESET_EDIT_STATE
 }
 
 export type GameActions = TryCreateGame
@@ -216,7 +216,7 @@ export type GameActions = TryCreateGame
                             | GetAllGamesByUserId 
                             | GetGameById 
                             | ResetState
-                            | FinishEdit 
+                            | ResetEditState 
                             | TryGetAllGamesByUserId 
                             | GetGamesFailed
                             | TryJoinGameByCode
