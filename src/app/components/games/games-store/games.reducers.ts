@@ -107,13 +107,17 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
                 errorCode: action.payload
             }
         case GameActions.ADD_COMPETITION:
-            const game = state.editedGame
-            game.competitions.push(action.payload)
-            var games = [...state.games]
-            games[state.editedGame._id] = game
+            const game = state.editedGame 
+            
+            var competitionIndex = game.competitions.findIndex(x=> x == action.payload) //check if we have the competition already
+           
+            if(!(competitionIndex >= 0)) {
+                game.competitions.push(action.payload)
+            }
+        
             return {
                 ...state,
-                games: games
+                editedGame: game
             }
         case GameActions.REMOVE_COMPETITION:
             const reqGame = state.editedGame

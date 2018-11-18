@@ -1,5 +1,13 @@
-<li class="list-group-item">
-  {{competition.name}}
-  <button type="button" class="btn btn-success" (click) = "onAddCompetition()" *ngIf="!selected">Add competition</button>
-  <button type="button" class="btn btn-danger" (click) = "onRemoveCompetition()" *ngIf = "selected">Remove Competition</button>
-</li>
+<a class="list-group-item list-group-item-action list-group-item" 
+  [style.background-color]="selected ? '#283655' : 'white'"
+  [style.color]="selected ? 'white' : '#283655'"  
+  (click) = "selected ? onRemoveCompetition() : onAddCompetition()">
+    {{competition.name}}
+  </a>
+  <!-- <div>
+      <p class="col-lg-3 col-lg-offset-1">{{competition.name}}</p>
+      <div class="col-lg-3 col-lg-offset-3">
+          <button type="button" class="btn btn-success" (click) = "onAddCompetition()" *ngIf="!selected">Add competition</button>
+          <button type="button" class="btn btn-danger" (click) = "onRemoveCompetition()" *ngIf = "selected">Remove Competition</button>
+      </div>
+  </div> -->

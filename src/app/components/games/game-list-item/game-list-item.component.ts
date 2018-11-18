@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Game } from '../../models/game.model'
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../app.reducers'
+import * as GameActions from '../games-store/games.actions'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-list-item',
@@ -9,15 +13,15 @@ import { Game } from '../../models/game.model'
 export class GameListItemComponent implements OnInit {
   @Input() game: Game
 
-  constructor() { }
+  constructor(private store: Store<fromApp.AppState>, private router: Router ) { }
 
-  clicked: boolean = false
 
   ngOnInit() {
   }
 
   onChooseCompetitions() {
-    this.clicked = !this.clicked
+    this.store.dispatch(new GameActions.BeginEditGame(this.game))
+    this.router.navigate(['/games/create/competitions'])
     console.log("Choose competitions")
   }
 

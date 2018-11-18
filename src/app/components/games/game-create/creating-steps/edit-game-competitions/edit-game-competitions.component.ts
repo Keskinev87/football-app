@@ -38,38 +38,10 @@ export class EditGameCompetitionsComponent implements OnInit, OnDestroy {
 
   onSave() {
 
-    // return this.store.select('auth')
-    // .pipe(take(1))
-    // .pipe(switchMap((authState: fromAuth.State) => {
-    //     const reqCopy = req.clone({ headers: new HttpHeaders().append("Authorization", "JWT " + authState.token)})
-    //     console.log(authState.token)
-    //     return next.handle(reqCopy)
-    // }))
     this.gamesState.pipe(take(1)).subscribe((state) => {
       console.log(state.editedGame)
       this.store.dispatch(new GamesActions.TryUpdateGameCompetitions(state.editedGame))
     })
 
-    // this.store.select('games')
-    //   .pipe(take(1))
-    //   .pipe(map((gamesState: fromGames.State ) => {
-    //     console.log(gamesState.editedGame)
-    //     return this.store.dispatch(new GamesActions.UpdateGame(gamesState.editedGame))
-    //   }))
-    //TODO: catchError here
-    
-    // this.store.select('games').pipe(map((res: {games: Game[],
-    //   gameOptions: any,
-    //   editedGame: Game,
-    //   editedGameId: string,
-    //   error: boolean,
-    //   errorMsg: string,
-    //   loading: boolean
-    // }) => {
-    //   return res.editedGame
-    // })).pipe(map((editedGame) => {
-    //   console.log(editedGame)
-    //   this.store.dispatch(new GamesActions.UpdateGame(editedGame))
-    // }))
   }
 }
