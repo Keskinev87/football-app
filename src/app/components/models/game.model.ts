@@ -5,7 +5,7 @@ export class Game {
         public description: string,
         public secretCode: number,
         public _id?: string,
-        public scoreRules?: Array<Object>,
+        public scoreRules?: object,
         public shareableUrl?: string,
         public competitions?: Array<number>,
         public matches?: Array<object>,
