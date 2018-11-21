@@ -1,5 +1,7 @@
 export class ScoreRules {
     constructor(
+        public exactTie: number,
+        public tie: number,
         public exactMatch: number,
         public goalDiff: number,
         public oneGoalDiff: number,

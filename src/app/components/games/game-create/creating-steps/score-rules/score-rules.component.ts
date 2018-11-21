@@ -26,7 +26,15 @@ export class ScoreRulesComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    let rules = new ScoreRules(form.value.exactMatch, form.value.goalDiff, form.value.oneGoalDiff, form.value.guessedWinner, form.value.zeroZero, form.value.finalWinner, form.value.topScorer)
+    let rules = new ScoreRules(form.value.exactMatch,
+                                form.value.exactTie,
+                                form.value.tie,
+                                form.value.goalDiff,
+                                form.value.oneGoalDiff,
+                                form.value.guessedWinner,
+                                form.value.zeroZero,
+                                form.value.finalWinner,
+                                form.value.topScorer)
     console.log(rules)
     this.gamesState.pipe(take(1)).subscribe((state) => {
       let reqGame = state.editedGame
