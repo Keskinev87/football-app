@@ -3,10 +3,11 @@ import { Effect, Actions } from "@ngrx/effects";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import * as MatchActions from "./match.actions"
-import { map, switchMap, catchError } from "rxjs/operators";
+import { map, switchMap, catchError, takeUntil, take, mapTo } from "rxjs/operators";
 import { environment } from "../../../../environments/environment"
 import { Match } from "../../models/match.model"
-import { of } from "rxjs";
+import { of, Observable } from "rxjs";
+import { timer }  from "rxjs" 
 
 
 @Injectable()
@@ -40,6 +41,20 @@ getMatches = this.actions$
             console.log("error 2")
             return of(new MatchActions.GetMatchesFailed())
         }))
+    }))
+
+@Effect()
+updateLiveMatch = this.actions$
+    .ofType(MatchActions.SCHEDULE_UPDATE_LIVE_SCORE)
+    .pipe(switchMap((action: MatchActions.ScheduleUpdateLiveScore) => {
+        return timer(action.payload.miliseconds, 5000).pipe(takeUntil(this.actions$.ofType(MatchActions.STOP_LIVE_UPDATE))).pipe(map(() => {
+            console.log(action.payload.matchId)
+            return {
+                type: MatchActions.DO_NOTHING
+            }
+        }))
+        
+        
     }))
         
 
