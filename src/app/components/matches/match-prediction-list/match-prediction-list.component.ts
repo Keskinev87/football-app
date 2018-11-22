@@ -33,6 +33,14 @@ export class MatchPredictionListComponent implements OnInit {
     //1. Get the games of the user 
 
       this.gamesState = this.store.select('games')
+      this.store.dispatch(new MatchActions.ScheduleUpdateLiveScore({miliseconds:0, matchId: 1010}))
+      setTimeout(() => {
+        this.store.dispatch(new MatchActions.ScheduleUpdateLiveScore({miliseconds:0, matchId: 2010}))
+      },6000)
+
+      setTimeout(() => {
+        this.store.dispatch(new MatchActions.StopLiveUpdate())
+      },20000)
        
     // The games will be passed to "match-prediciton-game" component. From there, we will get the pending matches for each game
     

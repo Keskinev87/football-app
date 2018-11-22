@@ -6,12 +6,14 @@ import * as GamesActions from "../../games/games-store/games.actions"
 import * as CompetitionsActions from "../../competitions/competitions-store/competitions.actions"
 import * as MatchActions from "../../matches/match-store/match.actions"
 import * as PredictionsActions from "../../predictions/predictions-store/predictions.actions"
+import * as UsersActions from "../../users/users-store/users.actions"
 import { map, switchMap, mergeMap, catchError } from "rxjs/operators";
 import { User } from "../../models/user.model";
 import { HttpClient } from '@angular/common/http';
 import { of } from "rxjs";
 import { environment } from '../../../../environments/environment'
 import { Router } from "@angular/router";
+
  
 
 
@@ -59,10 +61,7 @@ export class AuthEffects {
                         payload: body.token
                     },
                     {
-                        type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
-                    },
-                    {
-                        type: CompetitionsActions.TRY_GET_COMPETITIONS
+                        type: UsersActions.TRY_GET_USER
                     }
                 ]
             }),catchError((error: any) => {
@@ -73,36 +72,36 @@ export class AuthEffects {
         }))
         
         
-
-    @Effect()
-    authCheckStatus = this.actions$
-        .ofType(AuthActions.CHECK_STATUS)
-        .pipe(mergeMap(() => {
-            let token = localStorage.getItem('token')
-            if (token) {
-                setTimeout(function(){ console.log("success")}, 3000);
-                return [{
-                    type: AuthActions.SIGNIN
-                },{
-                    type: AuthActions.SET_TOKEN,
-                    payload: token
-                },
-                {
-                    type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
-                },
-                {
-                    type: CompetitionsActions.TRY_GET_COMPETITIONS
-                },
-                {
-                    type: PredictionsActions.TRY_GET_PREDICTIONS
-                }]
-            } else {
-                this.router.navigate(['/login'])
-                return [{
-                    type: AuthActions.SIGNIN_FAILED
-                }]
-            } 
-        }))
+        //deprecated - use users effects for initial loading
+    // @Effect()
+    // authCheckStatus = this.actions$
+    //     .ofType(AuthActions.CHECK_STATUS)
+    //     .pipe(mergeMap(() => {
+    //         let token = localStorage.getItem('token')
+    //         if (token) {
+    //             setTimeout(function(){ console.log("success")}, 3000);
+    //             return [{
+    //                 type: AuthActions.SIGNIN
+    //             },{
+    //                 type: AuthActions.SET_TOKEN,
+    //                 payload: token
+    //             },
+    //             {
+    //                 type: GamesActions.TRY_GET_ALL_GAMES_BY_USER_ID
+    //             },
+    //             {
+    //                 type: CompetitionsActions.TRY_GET_COMPETITIONS
+    //             },
+    //             {
+    //                 type: PredictionsActions.TRY_GET_PREDICTIONS
+    //             }]
+    //         } else {
+    //             this.router.navigate(['/login'])
+    //             return [{
+    //                 type: AuthActions.SIGNIN_FAILED
+    //             }]
+    //         } 
+    //     }))
 
         
     @Effect()

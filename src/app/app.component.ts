@@ -3,10 +3,8 @@ import { Store } from '@ngrx/store';
 
 import * as fromApp from './app.reducers'
 import * as AuthActions from './components/auth/auth-store/auth.actions'
-import * as GamesActions from './components/games/games-store/games.actions'
-import * as CompetitionsActions from './components/competitions/competitions-store/competitions.actions'
-import { Observable, interval } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import * as UsersActions from './components/users/users-store/users.actions'
+
 
 @Component({
   selector: 'app-root',
@@ -18,9 +16,17 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
+    let token = localStorage.getItem('token')
+    //check if there is a token in the local storage
+    if (token) {
+      //if token exists, set it in the auth state
+      this.store.dispatch(new AuthActions.SetToken(token))
+      //check if the token is valid (if valid, the request to the server will receive user as an answer. If not, the user has to login.) 
+      this.store.dispatch(new UsersActions.TryGetUser())
+      // this.store.dispatch(new AuthActions.CheckStatus()) - this is the old way. It did not check if the token is actually valid 
+    }
+      
     
-    this.store.dispatch(new AuthActions.CheckStatus()) //this goes through the auth.effect. If successfull, the effect will emit actions to load the state of games, competitions and matches.  
-  
   }
 
 }

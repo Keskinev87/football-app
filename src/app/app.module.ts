@@ -48,7 +48,10 @@ import { GamesJoinComponent } from './components/games/games-join/games-join.com
 import { MatchPredictionGameComponent } from './components/matches/match-prediction-list/match-prediction-game/match-prediction-game.component';
 import { PredictionsEffects } from './components/predictions/predictions-store/predictions.effects';
 import { MatchPredictionComponent } from './components/predictions/match-prediction/match-prediction.component';
-import { ErrorMsgService } from './services/errorMsg.service'
+import { ErrorMsgService } from './services/errorMsg.service';
+import { UserViewComponent } from './components/users/user-view/user-view.component'
+import { UsersEffects } from './components/users/users-store/users.effects';
+import { LiveScoreComponent } from './components/matches/match-live/live-score/live-score.component'
 
 
 @NgModule({
@@ -79,7 +82,9 @@ import { ErrorMsgService } from './services/errorMsg.service'
     CompetitionItemComponent,
     GamesJoinComponent,
     MatchPredictionGameComponent,
-    MatchPredictionComponent
+    MatchPredictionComponent,
+    UserViewComponent,
+    LiveScoreComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +92,7 @@ import { ErrorMsgService } from './services/errorMsg.service'
     AppRouterModule,
     FormsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, GameEffects, CompetitionsEffects, MatchEffects, PredictionsEffects]),
+    EffectsModule.forRoot([UsersEffects, AuthEffects, GameEffects, CompetitionsEffects, MatchEffects, PredictionsEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
