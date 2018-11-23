@@ -8,6 +8,7 @@ export const TRY_GET_MATCHES = "TRY_GET_MATCHES"
 export const GET_MATCHES_SUCCESS = "GET_MATCHES_SUCCESS"
 export const GET_MATCHES_FAILED = "GET_MATCHES_FAILED"
 export const SCHEDULE_UPDATE_LIVE_SCORE = "SCHEDULE_UPDATE_LIVE_SCORE" //this will be used to begin polling the server in order to update the match score result live
+export const TRY_UPDATE_LIVE_MATCH = "TRY_UPDATE_LIVE_MATCH"
 export const UPDATE_LIVE_MATCH = "UPDATE_LIVE_MATCH"
 export const STOP_LIVE_UPDATE = "STOP_LIVE_UPDATE"
 export const DO_NOTHING = "DO_NOTHING"
@@ -38,10 +39,16 @@ export class ScheduleUpdateLiveScore implements Action {
     }) {}
 }
 
+export class TryUpdateLiveMatch implements Action {
+    readonly type = TRY_UPDATE_LIVE_MATCH
+
+    constructor(public payload: {matchId:number, score: object}) {}
+}
+
 export class UpdateLiveMatch implements Action {
     readonly type = UPDATE_LIVE_MATCH
 
-    constructor(public payload: Match) {}
+    constructor(public payload: {id: number, home: number, away: number}) {}
 }
 
 export class StopLiveUpdate implements Action {
@@ -57,4 +64,4 @@ export class ResetState implements Action {
 }
 
 
-export type MatchActions = TryGetMatches | GetMatchesSuccess | GetMatchesFailed | ScheduleUpdateLiveScore | UpdateLiveMatch | StopLiveUpdate | ResetState
+export type MatchActions = TryGetMatches | GetMatchesSuccess | GetMatchesFailed | ScheduleUpdateLiveScore | TryUpdateLiveMatch | UpdateLiveMatch | StopLiveUpdate | ResetState

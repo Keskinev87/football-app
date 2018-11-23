@@ -44,18 +44,8 @@ getMatches = this.actions$
     }))
 
 @Effect()
-updateLiveMatch = this.actions$
-    .ofType(MatchActions.SCHEDULE_UPDATE_LIVE_SCORE)
-    .pipe(switchMap((action: MatchActions.ScheduleUpdateLiveScore) => {
-        return timer(action.payload.miliseconds, 5000).pipe(takeUntil(this.actions$.ofType(MatchActions.STOP_LIVE_UPDATE))).pipe(map(() => {
-            console.log(action.payload.matchId)
-            return {
-                type: MatchActions.DO_NOTHING
-            }
-        }))
-        
-        
-    }))
+tryUpdateLiveMatch = this.actions$
+    .ofType(MatchActions.TRY_UPDATE_LIVE_MATCH)
         
 
 

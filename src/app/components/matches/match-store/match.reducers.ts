@@ -37,7 +37,22 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
         case MatchActions.SCHEDULE_UPDATE_LIVE_SCORE:
             return {
                 ...state
-            }   
+            }  
+        case MatchActions.TRY_UPDATE_LIVE_MATCH:
+            return {
+                ...state
+            }
+        case MatchActions.UPDATE_LIVE_MATCH:
+            const matchIndex = state.matches.findIndex(x => x.id == action.payload.id)
+            let matches = state.matches
+            let newMatch = matches[matchIndex]
+            newMatch.score.fullTime.homeTeam = action.payload.home
+            newMatch.score.fullTime.awayTeam = action.payload.away
+            matches[matchIndex] = newMatch
+            return {
+                ...state,
+                matches: matches
+            }
         case MatchActions.RESET_STATE: 
             return {
                 matches: [],

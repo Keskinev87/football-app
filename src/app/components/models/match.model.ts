@@ -14,7 +14,26 @@ export class Match {
 		public lastUpdated: Date,
 		public homeTeam: Object,
 		public awayTeam: Object,
-		public score: Object,
+		public score: {
+			winner: string,
+			duration: string,
+			fullTime: {
+				homeTeam: number,
+				awayTeam: number
+			},
+			halfTime: {
+				homeTeam: number,
+				awayTeam: number
+			},
+			extraTime: {
+				homeTeam: number,
+				awayTeam: number
+			},
+			penalties: {
+				homeTeam: number,
+				awayTeam:number
+			}
+		},
 		public referees?: Array<object>,
 		public goals?: Array<object>,
 		public bookings?: Array<object>,
