@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Match } from '../../models/match.model';
 import { map, filter, switchMap } from 'rxjs/operators';
 import { Game } from '../../models/game.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-match-prediction-list',
@@ -33,14 +34,15 @@ export class MatchPredictionListComponent implements OnInit {
     //1. Get the games of the user 
 
       this.gamesState = this.store.select('games')
-      this.store.dispatch(new MatchActions.ScheduleUpdateLiveScore({miliseconds:0, matchId: 1010}))
-      setTimeout(() => {
-        this.store.dispatch(new MatchActions.ScheduleUpdateLiveScore({miliseconds:0, matchId: 2010}))
-      },6000)
+     
+      // this.store.dispatch(new MatchActions.ScheduleUpdateLiveScore({miliseconds:0, matchId: 1010}))
+      // setTimeout(() => {
+      //   this.store.dispatch(new MatchActions.ScheduleUpdateLiveScore({miliseconds:0, matchId: 2010}))
+      // },6000)
 
-      setTimeout(() => {
-        this.store.dispatch(new MatchActions.StopLiveUpdate())
-      },20000)
+      // setTimeout(() => {
+      //   this.store.dispatch(new MatchActions.StopLiveUpdate())
+      // },20000)
        
     // The games will be passed to "match-prediciton-game" component. From there, we will get the pending matches for each game
     

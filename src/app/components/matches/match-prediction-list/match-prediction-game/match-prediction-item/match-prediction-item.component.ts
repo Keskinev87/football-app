@@ -2,10 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Match } from '../../../../models/match.model'
 import { Game } from 'src/app/components/models/game.model';
 import { Prediction } from 'src/app/components/models/prediction.model';
-import { Store } from '@ngrx/store';
+import { Store, State } from '@ngrx/store';
 import * as fromApp from '../../../../../app.reducers'
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take, switchMap } from 'rxjs/operators';
+import { User } from 'src/app/components/models/user.model';
 
 
 @Component({
@@ -16,13 +17,19 @@ import { map } from 'rxjs/operators';
 export class MatchPredictionItemComponent implements OnInit {
   @Input() match: Match
   @Input() game: Game
+  @Input() loggedUser: User
+ 
   predictionState: Observable<any>
+  
 
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     let curGame = this.game
     let curMatch = this.match
+    let curUser = this.loggedUser
+   
+    
 
     this.predictionState = this.store.select('predictions')
       .pipe(map((state:any) => {
@@ -30,7 +37,7 @@ export class MatchPredictionItemComponent implements OnInit {
       }))
       .pipe(map((predictions: Prediction[]) => {
         let prediction = predictions.find(function(el) {
-          return (el.gameId == curGame._id && el.matchId == curMatch.id)
+          return (el.gameId == curGame._id && el.matchId == curMatch.id && el.userId == curUser._id)
         })
         let isEdit = false
         if(prediction)
