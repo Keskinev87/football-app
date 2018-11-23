@@ -10,13 +10,13 @@ export interface State {
 }
 
 const initialState = {
-    loggedUser: undefined,
+    loggedUser: null,
     gameUsers: [],
     error: false,
     loading: false
 };
 
-export function matchReducer(state = initialState, action: UsersActions.UsersActions): State {
+export function usersReducer(state = initialState, action: UsersActions.UsersActions): State {
     switch (action.type) {
         case UsersActions.TRY_GET_USER:
             return {
@@ -34,7 +34,9 @@ export function matchReducer(state = initialState, action: UsersActions.UsersAct
                 ...state,
                 loading: false
             }
-
-
+        default: 
+            return {
+                ...state
+            }
         }
 }

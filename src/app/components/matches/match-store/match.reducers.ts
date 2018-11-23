@@ -4,12 +4,14 @@ import { Match } from '../../models/match.model'
 
 export interface State {
     matches: Match[],
+    liveMatches: Match[],
     error: boolean,
     loading: boolean
 }
 
 const initialState = {
     matches: [],
+    liveMatches: [],
     error: false,
     loading: false
 };
@@ -38,7 +40,8 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
             }   
         case MatchActions.RESET_STATE: 
             return {
-                matches: undefined,
+                matches: [],
+                liveMatches: [],
                 error: false,
                 loading: false
             }

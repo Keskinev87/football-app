@@ -34,8 +34,7 @@ export class ScheduleUpdateLiveScore implements Action {
 
     constructor(public payload: {
         miliseconds: number, //this is the time until the match begins. The timer will be scheduled to begin when the match starts
-        matchId: number,
-        timerName: string
+        matchId: number
     }) {}
 }
 
