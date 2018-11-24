@@ -1,5 +1,11 @@
 <h2>Games</h2>
+<div *ngIf="(gamesState| async).games != undefined && (gamesState | async).games.length > 0 as games; else noGames">
+    <app-match-prediction-game *ngFor="let game of (gamesState | async).games " [game]="game"></app-match-prediction-game>
+    <app-loader-component *ngIf="(gamesState | async).loading"></app-loader-component>
+</div>
 
-<app-match-prediction-game *ngFor="let game of (gamesState | async).games " [game]="game"></app-match-prediction-game>
-<app-loader-component *ngIf="(gamesState | async).loading"></app-loader-component>
-<p *ngIf="!(gamesState | async).games">Sorry! No games available.</p>
+<ng-template #noGames>
+    <p>Sorry! No games available.</p>
+    <button class="btn btn-primary">Create New</button>
+</ng-template>
+

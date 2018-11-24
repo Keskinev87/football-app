@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import * as MatchActions from '../match-store/match.actions'
 import * as fromMatch from '../match-store/match.reducers'
 import * as fromApp from '../../../app.reducers'
-import { Store } from '@ngrx/store';
+import { Store, State } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Match } from '../../models/match.model';
-import { map, filter, switchMap } from 'rxjs/operators';
+import { map, filter, switchMap, take } from 'rxjs/operators';
 import { Game } from '../../models/game.model';
 import { User } from '../../models/user.model';
 
@@ -19,22 +19,35 @@ export class MatchPredictionListComponent implements OnInit {
   gamesState: Observable<{
     games: Game[]
   }>
+  liveMatchesState: Observable<any>
   
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    //This component loads the pending matches. Pending matches are matches, that: 
-    //a. Belong to a competition from a game, that the user participates in
-    //b. Are today or tomorrow
-    //c. Are not with status "FINISHED"
-
-    //1. Declare the date filters
-      
-
-    //1. Get the games of the user 
-
+      //get all games for this user and create a list with the matches that are pending for these games
       this.gamesState = this.store.select('games')
+      
+      this.liveMatchesState = this.store.select('matches')
+        .pipe(take(1))
+        .pipe(map((state:any) => {
+          return state.liveMatches
+        }))
+        .pipe(switchMap((liveMatches:Match[]) => {
+          console.log("Prediction list checked for live matches")
+          if(liveMatches && liveMatches.length > 0) {
+            var timer = setInterval(() => {
+              console.log("Dispatched")
+              console.log(liveMatches)
+              this.store.dispatch(new MatchActions.TryUpdateLiveMatches(liveMatches))
+            },20000)
+          } else {
+            clearInterval(timer)
+          }
+          return liveMatches
+        }))
+
      
+      
       // this.store.dispatch(new MatchActions.ScheduleUpdateLiveScore({miliseconds:0, matchId: 1010}))
       // setTimeout(() => {
       //   this.store.dispatch(new MatchActions.ScheduleUpdateLiveScore({miliseconds:0, matchId: 2010}))

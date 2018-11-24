@@ -16,7 +16,7 @@ export interface State {
 
 
 const initialState: State = {
-    games: undefined,
+    games: [],
     gameOptions: [
         {
           option: 'Standard',

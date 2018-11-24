@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Match } from 'src/app/components/models/match.model';
 import * as fromApp from '../../../../app.reducers'
 import { Store } from '@ngrx/store';
-import { map, take } from 'rxjs/operators';
+import { map, take, switchMap } from 'rxjs/operators';
 import { Game } from 'src/app/components/models/game.model';
 import { User } from 'src/app/components/models/user.model';
 
@@ -16,6 +16,7 @@ export class MatchPredictionGameComponent implements OnInit {
 
   //2. We received the games from the "match-prediction-list" component. Now we will filter the matches for each game. Also we will apply the date filters.
   @Input() game: Game
+  
   
   matchState: Observable<any>
   userState: Observable<any>
@@ -42,27 +43,27 @@ export class MatchPredictionGameComponent implements OnInit {
 
     //get the matches form the state and filter them
     this.matchState = this.store.select('matches')
-    .pipe(map((state:any) => {
-      
-      return state.matches 
-    })).pipe(map((matches: Match[]) => {
-      
-      let resMatches = []
-      if(matches) {
-        for (let match of matches) {
+      .pipe(map((state:any) => {
+        
+        return state.matches 
+      })).pipe(map((matches: Match[]) => {
+        
+        let resMatches = []
+        if(matches) {
+          for (let match of matches) {
 
-          if (match.dateMiliseconds >= yesterdaysDate && match.dateMiliseconds <= tomorrowsDate && competitionIds.includes(match.competition.id)) {
-            resMatches.push(match)
+            if (match.dateMiliseconds >= yesterdaysDate && match.dateMiliseconds <= tomorrowsDate && competitionIds.includes(match.competition.id)) {
+              resMatches.push(match)
+            }
           }
+          console.log(resMatches)
+          return resMatches
         }
-        console.log(resMatches)
-        return resMatches
-      }
-      else {
-        return resMatches
-      }
-      
-    }))
+        else {
+          return resMatches
+        }
+        
+      }))
   }
 
 }

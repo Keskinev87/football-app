@@ -6,6 +6,7 @@ export interface State {
     matches: Match[],
     liveMatches: Match[],
     error: boolean,
+    errorCode: number,
     loading: boolean
 }
 
@@ -13,6 +14,7 @@ const initialState = {
     matches: [],
     liveMatches: [],
     error: false,
+    errorCode: null,
     loading: false
 };
 
@@ -34,30 +36,38 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
                 ...state,
                 loading: false
             }
-        case MatchActions.SCHEDULE_UPDATE_LIVE_SCORE:
+        case MatchActions.ADD_MATCH_FOR_LIVE_UPDATE:
             return {
-                ...state
-            }  
-        case MatchActions.TRY_UPDATE_LIVE_MATCH:
+                ...state,
+                liveMatches: [...state.liveMatches, action.payload],
+            }
+        case MatchActions.REMOVE_MATCH_OF_LIVE_UPDATE:
+            let matchIndex = state.liveMatches.findIndex(x => x.id == action.payload)
+            state.liveMatches.splice(matchIndex, 1)
             return {
                 ...state
             }
-        case MatchActions.UPDATE_LIVE_MATCH:
-            const matchIndex = state.matches.findIndex(x => x.id == action.payload.id)
-            let matches = state.matches
-            let newMatch = matches[matchIndex]
-            newMatch.score.fullTime.homeTeam = action.payload.home
-            newMatch.score.fullTime.awayTeam = action.payload.away
-            matches[matchIndex] = newMatch
+        case MatchActions.TRY_UPDATE_LIVE_MATCHES:
+            return {
+                ...state
+            }
+        case MatchActions.UPDATE_LIVE_MATCHES_SUCCESS:
+            state.liveMatches = action.payload
+            return {
+                ...state
+            }
+        case MatchActions.UPDATE_LIVE_MATCHES_FAIL:
             return {
                 ...state,
-                matches: matches
+                error: true,
+                errorCode: action.payload
             }
         case MatchActions.RESET_STATE: 
             return {
                 matches: [],
                 liveMatches: [],
                 error: false,
+                errorCode: null,
                 loading: false
             }
         default: 

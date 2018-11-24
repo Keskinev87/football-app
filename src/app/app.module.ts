@@ -51,7 +51,8 @@ import { MatchPredictionComponent } from './components/predictions/match-predict
 import { ErrorMsgService } from './services/errorMsg.service';
 import { UserViewComponent } from './components/users/user-view/user-view.component'
 import { UsersEffects } from './components/users/users-store/users.effects';
-import { LiveScoreComponent } from './components/matches/match-live/live-score/live-score.component'
+import { LiveScoreComponent } from './components/matches/match-live/live-score/live-score.component';
+
 
 
 @NgModule({

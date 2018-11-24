@@ -7,10 +7,12 @@ import { Prediction } from "../../models/prediction.model";
 export const TRY_GET_MATCHES = "TRY_GET_MATCHES"
 export const GET_MATCHES_SUCCESS = "GET_MATCHES_SUCCESS"
 export const GET_MATCHES_FAILED = "GET_MATCHES_FAILED"
-export const SCHEDULE_UPDATE_LIVE_SCORE = "SCHEDULE_UPDATE_LIVE_SCORE" //this will be used to begin polling the server in order to update the match score result live
-export const TRY_UPDATE_LIVE_MATCH = "TRY_UPDATE_LIVE_MATCH"
-export const UPDATE_LIVE_MATCH = "UPDATE_LIVE_MATCH"
-export const STOP_LIVE_UPDATE = "STOP_LIVE_UPDATE"
+export const ADD_MATCH_FOR_LIVE_UPDATE = "ADD_MATCH_FOR_LIVE_UPDATE"
+export const REMOVE_MATCH_OF_LIVE_UPDATE = "REMOVE_MATCH_OF_LIVE_UPDATE"
+export const TRY_UPDATE_LIVE_MATCHES = "TRY_UPDATE_LIVE_MATCHES"
+export const UPDATE_LIVE_MATCHES_SUCCESS = "UPDATE_LIVE_MATCHES_SUCCESS"
+export const UPDATE_LIVE_MATCHES_FAIL = "UPDATE_LIVE_MATCHES_FAIL"
+
 export const DO_NOTHING = "DO_NOTHING"
 export const RESET_STATE = "RESET_STATE"
 
@@ -30,30 +32,36 @@ export class GetMatchesFailed implements Action {
     readonly type = GET_MATCHES_FAILED
 }
 
-export class ScheduleUpdateLiveScore implements Action {
-    readonly type = SCHEDULE_UPDATE_LIVE_SCORE
+export class AddMatchForLiveUpdate implements Action {
+    readonly type = ADD_MATCH_FOR_LIVE_UPDATE
 
-    constructor(public payload: {
-        miliseconds: number, //this is the time until the match begins. The timer will be scheduled to begin when the match starts
-        matchId: number
-    }) {}
+    constructor(public payload: Match) {}
 }
 
-export class TryUpdateLiveMatch implements Action {
-    readonly type = TRY_UPDATE_LIVE_MATCH
+export class RemoveMatchOfLiveUpdate implements Action {
+    readonly type = REMOVE_MATCH_OF_LIVE_UPDATE
 
-    constructor(public payload: {matchId:number, score: object}) {}
+    constructor (public payload: number) {}
 }
 
-export class UpdateLiveMatch implements Action {
-    readonly type = UPDATE_LIVE_MATCH
+export class TryUpdateLiveMatches implements Action {
+    readonly type = TRY_UPDATE_LIVE_MATCHES
 
-    constructor(public payload: {id: number, home: number, away: number}) {}
+    constructor (public payload: Match[]) {}
 }
 
-export class StopLiveUpdate implements Action {
-    readonly type = STOP_LIVE_UPDATE
+export class UpdateLiveMatchesSuccess implements Action {
+    readonly type = UPDATE_LIVE_MATCHES_SUCCESS
+
+    constructor (public payload: Match[]) {}
 }
+
+export class UpdateLiveMatchesFail implements Action {
+    readonly type = UPDATE_LIVE_MATCHES_FAIL
+
+    constructor (public payload: number) {}
+}
+
 
 export class DoNothing implements Action {
     readonly type = DO_NOTHING
@@ -64,4 +72,13 @@ export class ResetState implements Action {
 }
 
 
-export type MatchActions = TryGetMatches | GetMatchesSuccess | GetMatchesFailed | ScheduleUpdateLiveScore | TryUpdateLiveMatch | UpdateLiveMatch | StopLiveUpdate | ResetState
+export type MatchActions = TryGetMatches 
+                            | GetMatchesSuccess
+                            | GetMatchesFailed
+                            | AddMatchForLiveUpdate
+                            | RemoveMatchOfLiveUpdate
+                            | TryUpdateLiveMatches
+                            | UpdateLiveMatchesSuccess
+                            | UpdateLiveMatchesFail
+                            | DoNothing
+                            | ResetState

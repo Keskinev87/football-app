@@ -4,6 +4,7 @@ import { Game } from 'src/app/components/models/game.model';
 import { Prediction } from 'src/app/components/models/prediction.model';
 import { Store, State } from '@ngrx/store';
 import * as fromApp from '../../../../../app.reducers'
+import * as MatchActions from '../../../match-store/match.actions'
 import { Observable } from 'rxjs';
 import { map, take, switchMap } from 'rxjs/operators';
 import { User } from 'src/app/components/models/user.model';
@@ -20,6 +21,10 @@ export class MatchPredictionItemComponent implements OnInit {
   @Input() loggedUser: User
  
   predictionState: Observable<any>
+
+  liveMatchesState: Observable<{
+    liveMatches: Match[]
+  }>
   
 
   constructor(private store: Store<fromApp.AppState>) { }
@@ -28,7 +33,16 @@ export class MatchPredictionItemComponent implements OnInit {
     let curGame = this.game
     let curMatch = this.match
     let curUser = this.loggedUser
-   
+    let now = new Date().getTime()
+
+    if (this.match.dateMiliseconds < now && this.match.status == ("SCHEDULED" || "IN_PLAY" || "PAUSED")) {
+      this.store.dispatch(new MatchActions.AddMatchForLiveUpdate(this.match))
+    }
+
+    this.liveMatchesState = this.store.select('matches')
+        .pipe(map((state: any) => {
+          return state.liveMatches
+        }))
     
 
     this.predictionState = this.store.select('predictions')
