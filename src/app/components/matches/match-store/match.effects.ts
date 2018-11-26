@@ -50,17 +50,19 @@ tryUpdateLiveMatch = this.actions$
         return action.payload
     }))
     .pipe(switchMap((liveMatches: Match[]) => {
-        return this.httpClient.post<Match>(environment.apiUrl + "/matches/getLiveMatch", liveMatches, {observe: 'body'})
-            .pipe(concatMap((liveMatches: Match[]) => {
+        return this.httpClient.post<Match>(environment.apiUrl + "/matches/getLiveScores", liveMatches, {observe: 'body'})
+            .pipe(map((liveMatches: Match[]) => {
+                console.log("Response is:")
+                console.log(liveMatches)
                 if (liveMatches && liveMatches.length > 0) {
-                    return [{
+                    return {
                         type: MatchActions.UPDATE_LIVE_MATCHES_SUCCESS,
                         payload: liveMatches
-                    }]
+                    }
                 } else {
-                    return [{
+                    return {
                         type: MatchActions.DO_NOTHING
-                    }]
+                    }
                 }
             }), catchError(error => {
                 return of(new MatchActions.UpdateLiveMatchesFail(error.status))

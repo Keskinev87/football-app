@@ -39,7 +39,7 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
         case MatchActions.ADD_MATCH_FOR_LIVE_UPDATE:
             return {
                 ...state,
-                liveMatches: [...state.liveMatches, action.payload],
+                liveMatches: [...state.liveMatches, action.payload]
             }
         case MatchActions.REMOVE_MATCH_OF_LIVE_UPDATE:
             let matchIndex = state.liveMatches.findIndex(x => x.id == action.payload)
@@ -52,9 +52,13 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
                 ...state
             }
         case MatchActions.UPDATE_LIVE_MATCHES_SUCCESS:
-            state.liveMatches = action.payload
+            console.log("Action payload")
+            console.log(action.payload)
+            let updatedLiveMatches = action.payload
+            
             return {
-                ...state
+                ...state,
+                liveMatches: updatedLiveMatches
             }
         case MatchActions.UPDATE_LIVE_MATCHES_FAIL:
             return {

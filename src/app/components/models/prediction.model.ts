@@ -8,6 +8,7 @@ export class Prediction {
     public scoreRules: object,
     public _id?: string,
     public userId?: string,
-    public scorer?: number
+    public scorer?: number,
+    public points?: number
     ) {}
 }
