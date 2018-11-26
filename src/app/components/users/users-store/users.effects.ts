@@ -8,13 +8,14 @@ import * as UsersActions from './users.actions'
 import * as GamesActions from '../../games/games-store/games.actions'
 import * as CompetitionsActions from '../../competitions/competitions-store/competitions.actions'
 import * as PredictionsActions from '../../predictions/predictions-store/predictions.actions'
-import { mergeMap, map, switchMap, catchError } from "rxjs/operators";
+import { mergeMap, map, switchMap, catchError, concatMap } from "rxjs/operators";
 import { User } from "../../models/user.model";
 import { of } from "rxjs";
 
 
 @Injectable()
 export class UsersEffects {
+    //THIS IS THE EFFECT THAT INITIATES THE LOADING OF THE WHOLE STATE
     @Effect()
     initialLoding = this.actions$
         .ofType(UsersActions.TRY_GET_USER)
@@ -26,8 +27,8 @@ export class UsersEffects {
             if (token) {
                 
                 return this.httpClient.get(environment.apiUrl + '/user/get', {observe:'body'})
-                    .pipe(mergeMap((user:User) => {
-                        this.router.navigate(['/pending-matches'])
+                    .pipe(concatMap((user:User) => {
+                        
                         return [{
                             type: AuthActions.SIGNIN
                         },

@@ -6,7 +6,7 @@ import * as GameActions from './games.actions'
 import * as CompetitionsActions from '../../competitions/competitions-store/competitions.actions'
 import * as MatchActions from '../../matches/match-store/match.actions'
 import { Effect, Actions } from "@ngrx/effects";
-import { map, switchMap, mergeMap, catchError } from "rxjs/operators";
+import { map, switchMap, mergeMap, catchError, concatMap } from "rxjs/operators";
 import { Game }  from "../../models/game.model";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
@@ -42,7 +42,7 @@ export class GameEffects {
     @Effect()
     getGamesByUserId = this.actions$
         .ofType(GameActions.TRY_GET_ALL_GAMES_BY_USER_ID)
-        .pipe(switchMap(() => {
+        .pipe(concatMap(() => {
             return this.httpClient.get<Game[]>(environment.apiUrl + "/game/getAll", {observe: 'body'}).pipe(mergeMap((games) => {
                 let competitionIds = []
                 for (let game of games) {

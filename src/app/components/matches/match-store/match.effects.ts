@@ -3,7 +3,7 @@ import { Effect, Actions } from "@ngrx/effects";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import * as MatchActions from "./match.actions"
-import { map, switchMap, catchError, takeUntil, take, mapTo } from "rxjs/operators";
+import { map, switchMap, catchError, takeUntil, take, mapTo, concatMap } from "rxjs/operators";
 import { environment } from "../../../../environments/environment"
 import { Match } from "../../models/match.model"
 import { of, Observable } from "rxjs";
@@ -51,15 +51,16 @@ tryUpdateLiveMatch = this.actions$
     }))
     .pipe(switchMap((liveMatches: Match[]) => {
         return this.httpClient.post<Match>(environment.apiUrl + "/matches/getLiveMatch", liveMatches, {observe: 'body'})
-            .pipe(map((liveMatches: Match[]) => {
+            .pipe(concatMap((liveMatches: Match[]) => {
                 if (liveMatches && liveMatches.length > 0) {
-                    return {
-                        type: MatchActions.UPDATE_LIVE_MATCHES_SUCCESS
-                    }
+                    return [{
+                        type: MatchActions.UPDATE_LIVE_MATCHES_SUCCESS,
+                        payload: liveMatches
+                    }]
                 } else {
-                    return {
+                    return [{
                         type: MatchActions.DO_NOTHING
-                    }
+                    }]
                 }
             }), catchError(error => {
                 return of(new MatchActions.UpdateLiveMatchesFail(error.status))

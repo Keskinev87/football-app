@@ -43,6 +43,7 @@ export class MatchPredictionGameComponent implements OnInit {
 
     //get the matches form the state and filter them
     this.matchState = this.store.select('matches')
+      .pipe(take(1))
       .pipe(map((state:any) => {
         
         return state.matches 
