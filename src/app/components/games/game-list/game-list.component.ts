@@ -6,6 +6,7 @@ import * as fromApp from '../../../app.reducers'
 import * as GamesActions from '../games-store/games.actions'
 import { ErrorMsgService } from 'src/app/services/errorMsg.service';
 import { Router } from '@angular/router';
+import { ModalService } from 'src/app/services/modal.service';
 
 
 @Component({
@@ -18,20 +19,23 @@ export class GameListComponent implements OnInit {
   
   gamesState: Observable<any>
 
-  gameJoin: boolean = false
-
-  constructor(private store: Store<fromApp.AppState>, public errMsgService: ErrorMsgService, private router: Router) {}
+  constructor(private store: Store<fromApp.AppState>, public errMsgService: ErrorMsgService, private router: Router, private modalService: ModalService) {}
 
   ngOnInit() {
     this.gamesState = this.store.select('games')
   }
 
-  onJoinGame() {
-    this.gameJoin = true
-  }
-
   onCreateNewGame() {
     this.router.navigate(['/games/create/choose-name'])
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.store.dispatch(new GamesActions.ResetEditState())
+    this.modalService.close(id);
   }
 
 

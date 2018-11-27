@@ -202,6 +202,8 @@ export function gamesReducer(state = initialState, action: GameActions.GameActio
             return {
                 ...state,
                 loading: false,
+                error: true,
+                errorCode: action.payload
             }
         default: 
             return state;

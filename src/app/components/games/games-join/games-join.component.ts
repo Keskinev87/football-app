@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../../app.reducers'
 import * as GameActions from '../games-store/games.actions'
 import { NgForm } from '@angular/forms';
+import { ErrorMsgService } from 'src/app/services/errorMsg.service';
 
 @Component({
   selector: 'app-games-join',
@@ -18,7 +19,7 @@ export class GamesJoinComponent implements OnInit {
     loading: boolean
   }>
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>, private errorMsg: ErrorMsgService) {}
 
   ngOnInit() {
     this.gamesState = this.store.select('games')

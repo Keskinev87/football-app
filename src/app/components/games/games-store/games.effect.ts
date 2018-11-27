@@ -10,6 +10,7 @@ import { map, switchMap, mergeMap, catchError, concatMap } from "rxjs/operators"
 import { Game }  from "../../models/game.model";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
+import { ModalService } from "src/app/services/modal.service";
 
 
 @Injectable()
@@ -55,7 +56,8 @@ export class GameEffects {
                     {
                         type: MatchActions.TRY_GET_MATCHES,
                         payload: competitionIds
-                    }]
+                    }
+                ]
             }), catchError(error => {
                 return of(new GameActions.GetGamesFailed(error.status))
             }))
@@ -102,20 +104,28 @@ export class GameEffects {
         .pipe(switchMap((code: object) => {
             console.log("Effect here")
             console.log(code)
-            return this.httpClient.post(environment.apiUrl + "/game/joinWithCode", code, {observe: 'body'}).pipe(map((resGame: Game) => {
+            return this.httpClient.post(environment.apiUrl + "/game/joinWithCode", code, {observe: 'body'}).pipe(mergeMap((resGame: Game) => {
                 if(resGame) {
-                    return {
+                    //close the modal. We know that the action was dispatched through an opened modal.
+                    this.modalService.close("custom-modal-1")
+                    return [{
                         type: GameActions.JOIN_GAME_BY_CODE_SUCCESS,
                         payload: resGame
-                    }
+                    },
+                    {
+                        type: GameActions.RESET_EDIT_STATE
+                    },
+                    {
+                        type: GameActions.TRY_GET_ALL_GAMES_BY_USER_ID
+                    }]
                 }
                 else {
-                    return {
+                    return [{
                         type: GameActions.JOIN_GAME_BY_CODE_FAIL
-                    }
+                    }]
                 }
             }), catchError(error => {
-                return of(new GameActions.JoinGameByCodeFail())
+                return of(new GameActions.JoinGameByCodeFail(error.status))
             }))
         }))
 
@@ -138,5 +148,5 @@ export class GameEffects {
         }))
 
 
-    constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router) {}
+    constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router, private modalService: ModalService) {}
 }

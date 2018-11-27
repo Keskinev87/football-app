@@ -22,9 +22,10 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.store.dispatch(new AuthActions.TryLogout())
+    this.toggleMenu()
   }
 
-  openMenu() {
+  toggleMenu() {
     this.showMenu = !this.showMenu
   }
 

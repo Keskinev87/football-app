@@ -3,7 +3,7 @@ export class ErrorMsgService {
     public errorMsgs: Object = {
         games: {
             401: "Game already exists",
-            404: "Game not found"
+            404: "No such game found"
         }
     }     
 

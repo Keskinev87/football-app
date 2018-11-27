@@ -1,10 +1,29 @@
+<h1 class="text-center">Your Games</h1>
 <div class="list-group">
-  <h1>Games</h1>
-  <button type="button" class="btn btn-success" (click)="onJoinGame()">Join Game</button> <br>
-  <app-games-join *ngIf="gameJoin"></app-games-join>
-  <button type="button" class="btn btn-primary" (click)="onCreateNewGame()">Create New Game</button> <br>
-  <app-game-list-item *ngFor="let game of (gamesState | async).games" [game]="game">
-  </app-game-list-item>
+  <div *ngIf="(gamesState | async).games && (gamesState | async).games.length > 0 as games; else noGames ">
+    <app-game-list-item *ngFor="let game of (gamesState | async).games" [game]="game"></app-game-list-item>
+  </div>
+  <ng-template #noGames>
+    <p class="text-center">You don't participate in any games. Join one or create your own through the buttons bellow.</p>
+  </ng-template>
+  
+  <div class = "row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+        <button type="button" class="btn btn-success" (click)="openModal('custom-modal-1')">Join Game</button> <br>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+        <button type="button" class="btn btn-primary" (click)="onCreateNewGame()">Create Game</button>
+    </div>
+  </div>
 </div>
 
-
+<my-modal id="custom-modal-1">
+    <div class="my-modal col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+        
+        <div class="my-modal-body text-center">
+            <button class="btn btn-danger pull-right" (click)="closeModal('custom-modal-1');">X</button>
+            <app-games-join></app-games-join>
+        </div>
+    </div>
+    <div class="my-modal-background"></div>
+</my-modal>

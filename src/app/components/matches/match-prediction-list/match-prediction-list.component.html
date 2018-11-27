@@ -1,11 +1,13 @@
-<h2>Games</h2>
+<h1 class="text-center">Pending Matches</h1>
 <div *ngIf="(gamesState| async).games != undefined && (gamesState | async).games.length > 0 as games; else noGames">
     <app-match-prediction-game *ngFor="let game of (gamesState | async).games " [game]="game"></app-match-prediction-game>
     <app-loader-component *ngIf="(gamesState | async).loading"></app-loader-component>
 </div>
 
 <ng-template #noGames>
-    <p>Sorry! No games available.</p>
-    <button class="btn btn-primary">Create New</button>
+    <div class="row text-center">
+            <p>You have to join a game or create one in order to see the pending matches.</p>
+            <button class="btn btn-primary" (click)="onGamesRedirect()">Go to Games</button>
+    </div>
 </ng-template>
 

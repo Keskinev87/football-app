@@ -9,6 +9,7 @@ import { map, filter, switchMap, take, concatMap } from 'rxjs/operators';
 import { Game } from '../../models/game.model';
 import { User } from '../../models/user.model';
 import { timer } from 'rxjs'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-match-prediction-list',
@@ -24,7 +25,7 @@ export class MatchPredictionListComponent implements OnInit, OnDestroy {
   scheduler: Observable<number>
   updater: Subscription
   
-  constructor(private store: Store<fromApp.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>, private router: Router) { }
 
   ngOnInit() {
     //get all games for this user and create a list with the matches that are pending for these games
@@ -52,6 +53,10 @@ export class MatchPredictionListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.updater.unsubscribe()
+  }
+
+  onGamesRedirect() {
+    this.router.navigate(['/games'])
   }
 
      

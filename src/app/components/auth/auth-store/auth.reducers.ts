@@ -17,7 +17,7 @@ const initialState = {
     error: false,
     errorMsg:'',
     success: false,
-    loading: true
+    loading: false
 };
 
 
@@ -73,6 +73,7 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
         case(AuthActions.LOGOUT):
             return {
                 ...state,
+                loading: false,
                 isAuthenticated: false,
                 token: ''
             }

@@ -185,6 +185,8 @@ export class JoinGameByCodeSuccess implements Action {
 
 export class JoinGameByCodeFail implements Action {
     readonly type = JOIN_GAME_BY_CODE_FAIL
+
+    constructor(public payload: number) {}
 }
 
 export class ResetState implements Action {

@@ -52,7 +52,8 @@ import { ErrorMsgService } from './services/errorMsg.service';
 import { UserViewComponent } from './components/users/user-view/user-view.component'
 import { UsersEffects } from './components/users/users-store/users.effects';
 import { LiveScoreComponent } from './components/matches/match-live/live-score/live-score.component';
-
+import { ModalService } from './services/modal.service'
+import { ModalComponent } from './directives/modal.directive';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { LiveScoreComponent } from './components/matches/match-live/live-score/l
     MatchPredictionGameComponent,
     MatchPredictionComponent,
     UserViewComponent,
-    LiveScoreComponent
+    LiveScoreComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +104,7 @@ import { LiveScoreComponent } from './components/matches/match-live/live-score/l
     AuthService, 
     AuthGuard,
     ErrorMsgService,
+    ModalService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

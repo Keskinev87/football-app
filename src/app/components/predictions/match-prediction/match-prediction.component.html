@@ -47,7 +47,7 @@
           <small display="block">-</small>
       </div>
       <button type="submit" class="btn btn-success" [disabled]="!f.valid">Edit</button>
-      <small *ngIf="prediction.score">Score: {{prediction.score}}</small>
+      <small *ngIf="prediction.points !== undefined">Score: {{prediction.points}}</small>
     </div>
     <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
       <input 

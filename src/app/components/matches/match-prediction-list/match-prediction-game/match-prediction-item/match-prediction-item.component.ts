@@ -20,7 +20,10 @@ export class MatchPredictionItemComponent implements OnInit {
   @Input() game: Game
   @Input() loggedUser: User
  
-  predictionState: Observable<any>
+  predictionState: Observable<{
+    prediction: Prediction,
+    isEdit: boolean
+  }>
 
   liveMatch : Observable<any>
   
@@ -59,6 +62,7 @@ export class MatchPredictionItemComponent implements OnInit {
         let isEdit = false
         if(prediction)
           isEdit = true
+          console.log("isEdit: " + isEdit)
         return {prediction, isEdit}
       }))
   }
