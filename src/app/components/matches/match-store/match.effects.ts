@@ -50,7 +50,7 @@ tryUpdateLiveMatch = this.actions$
         return action.payload
     }))
     .pipe(switchMap((liveMatches: Match[]) => {
-        return this.httpClient.post<Match>(environment.apiUrl + "/matches/getLiveScores", liveMatches, {observe: 'body'})
+        return this.httpClient.post<Match[]>(environment.apiUrl + "/matches/getLiveScores", liveMatches, {observe: 'body'})
             .pipe(map((liveMatches: Match[]) => {
                 console.log("Response is:")
                 console.log(liveMatches)
