@@ -12,8 +12,14 @@ export class Match {
 		public stage: string,
 		public group: string,
 		public lastUpdated: Date,
-		public homeTeam: Object,
-		public awayTeam: Object,
+		public homeTeam: {
+			id:number,
+			name: string
+		},
+		public awayTeam: {
+			id:number,
+			name: string
+		},
 		public score: {
 			winner: string,
 			duration: string,

@@ -19,7 +19,7 @@ export class GamesJoinComponent implements OnInit {
     loading: boolean
   }>
 
-  constructor(private store: Store<fromApp.AppState>, private errorMsg: ErrorMsgService) {}
+  constructor(private store: Store<fromApp.AppState>, public errorMsg: ErrorMsgService) {}
 
   ngOnInit() {
     this.gamesState = this.store.select('games')
