@@ -68,9 +68,9 @@ export class MatchPredictionItemComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    if (this.match.status == ("SCHEDULED" || "IN_PLAY" || "PAUSED")) {
-      this.store.dispatch(new MatchActions.RemoveMatchOfLiveUpdate(this.match.id))
-    }
+    // if (this.match.status == ("SCHEDULED" || "IN_PLAY" || "PAUSED")) {
+    //   this.store.dispatch(new MatchActions.RemoveMatchOfLiveUpdate(this.match.id))
+    // }
   }
 
 }
