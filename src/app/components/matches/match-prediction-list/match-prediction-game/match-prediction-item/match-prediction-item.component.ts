@@ -37,27 +37,27 @@ export class MatchPredictionItemComponent implements OnInit {
     let now = new Date().getTime()
 
 
-    //TODO: imporve the condition
-    if (this.match.dateMiliseconds < now && this.match.score.winner === null && this.match.status != "CANCELED") {
-      this.store.dispatch(new MatchActions.AddMatchForLiveUpdate(this.match))
-    }
+    // //TODO: imporve the condition
+    // if (this.match.dateMiliseconds < now && this.match.score.winner === null && this.match.status != "CANCELED") {
+    //   this.store.dispatch(new MatchActions.AddMatchForLiveUpdate(this.match))
+    // }
 
-    this.liveMatch = this.store.select('matches')
-        .pipe(map((state: any) => {
-          return state.liveMatches
-        }))
-        .pipe(filter(liveMatch =>
-          liveMatch.id == this.match.id
-        ))
+    // this.liveMatch = this.store.select('matches')
+    //     .pipe(map((state: any) => {
+    //       return state.liveMatches
+    //     }))
+    //     .pipe(filter(liveMatch =>
+    //       liveMatch.id == this.match.id
+    //     ))
     
 
     this.predictionState = this.store.select('predictions')
       .pipe(map((state:any) => {
-        return state.predictions
+        return state.myPredictions
       }))
       .pipe(map((predictions: Prediction[]) => {
         let prediction = predictions.find(function(el) {
-          return (el.gameId == curGame._id && el.matchId == curMatch.id && el.userId == curUser._id)
+          return (el.matchId == curMatch.id)
         })
         let isEdit = false
         if(prediction)

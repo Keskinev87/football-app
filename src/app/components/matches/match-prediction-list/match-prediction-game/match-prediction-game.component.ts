@@ -18,7 +18,9 @@ export class MatchPredictionGameComponent implements OnInit {
   @Input() game: Game
   
   
-  matchState: Observable<any>
+ 
+  pendingMatches: Observable<any>
+
   userState: Observable<any>
 
   constructor(private store: Store<fromApp.AppState>) { }
@@ -29,42 +31,29 @@ export class MatchPredictionGameComponent implements OnInit {
     
 
     //declare the date filters
-    let yesterday = new Date()
-    yesterday.setDate(new Date().getDate() - 1)
-    let yesterdaysDate = yesterday.getTime()
+    // let today = new Date()
+    // today.setDate(new Date().getDate())
+    // let todaysDate = today.getTime()
 
-    let tomorrow = new Date() 
-    tomorrow.setDate(new Date().getDate() + 2)
-    console.log(tomorrow)
-    let tomorrowsDate = tomorrow.getTime()
-    //extract the competition ids from the game.We will filter the matches by those too. 
+    // let tomorrow = new Date() 
+    // tomorrow.setDate(new Date().getDate() + 1)
+    // console.log(tomorrow)
+    // let tomorrowsDate = tomorrow.getTime()
+    // //extract the competition ids from the game.We will filter the matches by those too. 
     let competitionIds = this.game.competitions
    
 
     //get the matches form the state and filter them
-    this.matchState = this.store.select('matches')
-      .pipe(take(1))
-      .pipe(map((state:any) => {
-        
-        return state.matches 
-      })).pipe(map((matches: Match[]) => {
-        
-        let resMatches = []
-        if(matches) {
-          for (let match of matches) {
-
-            if (match.dateMiliseconds >= yesterdaysDate && match.dateMiliseconds <= tomorrowsDate && competitionIds.includes(match.competition.id)) {
-              resMatches.push(match)
-            }
-          }
-          console.log(resMatches)
-          return resMatches
-        }
-        else {
-          return resMatches
-        }
-        
+    this.pendingMatches = this.store.select('matches')
+      .pipe(map((state: any) => {
+        return state.pendingMatches
       }))
+      .pipe(map((pendingMatches: Match[]) => {
+        let filteredPendingMatches = pendingMatches.filter(x => competitionIds.includes(x.competition.id))
+        console.log(filteredPendingMatches)
+        return filteredPendingMatches
+      }))
+      
   }
 
 }

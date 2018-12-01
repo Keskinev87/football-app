@@ -45,16 +45,19 @@ export class GameEffects {
         .ofType(GameActions.TRY_GET_ALL_GAMES_BY_USER_ID)
         .pipe(concatMap(() => {
             return this.httpClient.get<Game[]>(environment.apiUrl + "/game/getAll", {observe: 'body'}).pipe(mergeMap((games) => {
-                let competitionIds = []
+                let ids = new Set()
                 for (let game of games) {
-                    competitionIds = competitionIds.concat(game.competitions)
+                    for (let competitionId of game.competitions) {
+                        ids.add(competitionId)
+                    }
                 }
+                let competitionIds = Array.from(ids)
                     return [{
                         type: GameActions.GET_ALL_GAMES_BY_USER_ID,
                         payload: games
                     },
                     {
-                        type: MatchActions.TRY_GET_MATCHES,
+                        type: MatchActions.TRY_GET_PENDING_MATCHES,
                         payload: competitionIds
                     }
                 ]
