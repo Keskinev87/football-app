@@ -1,6 +1,8 @@
-<div class="col-lg-4 col-md-6 col-sm-10 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-1">
+<br>
+<div class="auth-container col-lg-8 col-md-8 col-sm-8 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-1">
   <h3>Please register</h3>
-  <form (ngSubmit)="onSignup(f)" #f="ngForm">
+  <hr>
+  <form class="auth-form" (ngSubmit)="onSignup(f)" #f="ngForm">
     <fieldset [disabled]="(signupState | async).loading">
       <div class="form-group">
           <label for="fullName">Name</label>
@@ -46,4 +48,6 @@
         {{(signupState | async).errorMsg}}
       </div>
   </form>
+  <br>
+  <br>
 </div>

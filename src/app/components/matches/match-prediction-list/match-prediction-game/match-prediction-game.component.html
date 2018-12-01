@@ -1,5 +1,5 @@
-<div class="well">
-    <h3>{{game.name}}</h3>
+<div class="game-prediction-container">
+    <h3 class="text-center">{{game.name}}</h3>
     <div *ngIf="(matchState | async) != undefined && (matchState | async).length > 0 as matches; else noMatches">
         <app-match-prediction-item *ngFor="let match of (matchState | async)" [match] = "match" [game] = "game" [loggedUser] = "(userState | async).loggedUser"></app-match-prediction-item>
     </div>

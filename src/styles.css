@@ -1,4 +1,92 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #EFEFEF;
+  background-image: url('./assets/imagetemp4.jpg');
+
+}
+nav {
+  background-color: #283655 !important;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color: #d0e1f9 !important
+}
+
+h1 {
+  color: #1e1f26;
+  font-weight: bolder !important;
+}
+
+input {
+  background-color: #d0e1f9 !important;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid 	#bf001d;
+}
+
+.btn.btn-light {
+  background-color: #4d648d;
+  color: #d0e1f9  
+}
+
+.btn.btn-light:hover {
+  background-color: #1e1f26;
+}
+
+.btn.btn-dark {
+  background-color: #1e1f26;
+  color: #d0e1f9;
+}
+
+.btn.btn-dark:hover {
+  background-color: #4d648d;  
+}
+
+.btn.btn-light-negative {
+  background-color: #47B835;
+}
+
+.btn.btn-dark-negative {
+  background-color: #47B835;
+}
+
+div.well {
+  background-color: #283655 !important;
+  cursor: pointer;
+  color: #d0e1f9;
+  opacity: 0.8;
+}
+
+/* div.game-prediction-container {
+  background-color: white;
+} */
+
+div.auth-container {
+  background-color: #283655;
+  color: #d0e1f9;
+  opacity: 0.9;
+}
+
+
+
+.panel-heading {
+  color: #d0e1f9;
+  background-color: #283655;
+  border-bottom: 1px solid #4d648d;
+}
+
+.panel-body {
+  background-color: #283655;
+  color: #d0e1f9;
+}
+
+/* .game-prediction-container {
+  border: 1px solid #A1D6E2;
+    border-radius: 8px;
+} */
+
+
 /* body {
     background-repeat: no-repeat;
     background-image: url('./assets/football-bg.jpg');
@@ -7,7 +95,9 @@
 } */
 /* MODAL STYLES
 -------------------------------*/
-my-modal {
+ 
+
+  my-modal {
     /* modals are hidden by default */
   
     display: none;

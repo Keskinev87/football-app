@@ -1,4 +1,4 @@
-<h1 class="text-center">Your Games</h1>
+<h1 class="text-center"><strong>My Games</strong></h1>
 <div class="list-group">
   <div *ngIf="(gamesState | async).games && (gamesState | async).games.length > 0 as games; else noGames ">
     <app-game-list-item *ngFor="let game of (gamesState | async).games" [game]="game"></app-game-list-item>
@@ -9,10 +9,10 @@
   
   <div class = "row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
-        <button type="button" class="btn btn-success" (click)="openModal('custom-modal-1')">Join Game</button> <br>
+        <button type="button" class="btn btn-dark" (click)="openModal('custom-modal-1')">Join Game</button> <br>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
-        <button type="button" class="btn btn-primary" (click)="onCreateNewGame()">Create Game</button>
+        <button type="button" class="btn btn-dark" (click)="onCreateNewGame()">Create Game</button>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<h1 class="text-center">Pending Matches</h1>
+<h1 class="text-center"><strong>Pending Matches</strong></h1>
 <div *ngIf="(gamesState| async).games != undefined && (gamesState | async).games.length > 0 as games; else noGames">
     <app-match-prediction-game *ngFor="let game of (gamesState | async).games " [game]="game"></app-match-prediction-game>
     <app-loader-component *ngIf="(gamesState | async).loading"></app-loader-component>

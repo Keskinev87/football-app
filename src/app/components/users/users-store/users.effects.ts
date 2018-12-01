@@ -28,7 +28,7 @@ export class UsersEffects {
                 
                 return this.httpClient.get(environment.apiUrl + '/user/get', {observe:'body'})
                     .pipe(concatMap((user:User) => {
-                        
+                        this.router.navigate(['/'])
                         return [{
                             type: AuthActions.SIGNIN
                         },
