@@ -31,16 +31,16 @@ export class PredictionsEffects {
 
     @Effect()
     getPredictions = this.actions$
-        .ofType(PredictionsActions.TRY_GET_PREDICTIONS)
+        .ofType(PredictionsActions.TRY_GET_MY_PREDICTIONS)
         .pipe(switchMap(() => {
             console.log("Predicitons Actions")
             return this.httpClient.get(environment.apiUrl + "/predictions/getMatchPredictionsForUser", {observe: 'body'}).pipe(map((predictions: Prediction[]) => {
                 return {
-                    type: PredictionsActions.GET_PREDICTIONS_SUCCESS,
+                    type: PredictionsActions.GET_MY_PREDICTIONS_SUCCESS,
                     payload: predictions
                 }
             }), catchError(error => {
-                return of(new PredictionsActions.GetPredictionsFail())
+                return of(new PredictionsActions.GetMyPredictionsFail())
             }))
         }))
 

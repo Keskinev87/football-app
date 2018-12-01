@@ -2,12 +2,12 @@ import * as PredictionsActions from './predictions.actions'
 import { Prediction } from '../../models/prediction.model'
 
 export interface State {
-    predictions: Prediction[],
+    myPredictions: Prediction[],
     loading: boolean
 }
 
 const initialState: State = {
-    predictions: [],
+    myPredictions: [],
     loading: false
 }
 
@@ -25,24 +25,24 @@ export function predictionsReducer (state = initialState, action: PredictionsAct
             }
         case PredictionsActions.SAVE_PREDICTION_SUCCESS:
         console.log("Reducer Prediction: " + action.payload)
-        console.log(state.predictions)
+        console.log(state.myPredictions)
             return {
                 ...state,
-                predictions:[...state.predictions, action.payload],
+                myPredictions:[...state.myPredictions, action.payload],
                 loading: false
             }
-        case PredictionsActions. TRY_GET_PREDICTIONS:
+        case PredictionsActions. TRY_GET_MY_PREDICTIONS:
             return {
                 ...state,
                 loading: true
             }
-        case PredictionsActions.GET_PREDICTIONS_SUCCESS: 
+        case PredictionsActions.GET_MY_PREDICTIONS_SUCCESS: 
             return {
                 ...state,
-                predictions: action.payload,
+                myPredictions: action.payload,
                 loading: false
             }
-        case PredictionsActions.GET_PREDICTIONS_FAIL:
+        case PredictionsActions.GET_MY_PREDICTIONS_FAIL:
             return {
                 ...state,
                 loading: false
@@ -54,12 +54,12 @@ export function predictionsReducer (state = initialState, action: PredictionsAct
             }
         case PredictionsActions.EDIT_PREDICTION_SUCCESS:
             const newPrediction = action.payload
-            const index = state.predictions.findIndex(x => x._id == newPrediction._id)
-            var predictions = state.predictions
+            const index = state.myPredictions.findIndex(x => x._id == newPrediction._id)
+            var predictions = state.myPredictions
             predictions[index] = newPrediction
             return {
                 ...state,
-                predictions: predictions,
+                myPredictions: predictions,
                 loading: false
                 //TODO: update the prediction in the local state too
             }
