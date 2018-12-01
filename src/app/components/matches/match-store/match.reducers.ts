@@ -3,7 +3,7 @@ import { Match } from '../../models/match.model'
 
 
 export interface State {
-    matches: Match[],
+    pendingMatches: Match[],
     liveMatches: Match[],
     error: boolean,
     errorCode: number,
@@ -11,7 +11,7 @@ export interface State {
 }
 
 const initialState = {
-    matches: [],
+    pendingMatches: [],
     liveMatches: [],
     error: false,
     errorCode: null,
@@ -20,18 +20,18 @@ const initialState = {
 
 export function matchReducer(state = initialState, action: MatchActions.MatchActions): State {
     switch (action.type) {
-        case MatchActions.TRY_GET_MATCHES:
+        case MatchActions.TRY_GET_PENDING_MATCHES:
             return {
                 ...state,
                 loading: true
             }
-        case MatchActions.GET_MATCHES_SUCCESS:
+        case MatchActions.GET_PENDING_MATCHES_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                matches: action.payload
+                pendingMatches: action.payload
             }
-        case MatchActions.GET_MATCHES_FAILED:
+        case MatchActions.GET_PENDING_MATCHES_FAILED:
             return {
                 ...state,
                 loading: false
@@ -68,7 +68,7 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
             }
         case MatchActions.RESET_STATE: 
             return {
-                matches: [],
+                pendingMatches: [],
                 liveMatches: [],
                 error: false,
                 errorCode: null,

@@ -15,31 +15,31 @@ export class MatchEffects {
 
 @Effect()
 getMatches = this.actions$
-    .ofType(MatchActions.TRY_GET_MATCHES)
-    .pipe(map((action: MatchActions.TryGetMatches) => {
+    .ofType(MatchActions.TRY_GET_PENDING_MATCHES)
+    .pipe(map((action: MatchActions.TryGetPendingMatches) => {
         return action.payload
     }))
     .pipe(switchMap((competitionIds: Array<number>) => {
         console.log("Match loader ")
         console.log(competitionIds)
-        return this.httpClient.post<Match[]>(environment.apiUrl + "/matches/getByCompetitionId", competitionIds, {observe: 'body'}).pipe(map((matches: Match[]) => {
+        return this.httpClient.post<Match[]>(environment.apiUrl + "/matches/getPendingByCompetitionId", competitionIds, {observe: 'body'}).pipe(map((matches: Match[]) => {
             console.log("Match loader ")
             console.log(matches)
             if(matches) {
                 console.log("success")
                 return {
-                    type: MatchActions.GET_MATCHES_SUCCESS,
+                    type: MatchActions.GET_PENDING_MATCHES_SUCCESS,
                     payload: matches
                 }
             } else {
                 console.log("error1")
                 return {
-                    type: MatchActions.GET_MATCHES_FAILED
+                    type: MatchActions.GET_PENDING_MATCHES_FAILED
                 }
             }
         }),catchError(error => {
             console.log("error 2")
-            return of(new MatchActions.GetMatchesFailed())
+            return of(new MatchActions.GetPendingMatchesFailed())
         }))
     }))
 

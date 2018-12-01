@@ -4,9 +4,9 @@ import { Competition } from "../../models/competition.model";
 import { Prediction } from "../../models/prediction.model";
 
 
-export const TRY_GET_MATCHES = "TRY_GET_MATCHES"
-export const GET_MATCHES_SUCCESS = "GET_MATCHES_SUCCESS"
-export const GET_MATCHES_FAILED = "GET_MATCHES_FAILED"
+export const TRY_GET_PENDING_MATCHES = "TRY_GET_PENDING_MATCHES"
+export const GET_PENDING_MATCHES_SUCCESS = "GET_MATCHES_SUCCESS"
+export const GET_PENDING_MATCHES_FAILED = "GET_MATCHES_FAILED"
 export const ADD_MATCH_FOR_LIVE_UPDATE = "ADD_MATCH_FOR_LIVE_UPDATE"
 export const REMOVE_MATCH_OF_LIVE_UPDATE = "REMOVE_MATCH_OF_LIVE_UPDATE"
 export const TRY_UPDATE_LIVE_MATCHES = "TRY_UPDATE_LIVE_MATCHES"
@@ -16,20 +16,20 @@ export const UPDATE_LIVE_MATCHES_FAIL = "UPDATE_LIVE_MATCHES_FAIL"
 export const DO_NOTHING = "DO_NOTHING"
 export const RESET_STATE = "RESET_STATE"
 
-export class TryGetMatches implements Action {
-    readonly type = TRY_GET_MATCHES
+export class TryGetPendingMatches implements Action {
+    readonly type = TRY_GET_PENDING_MATCHES
 
     constructor(public payload: Array<number>) {}
 }
 
-export class GetMatchesSuccess implements Action {
-    readonly type = GET_MATCHES_SUCCESS
+export class GetPendingMatchesSuccess implements Action {
+    readonly type = GET_PENDING_MATCHES_SUCCESS
 
     constructor(public payload: Match[]) {}
 }
 
-export class GetMatchesFailed implements Action {
-    readonly type = GET_MATCHES_FAILED
+export class GetPendingMatchesFailed implements Action {
+    readonly type = GET_PENDING_MATCHES_FAILED
 }
 
 export class AddMatchForLiveUpdate implements Action {
@@ -72,9 +72,9 @@ export class ResetState implements Action {
 }
 
 
-export type MatchActions = TryGetMatches 
-                            | GetMatchesSuccess
-                            | GetMatchesFailed
+export type MatchActions = TryGetPendingMatches 
+                            | GetPendingMatchesSuccess
+                            | GetPendingMatchesFailed
                             | AddMatchForLiveUpdate
                             | RemoveMatchOfLiveUpdate
                             | TryUpdateLiveMatches
