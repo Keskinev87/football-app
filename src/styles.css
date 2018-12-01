@@ -12,7 +12,7 @@ nav {
   color: #d0e1f9 !important
 }
 
-h1 {
+h1,h2,h3 {
   color: #1e1f26;
   font-weight: bolder !important;
 }
@@ -59,7 +59,7 @@ div.well {
 }
 
 /* div.game-prediction-container {
-  background-color: white;
+  background-color: #d0e1f9;
 } */
 
 div.auth-container {

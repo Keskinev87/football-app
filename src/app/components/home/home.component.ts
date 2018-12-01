@@ -22,8 +22,10 @@ export class HomeComponent implements OnInit {
     this.userState = this.store.select('users')
   }
   
-  onLogin() {
-    this.router.navigate(['/login'])
-  }
+ 
 
+  onNavigate(path) {
+    this.router.navigate([path])
+  }
+ 
 }

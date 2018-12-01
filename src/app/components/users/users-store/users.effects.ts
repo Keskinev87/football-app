@@ -43,7 +43,7 @@ export class UsersEffects {
                             type: CompetitionsActions.TRY_GET_COMPETITIONS
                         },
                         {
-                            type: PredictionsActions.TRY_GET_PREDICTIONS
+                            type: PredictionsActions.TRY_GET_MY_PREDICTIONS
                         }]
                     }), catchError(error => {
                         this.router.navigate(['/login'])
