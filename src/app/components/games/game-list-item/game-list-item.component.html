@@ -5,7 +5,9 @@
     <!-- <p>Players:{{ game.users.length }}</p> -->
     <p>Description:{{game.description}}</p>
     <!-- <p>Next match:{{ game.matches[0] }}</p> -->
-    <button class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-xs-5" (click)="onChooseCompetitions()">Choose Competitions</button>
-    <button class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-xs-5 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" (click)="onAddMatches()">Add Matches</button>
+    
+        <button *ngIf="isAdmin" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-xs-5" (click)="onChooseCompetitions()">Choose Competitions</button>
+        <button *ngIf="isAdmin" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-xs-5 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" (click)="onAddMatches()">Add Matches</button>
+    
   </div>
 </div>
