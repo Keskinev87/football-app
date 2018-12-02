@@ -2,8 +2,6 @@
 body {
   background-color: #EFEFEF;
   background-image: url('./assets/imagetemp4.jpg');
-  overflow: hidden;
-
 }
 nav {
   background-color: #283655 !important;
