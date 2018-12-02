@@ -2,6 +2,7 @@
 body {
   background-color: #EFEFEF;
   background-image: url('./assets/imagetemp4.jpg');
+  overflow: hidden;
 
 }
 nav {
@@ -18,7 +19,9 @@ h1,h2,h3 {
 }
 
 input {
-  background-color: #d0e1f9 !important;
+  background-color: #A1D6E2 !important;
+  /* background-color: rgba(161,214,226,0.5) !important; */
+  color: #1e1f26 !important;
 }
 
 input.ng-invalid.ng-touched {
@@ -62,13 +65,16 @@ div.well {
   background-color: #d0e1f9;
 } */
 
-div.auth-container {
-  background-color: #283655;
-  color: #d0e1f9;
-  opacity: 0.9;
+div.outlet-container {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
-
+div.auth-container {
+  /* background-color: #283655; */
+  background-color: rgba(40,54,85,0.9);
+  color: #d0e1f9;
+}
 
 .panel-heading {
   color: #d0e1f9;
@@ -81,10 +87,16 @@ div.auth-container {
   color: #d0e1f9;
 }
 
-/* .game-prediction-container {
+div.game-prediction-container {
+  /* background-color: #A1D6E2; */
+  background-color: rgba(161,214,226,0.5);
   border: 1px solid #A1D6E2;
-    border-radius: 8px;
-} */
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
 
 
 /* body {
