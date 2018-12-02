@@ -11,9 +11,13 @@ nav {
   color: #d0e1f9 !important
 }
 
-h1,h2,h3 {
+h1,h3 {
   color: #1e1f26;
   font-weight: bolder !important;
+}
+
+h2 {
+  color: #d0e1f9;
 }
 
 input {
@@ -95,6 +99,13 @@ div.game-prediction-container {
   border-radius: 8px;
 }
 
+div.image-container {
+  color: #d0e1f9;
+}
+
+div.image-container > .img-responsive {
+  margin: 0 auto;
+}
 
 
 /* body {
