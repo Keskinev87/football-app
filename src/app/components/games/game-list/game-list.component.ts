@@ -18,11 +18,13 @@ export class GameListComponent implements OnInit {
 
   
   gamesState: Observable<any>
+  userState: Observable<any>
 
   constructor(private store: Store<fromApp.AppState>, public errMsgService: ErrorMsgService, private router: Router, private modalService: ModalService) {}
 
   ngOnInit() {
     this.gamesState = this.store.select('games')
+    this.userState = this.store.select('users')
   }
 
   onCreateNewGame() {
