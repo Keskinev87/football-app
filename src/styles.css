@@ -16,7 +16,7 @@ h1,h3 {
   font-weight: bolder !important;
 }
 
-h2 {
+h2,h4 {
   color: #d0e1f9;
 }
 
@@ -46,6 +46,14 @@ input.ng-invalid.ng-touched {
 
 .btn.btn-dark:hover {
   background-color: #4d648d;  
+}
+
+.btn.btn-icon {
+  color: #d0e1f9;
+}
+
+.btn.btn-icon:hover {
+  color:#4d648d;
 }
 
 .btn.btn-light-negative {
@@ -78,13 +86,24 @@ div.auth-container {
   color: #d0e1f9;
 }
 
-.panel-heading {
+.panel-heading.match {
   color: #d0e1f9;
   background-color: #283655;
   border-bottom: 1px solid #4d648d;
 }
 
-.panel-body {
+.panel-body.match {
+  background-color: #283655;
+  color: #d0e1f9;
+}
+
+.panel-heading.game {
+  color: #d0e1f9;
+  background-color: rgba(40,54,85,0.9);
+  border-bottom: 1px solid #4d648d;
+}
+
+.panel-body.game {
   background-color: #283655;
   color: #d0e1f9;
 }

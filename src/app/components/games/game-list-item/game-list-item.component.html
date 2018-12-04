@@ -1,28 +1,37 @@
-<div class="panel">
-  <div class="panel-heading text-center">
-    <h2>{{game.name}}</h2>
-  </div>
-  <div class="panel-body">
-    <div class="image-container col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-        <img src="../../../../assets/standings-icon.png" class="img-responsive" alt="Standings Icon" height="100" width="100">
-        <small>Standings</small>
+<div class="col-lg-8 col-lg-offset-2">
+    <div class="panel">
+        <div class="panel-heading game text-center">
+            <h4>{{game.name}}</h4>
+        </div>
+        <div class="panel-body game">
+            <small>Description:{{game.description}}</small>
+            <small>Secret Code: {{game.secretCode}}</small>
+            <div class="row">
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 col-xs-offset-1 text-center">
+                    <img src="../../../assets/rules-icon.png" class="img-responsive" alt="Rules Icon" height="100" width="100">
+                    <small>Rules</small>
+                </div>
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                    <img src="../../../../assets/standings-icon.png" class="img-responsive" alt="Standings Icon" height="100" width="100">
+                    <small>Ranks</small>
+                </div>
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                    <img src="../../../../assets/football-icon.png" class="img-responsive" alt="Match Icon" height="100" width="100">
+                    <small>Matches</small>
+                </div>
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                    <img src="../../../assets/competition-icon.png" class="img-responsive" alt="Comp Icon" height="100" width="100">
+                    <small>Prizes</small>
+                </div>
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                    <img src="../../../assets/invite-icon.png" class="img-responsive" alt="Invite Icon" height="100" width="100">
+                    <small>Invite</small>
+                </div>
+            </div>
+                
+            <button *ngIf="isAdmin" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-xs-6" (click)="onChooseCompetitions()"><small>Choose Competitions</small></button>
+            <button *ngIf="isAdmin" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-xs-5 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-1" (click)="onAddMatches()"><small>Add Matches</small></button>
+            
+        </div>
     </div>
-    <div class="image-container col-lg-3 col-md-3 col-sm-3 col-xs-3 col-xs-offset-1 text-center">
-        <img src="../../../assets/rules-icon.png" class="img-responsive" alt="Standings Icon" height="100" width="100">
-        <small>Rules</small>
-    </div>
-    <div class="image-container col-lg-3 col-md-3 col-sm-3 col-xs-3 col-xs-offset-1 text-center">
-        <img src="../../../assets/competition-icon.png" class="img-responsive" alt="Standings Icon" height="100" width="100">
-        <small>Competitions</small>
-    </div>
-    
-    <p >Secret Code: {{game.secretCode}}</p>
-    <!-- <p>Players:{{ game.users.length }}</p> -->
-    <p>Description:{{game.description}}</p>
-    <!-- <p>Next match:{{ game.matches[0] }}</p> -->
-    
-        <button *ngIf="isAdmin" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-xs-5" (click)="onChooseCompetitions()">Choose Competitions</button>
-        <button *ngIf="isAdmin" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-xs-5 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" (click)="onAddMatches()">Add Matches</button>
-    
-  </div>
 </div>
