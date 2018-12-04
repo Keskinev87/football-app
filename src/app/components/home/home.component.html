@@ -1,12 +1,6 @@
 <h1 class="text-center"><strong>WELCOME TO SCORE PREDICTOR</strong></h1>
 <br>
-<p class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
- when an unknown printer took a galley of type and scrambled it to make a type
-  specimen book. It has survived not only five centuries, but also the leap into
-   electronic typesetting, remaining essentially unchanged. It was popularised in
-    the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-     and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+<p class="text-center">Score predictor lets you bet on football matches with your friends. Create a game, setup the scoring rules and invite your friends to play. </p>
 <app-loader-component *ngIf="(userState | async).loading; else loaded"></app-loader-component>
 
 <ng-template #loaded>
@@ -25,7 +19,7 @@ Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
     <ng-template #notAuthenticated>
         <div class="col-lg-4 col-md-6 col-sm-10 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-1 text-center">
         
-            <p>Please <button class="btn btn-success" (click)="onNavigate('/login')">login</button> to see you games</p>
+            <p>Please <button class="btn btn-dark" (click)="onNavigate('/login')">login</button> to see you games</p>
         </div>
     </ng-template>
     
