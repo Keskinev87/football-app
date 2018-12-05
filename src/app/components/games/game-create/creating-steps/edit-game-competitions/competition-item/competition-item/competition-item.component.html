@@ -1,9 +1,11 @@
-<a class="list-group-item list-group-item-action list-group-item" 
-  [style.background-color]="selected ? '#283655' : 'white'"
-  [style.color]="selected ? 'white' : '#283655'"  
-  (click) = "selected ? onRemoveCompetition() : onAddCompetition()">
-    {{competition.name}}
-  </a>
+<a class="competition-list-item list-group-item" 
+    [style.background-color]="selected ? '#283655' : '#d0e1f9'"
+    [style.color]="selected ? '#d0e1f9' : '#283655'"  
+    (click) = "selected ? onRemoveCompetition() : onAddCompetition()">
+      {{competition.name}}
+</a>
+
+
   <!-- <div>
       <p class="col-lg-3 col-lg-offset-1">{{competition.name}}</p>
       <div class="col-lg-3 col-lg-offset-3">

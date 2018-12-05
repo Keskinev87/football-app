@@ -1,45 +1,52 @@
+<div class="text-center">
+  <h3>Scoring Rules</h3>
+  <small class="tex-info">Enter the points that will be awarded for each prediction.</small>
+</div>
+<br>
 
-<ul class="nav nav-tabs">
-  <li class="tab-selector" [class.active]="shortTermTab" (click)="onChangeTab()"><a>Match Score Predictions</a></li>
-  <li class="tab-selector" [class.active]="!shortTermTab" (click)="onChangeTab()"><a>Long-term Predictions</a></li>
-</ul>
+
+<div class="auth-container col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
 <form id='game-data' (ngSubmit)="onSubmit(f)" #f="ngForm">
-<div class="tab-content">
-  <div id="short-term" class="tab-pane fade in" [class.active]="shortTermTab">
-    <h3>Match Score Rules</h3>
-    <div class="col-lg-4 col-md-6 col-sm-10 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-1">
-     
+  <ul class="nav nav-tabs">
+    <li class="tab-selector" [class.active]="shortTermTab" (click)="onChangeTab()"><a>Match Score Predictions</a></li>
+    <li class="tab-selector" [class.active]="!shortTermTab" (click)="onChangeTab()"><a>Long-term Predictions</a></li>
+  </ul>
+  
+    <div class="tab-content">
+      <div id="short-term" class="tab-pane fade in" [class.active]="shortTermTab">
+        <h4>Match Score Rules</h4>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
           <div class="form-group">
-              <label for="exactTie">Points for exact tie (you play 1:1, the match ends 1:1)</label>
-              <input 
-                type="text" 
-                class="form-control input-sm"
-                name="exactTie"
-                ngModel
-                required
-                pattern="^[0-9]*$"
-                #exactMatch="ngModel">
-
-              <label for="tie">Points for tie (you play 1:1, the match ends 2:2 (0:0 is separate case))</label>
-              <input 
-                type="text" 
-                class="form-control input-sm"
-                name="tie"
-                ngModel
-                required
-                pattern="^[0-9]*$"
-                #exactMatch="ngModel">
-
-              <label for="exactMatch">Points for exact match (you play 1:1, the match ends 1:1)</label>
-              <input 
-                type="text" 
-                class="form-control input-sm"
-                name="exactMatch"
-                ngModel
-                required
-                pattern="^[0-9]*$"
-                #exactMatch="ngModel">
+            <label for="exactTie">Points for exact tie (you play 1:1, the match ends 1:1)</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              name="exactTie"
+              ngModel
+              required
+              pattern="^[0-9]*$"
+              #exactMatch="ngModel">
       
+            <label for="tie">Points for tie (you play 1:1, the match ends 2:2 (0:0 is separate case))</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              name="tie"
+              ngModel
+              required
+              pattern="^[0-9]*$"
+              #exactMatch="ngModel">
+      
+            <label for="exactMatch">Points for exact match (you play 1:1, the match ends 1:1)</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              name="exactMatch"
+              ngModel
+              required
+              pattern="^[0-9]*$"
+              #exactMatch="ngModel">
+            
             <label for="goalDiff">Points for exact goal difference (You play 2:0, the match ends 3:1)</label>
             <input 
               type="text" 
@@ -49,7 +56,7 @@
               required
               pattern="^[0-9]*$"
               #goalDiff="ngModel">
-    
+          
             <label for="oneGoalDiff">Points for one goal difference (You play 1:0, the match ends 2:0) </label>
             <input 
               type="text" 
@@ -59,61 +66,63 @@
               required
               pattern="^[0-9]*$"
               #oneGoalDiff="ngModel">
-    
+          
             <label for="guessedWinner">Points for guessing the winner (Any other outcome, where you guessed the winner)</label>
-            <input 
-              type="text" 
-              class="form-control input-sm"
-              name="guessedWinner"
-              ngModel 
-              required
-              pattern="^[0-9]*$"
-              #guessedWinner="ngModel">
-    
-            <label for="zeroZero">Points for guessing there will be no goals (0:0)</label>
-            <input 
-              type="text" 
-              class="form-control input-sm"
-              name="zeroZero"
-              ngModel 
-              required
-              pattern="^[0-9]*$"
-              #zeroZero="ngModel">
+              <input 
+                type="text" 
+                class="form-control input-sm"
+                name="guessedWinner"
+                ngModel 
+                required
+                pattern="^[0-9]*$"
+                #guessedWinner="ngModel">
+          
+              <label for="zeroZero">Points for guessing there will be no goals (0:0)</label>
+                <input 
+                  type="text" 
+                  class="form-control input-sm"
+                  name="zeroZero"
+                  ngModel 
+                  required
+                  pattern="^[0-9]*$"
+                  #zeroZero="ngModel">
           </div>
           <button type="button" class="btn btn-info"(click) = "onChangeTab()">Long-term rules</button>
-    </div>
-  </div>
-  <div class="tab-pane fade in" [class.active]="!shortTermTab">
-    <h3>Long-term predictions</h3>
-    <div class="col-lg-4 col-md-6 col-sm-10 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-1">
-  
-        <div class="form-group">
-          <label for="finalWinner">Points for guessing which team will win the competition</label>
-          <input 
-            type="text" 
-            class="form-control input-sm"
-            name="finalWinner"
-            ngModel 
-            required
-            pattern="^[0-9]*$"
-            #teamChampion="ngModel">
-  
-          <label for="topScorer">Points for guessing who will be the top scorer of the competition</label>
-          <input 
-            type="text" 
-            class="form-control input-sm"
-            id="topScorer"
-            name="topScorer" 
-            ngModel
-            required
-            pattern="^[0-9]*$"
-            #topScorer="ngModel">
-
+          <br>
         </div>
-        <button type="button" class="btn btn-info"(click) = "onChangeTab()">Match rules</button>
-    <button type="submit" class="btn btn-default" *ngIf="!(gamesState | async).loading" [disabled]="!f.valid">Submit</button>
-  </div>
-</div>
-</div>
+      </div>
+      <div class="tab-pane fade in" [class.active]="!shortTermTab">
+        <h4>Long-term predictions</h4>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+          <div class="form-group">
+            <label for="finalWinner">Points for guessing which team will win the competition</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              name="finalWinner"
+              ngModel 
+              required
+              pattern="^[0-9]*$"
+              #teamChampion="ngModel">
+        
+            <label for="topScorer">Points for guessing who will be the top scorer of the competition</label>
+            <input 
+              type="text" 
+              class="form-control input-sm"
+              id="topScorer"
+              name="topScorer" 
+              ngModel
+              required
+              pattern="^[0-9]*$"
+              #topScorer="ngModel">
+          </div>
+          <button type="button" class="btn btn-light"(click) = "onChangeTab()">Match rules</button>
+          <button type="submit" class="btn btn-light" *ngIf="!(gamesState | async).loading" [disabled]="!f.valid">Submit</button>
+          <br>
+        </div>
+      </div>
+    </div>
 </form>
+
+</div>
 

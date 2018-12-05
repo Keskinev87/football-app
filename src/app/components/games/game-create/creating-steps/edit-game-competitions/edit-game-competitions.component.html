@@ -1,5 +1,17 @@
-<ul class="list-group">
-  <app-competition-item *ngFor="let competition of (competitionState | async).competitions" [competition] = "competition" [game] = "(gamesState | async).editedGame"></app-competition-item> 
-</ul>
-
-<button type="button" class="btn btn-success" (click)="onSave()">SAVE</button>
+<div class="row text-center col-xs-10 col-xs-offset-1">
+  <h3>Choose Competitions</h3>
+  <small class="text-info">The game will follow only matches, that belong to the competitions you choose here.</small>
+</div>
+<br>
+<div class="row">
+  <div class="auth-container col-lg-6 col-md-6 col-sm-6 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-1 text-center">
+      <br>
+      <ul class="list-group">
+        <app-competition-item *ngFor="let competition of (competitionState | async).competitions" [competition] = "competition" [game] = "(gamesState | async).editedGame"></app-competition-item> 
+      </ul>
+  </div>
+</div>
+<br>
+<div class="row text-center">
+  <button type="button" class="btn btn-dark" (click)="onSave()">SAVE</button>
+</div>

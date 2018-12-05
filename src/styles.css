@@ -20,6 +20,10 @@ h2,h4 {
   color: #d0e1f9;
 }
 
+.competition-list-item {
+  margin-bottom: 5px !important;
+}
+
 input {
   background-color: #A1D6E2 !important;
   /* background-color: rgba(161,214,226,0.5) !important; */
