@@ -18,8 +18,7 @@ export class MatchListComponent implements OnInit {
   constructor(private matchService: MatchesService) {}
 
   ngOnInit() {
-   this.matches = this.matchService.getMatches()
-   console.log(this.matches)
+  
   }
 
 }

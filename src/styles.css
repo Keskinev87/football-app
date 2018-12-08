@@ -134,6 +134,9 @@ div.image-container > .img-responsive {
   margin: 0 auto;
 }
 
+small.live-indicator {
+  color: #a2c523;
+}
 
 /* body {
     background-repeat: no-repeat;
@@ -167,7 +170,7 @@ div.image-container > .img-responsive {
   }
   my-modal .my-modal .my-modal-body {
     padding: 20px;
-    background: #fff;
+    background: #d0e1f9;
     /* margin exposes part of the modal background */
   
     margin: 40px;

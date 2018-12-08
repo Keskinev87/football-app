@@ -1,11 +1,14 @@
-<div *ngIf="liveMatch">
-    <small>{{"-" || liveMatch.score.fullTime.homeTeam}}</small>
-    <small>|</small>
-    <small>{{"-" || liveMatch.score.fullTime.awayTeam}}</small>
+<div *ngIf="(liveMatch | async)" class="text-center">
+    <div class="row">
+        <small class="live-indicator">Live</small>
+    </div>
+    <small>{{(liveMatch | async).score.fullTime.homeTeam}}</small>
+    <small> - </small>
+    <small>{{(liveMatch| async).score.fullTime.awayTeam}}</small>
 </div>
-<div *ngIf="!liveMatch">
+<div *ngIf="!(liveMatch | async)">
     <small>-</small>
-    <small>|</small>
+    <small> | </small>
     <small>-</small>
 </div>
 

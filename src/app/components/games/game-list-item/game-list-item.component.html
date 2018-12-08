@@ -7,19 +7,19 @@
             <small>Description:{{game.description}}</small>
             <small>Secret Code: {{game.secretCode}}</small>
             <div class="row">
-                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 col-xs-offset-1 text-center">
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 col-xs-offset-1 text-center" (click)="onOpenModal('rules')">
                     <img src="../../../assets/rules-icon.png" class="img-responsive" alt="Rules Icon" height="100" width="100">
                     <small>Rules</small>
                 </div>
-                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center" (click)="onOpenModal('ranks')">
                     <img src="../../../../assets/standings-icon.png" class="img-responsive" alt="Standings Icon" height="100" width="100">
                     <small>Ranks</small>
                 </div>
-                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center" (click)="onOpenModal('matches')">
                     <img src="../../../../assets/football-icon.png" class="img-responsive" alt="Match Icon" height="100" width="100">
                     <small>Matches</small>
                 </div>
-                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                <div class="image-container btn btn-icon col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center" (click)="onOpenModal('prizes')">
                     <img src="../../../assets/competition-icon.png" class="img-responsive" alt="Comp Icon" height="100" width="100">
                     <small>Prizes</small>
                 </div>
@@ -35,3 +35,5 @@
         </div>
     </div>
 </div>
+
+<app-my-modal [requestedData] = "requestedData"></app-my-modal>

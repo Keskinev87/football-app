@@ -35,14 +35,12 @@ export class MatchPredictionComponent implements OnInit {
         console.log("State of predictions")
         console.log(state)
         return state.myPredictions
-      }))
-      .pipe(map((predictions: Prediction[]) => {
-        console.log("Searching for prediction")
-        let resPrediction = predictions.find(x => x.matchId == this.match.id)
-          console.log("Prediction:")
-          console.log(resPrediction)
+      }), map((myPredictions) => {
+        let resPrediction = myPredictions.find(x => x.matchId == this.match.id)
+        console.log("Prediction:")
+        console.log(resPrediction)
+        
         if(resPrediction) {
-          
           this.editedPrediction = resPrediction
           this.isEdit = true
           return resPrediction

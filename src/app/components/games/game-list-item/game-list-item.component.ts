@@ -5,6 +5,7 @@ import * as fromApp from '../../../app.reducers'
 import * as GameActions from '../games-store/games.actions'
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
+import { ModalService } from '../../../services/modal.service'
 
 @Component({
   selector: 'app-game-list-item',
@@ -15,8 +16,10 @@ export class GameListItemComponent implements OnInit {
   @Input() game: Game
   @Input() user: User
   isAdmin: boolean
+  requestedData: string
+  
 
-  constructor(private store: Store<fromApp.AppState>, private router: Router ) { }
+  constructor(private store: Store<fromApp.AppState>, private router: Router, private modalService: ModalService ) { }
 
 
   ngOnInit() {
@@ -38,5 +41,9 @@ export class GameListItemComponent implements OnInit {
 
   onAddMatches() {
     console.log("Add matches")
+  }
+
+  onOpenModal(data) {
+    this.modalService.open("app-games-modal")
   }
 }

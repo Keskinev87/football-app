@@ -46,12 +46,7 @@ export class MatchPredictionGameComponent implements OnInit {
     //get the matches form the state and filter them
     this.pendingMatches = this.store.select('matches')
       .pipe(map((state: any) => {
-        return state.pendingMatches
-      }))
-      .pipe(map((pendingMatches: Match[]) => {
-        let filteredPendingMatches = pendingMatches.filter(x => competitionIds.includes(x.competition.id))
-        console.log(filteredPendingMatches)
-        return filteredPendingMatches
+        return state.pendingMatches.filter(x => competitionIds.includes(x.competition.id))
       }))
       
   }

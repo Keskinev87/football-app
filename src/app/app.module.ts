@@ -54,6 +54,10 @@ import { UsersEffects } from './components/users/users-store/users.effects';
 import { LiveScoreComponent } from './components/matches/match-live/live-score/live-score.component';
 import { ModalService } from './services/modal.service'
 import { ModalComponent } from './directives/modal.directive';
+import { MyModalComponent } from './components/games/my-modal/my-modal.component';
+import { GameRulesComponent } from './components/games/game-info/game-rules/game-rules.component';
+import { GameRankingsComponent } from './components/games/game-info/game-rankings/game-rankings.component';
+import { GamePrizesComponent } from './components/games/game-info/game-prizes/game-prizes.component';
 
 
 @NgModule({
@@ -87,7 +91,11 @@ import { ModalComponent } from './directives/modal.directive';
     MatchPredictionComponent,
     UserViewComponent,
     LiveScoreComponent,
-    ModalComponent
+    ModalComponent,
+    MyModalComponent,
+    GameRulesComponent,
+    GameRankingsComponent,
+    GamePrizesComponent
   ],
   imports: [
     BrowserModule,

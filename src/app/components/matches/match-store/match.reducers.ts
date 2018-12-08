@@ -52,11 +52,10 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
         case MatchActions.UPDATE_LIVE_MATCHES_SUCCESS:
             console.log("Action payload")
             console.log(action.payload)
-            let updatedLiveMatches = action.payload
             
             return {
                 ...state,
-                liveMatches: updatedLiveMatches
+                liveMatches: action.payload
             }
         case MatchActions.UPDATE_LIVE_MATCHES_FAIL:
             return {
