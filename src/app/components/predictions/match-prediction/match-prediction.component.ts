@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../../app.reducers';
 import { Game } from '../../models/game.model';
 import { Match } from '../../models/match.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, take, switchMap } from 'rxjs/operators';
 
 
@@ -17,15 +17,38 @@ import { map, take, switchMap } from 'rxjs/operators';
 })
 export class MatchPredictionComponent implements OnInit {
 
-  @Input() game: Game
   @Input() match: Match
-  @Input() isEdit: boolean
-  @Input() prediction: Prediction
+  @Input() game: Game
+  
+  predictions: Observable<any>
+  prediction: Subscription
+  editedPrediction: Prediction
+  isEdit: boolean = false
 
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-
+    console.log("Prediction initialized")
+    this.prediction = this.store.select('predictions')
+      .pipe(take(1))
+      .pipe(map((state:any) => {
+        console.log("State of predictions")
+        console.log(state)
+        return state.myPredictions
+      }))
+      .pipe(map((predictions: Prediction[]) => {
+        console.log("Searching for prediction")
+        let resPrediction = predictions.find(x => x.matchId == this.match.id)
+          console.log("Prediction:")
+          console.log(resPrediction)
+        if(resPrediction) {
+          
+          this.editedPrediction = resPrediction
+          this.isEdit = true
+          return resPrediction
+        } else 
+          return undefined
+      })).subscribe()
   }
 
   onPredict(form: NgForm) {
@@ -35,8 +58,8 @@ export class MatchPredictionComponent implements OnInit {
   }
 
   onEdit(form: NgForm) {
-    this.store.dispatch(new PredictionActions.TryEditPrediction(this.prediction))
-    console.log(this.prediction)
+    this.store.dispatch(new PredictionActions.TryEditPrediction(this.editedPrediction))
+    console.log(this.editedPrediction)
   }
 
 

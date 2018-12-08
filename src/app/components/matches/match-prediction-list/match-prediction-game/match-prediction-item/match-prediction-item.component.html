@@ -3,17 +3,10 @@
       <div class="row">
         <small class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">{{match.utcDate | date }}</small>
         
-        <div *ngIf="(liveMatch | async) as liveMatch; else notLiveYet" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-            <app-live-score [liveMatch] = "liveMatch"></app-live-score>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+            <app-live-score [match] = "match"></app-live-score>
         </div>
         <!--If the match hasn't begun yet-->
-        <ng-template #notLiveYet>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                <small>-</small>
-                <small>|</small>
-                <small>-</small>
-            </div>
-        </ng-template>
           
           <small class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">{{match.utcDate | date:'shortTime'}}</small>
       </div>
@@ -31,10 +24,7 @@
                 </small>
         </div>
         <app-match-prediction 
-                [match] = "match"
-                [game] = "game" 
-                [prediction] = "(predictionState | async).prediction" 
-                [isEdit] = "(predictionState | async).isEdit">
+                [match] = "match" [game] = "game">
         </app-match-prediction>
     </div>
     

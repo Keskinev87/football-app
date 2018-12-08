@@ -33,20 +33,12 @@ export class MatchPredictionListComponent implements OnInit, OnDestroy {
     
 
     //1. Check every X seconds if there are matches to be updated. 2. Try to update them by dispatching the action.
-    this.scheduler = timer(0, 20000)
+    this.scheduler = timer(0, 10000)
     
     this.updater = this.scheduler
       .pipe(map(() => {
-        this.store.select('matches')
-          .pipe(take(1))
-          .subscribe(((state: any) => {
-            if (state.liveMatches.length > 0) {
-              console.log("Dispatching actions")
-              this.store.dispatch(new MatchActions.TryUpdateLiveMatches(state.liveMatches))
-            } else {
-              console.log("No matches")
-            }
-          }))
+        console.log("Update Matches")
+              this.store.dispatch(new MatchActions.TryUpdateLiveMatches())
       }))
       .subscribe()     
   }

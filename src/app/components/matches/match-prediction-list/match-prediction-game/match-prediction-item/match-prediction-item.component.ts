@@ -18,53 +18,11 @@ import { User } from 'src/app/components/models/user.model';
 export class MatchPredictionItemComponent implements OnInit {
   @Input() match: Match
   @Input() game: Game
-  @Input() loggedUser: User
- 
-  predictionState: Observable<{
-    prediction: Prediction,
-    isEdit: boolean
-  }>
-
-  liveMatch : Observable<any>
-  
 
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    let curGame = this.game
-    let curMatch = this.match
-    let curUser = this.loggedUser
-    let now = new Date().getTime()
-
-
-    // //TODO: imporve the condition
-    // if (this.match.dateMiliseconds < now && this.match.score.winner === null && this.match.status != "CANCELED") {
-    //   this.store.dispatch(new MatchActions.AddMatchForLiveUpdate(this.match))
-    // }
-
-    // this.liveMatch = this.store.select('matches')
-    //     .pipe(map((state: any) => {
-    //       return state.liveMatches
-    //     }))
-    //     .pipe(filter(liveMatch =>
-    //       liveMatch.id == this.match.id
-    //     ))
     
-
-    this.predictionState = this.store.select('predictions')
-      .pipe(map((state:any) => {
-        return state.myPredictions
-      }))
-      .pipe(map((predictions: Prediction[]) => {
-        let prediction = predictions.find(function(el) {
-          return (el.matchId == curMatch.id)
-        })
-        let isEdit = false
-        if(prediction)
-          isEdit = true
-          console.log("isEdit: " + isEdit)
-        return {prediction, isEdit}
-      }))
   }
 
   ngOnDestroy() {

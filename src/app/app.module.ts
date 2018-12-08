@@ -55,6 +55,7 @@ import { LiveScoreComponent } from './components/matches/match-live/live-score/l
 import { ModalService } from './services/modal.service'
 import { ModalComponent } from './directives/modal.directive';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -5,6 +5,7 @@ import { Match } from '../../models/match.model'
 export interface State {
     pendingMatches: Match[],
     liveMatches: Match[],
+    lastUpdated: number,
     error: boolean,
     errorCode: number,
     loading: boolean
@@ -13,6 +14,7 @@ export interface State {
 const initialState = {
     pendingMatches: [],
     liveMatches: [],
+    lastUpdated: new Date().getTime(),
     error: false,
     errorCode: null,
     loading: false
@@ -47,10 +49,6 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
             return {
                 ...state
             }
-        case MatchActions.TRY_UPDATE_LIVE_MATCHES:
-            return {
-                ...state
-            }
         case MatchActions.UPDATE_LIVE_MATCHES_SUCCESS:
             console.log("Action payload")
             console.log(action.payload)
@@ -70,10 +68,13 @@ export function matchReducer(state = initialState, action: MatchActions.MatchAct
             return {
                 pendingMatches: [],
                 liveMatches: [],
+                lastUpdated: new Date().getTime(),
                 error: false,
                 errorCode: null,
                 loading: false
             }
+        case MatchActions.DO_NOTHING:
+            return state;
         default: 
             return state;
         }

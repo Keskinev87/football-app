@@ -30,6 +30,10 @@ input {
   color: #1e1f26 !important;
 }
 
+div.smart-component {
+  border: 2px solid black;
+}
+
 input.ng-invalid.ng-touched {
   border: 2px solid 	#bf001d;
 }

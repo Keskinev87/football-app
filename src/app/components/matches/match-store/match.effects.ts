@@ -46,30 +46,25 @@ getMatches = this.actions$
 @Effect()
 tryUpdateLiveMatch = this.actions$
     .ofType(MatchActions.TRY_UPDATE_LIVE_MATCHES)
-    .pipe(map((action:MatchActions.TryUpdateLiveMatches) => {
-        return action.payload
-    }))
-    .pipe(switchMap((liveMatches: Match[]) => {
-        return this.httpClient.post<Match[]>(environment.apiUrl + "/matches/getLiveScores", liveMatches, {observe: 'body'})
-            .pipe(map((liveMatches: Match[]) => {
-                console.log("Response is:")
-                console.log(liveMatches)
-                if (liveMatches && liveMatches.length > 0) {
-                    return {
-                        type: MatchActions.UPDATE_LIVE_MATCHES_SUCCESS,
-                        payload: liveMatches
-                    }
-                } else {
-                    return {
-                        type: MatchActions.DO_NOTHING
-                    }
+    .pipe(switchMap(() => {
+        return this.httpClient.post<Match[]>(environment.apiUrl + "/matches/getLiveScores", {observe: 'body'})
+        .pipe(map((liveMatches: Match[]) => {
+            console.log("Response is:")
+            console.log(liveMatches)
+            if (liveMatches && liveMatches.length > 0) {
+                return {
+                    type: MatchActions.UPDATE_LIVE_MATCHES_SUCCESS,
+                    payload: liveMatches
                 }
-            }), catchError(error => {
-                return of(new MatchActions.UpdateLiveMatchesFail(error.status))
-            }))
+            } else {
+                return {
+                    type: MatchActions.DO_NOTHING
+                }
+            }
+        }), catchError(error => {
+            return of(new MatchActions.UpdateLiveMatchesFail(error.status))
+        }))
     }))
-        
-
 
 constructor(private actions$: Actions, private httpClient: HttpClient, private router: Router) {}
 

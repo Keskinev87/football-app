@@ -46,8 +46,6 @@ export class RemoveMatchOfLiveUpdate implements Action {
 
 export class TryUpdateLiveMatches implements Action {
     readonly type = TRY_UPDATE_LIVE_MATCHES
-
-    constructor (public payload: Match[]) {}
 }
 
 export class UpdateLiveMatchesSuccess implements Action {
