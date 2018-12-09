@@ -17,7 +17,7 @@ export class MyModalComponent implements OnInit {
     console.log(this.requestedData)
   }
 
-  onCloseModal(id) {
+  onCloseModal() {
     this.modalService.close("app-games-modal")
   }
 
