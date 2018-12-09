@@ -170,7 +170,8 @@ small.live-indicator {
   }
   my-modal .my-modal .my-modal-body {
     padding: 20px;
-    background: #d0e1f9;
+    background: #283655;
+    color: #d0e1f9;
     /* margin exposes part of the modal background */
   
     margin: 40px;
@@ -191,6 +192,10 @@ small.live-indicator {
   
     z-index: 900;
   }
+  my-modal .modal-list-light {
+    color: #1e1f26;
+  }
+
   my-modal .my-modal-open {
     /* body overflow is hidden to hide main scrollbar when modal window is open */
   

@@ -81,6 +81,9 @@ export class GameEffects {
                     console.log(resGame)
                     this.router.navigate(['/games/create/score-rules'])
                     return [{
+                        type: GameActions.TRY_GET_ALL_GAMES_BY_USER_ID
+                    },
+                    {
                         type: GameActions.UPDATE_GAME_COMPETITIONS,
                         payload: resGame
                     }, {
@@ -140,6 +143,7 @@ export class GameEffects {
         }))
         .pipe(switchMap((game: Game) => {
             return this.httpClient.post(environment.apiUrl + "/game/saveGameRules", game, {observe: 'body'}).pipe(map((resGame:Game) => {
+                this.router.navigate(['/games'])
                     return {
                         type: GameActions.SAVE_GAME_RULES_SUCCESS,
                         payload: resGame

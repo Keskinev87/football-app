@@ -9,6 +9,7 @@ import { ModalService } from '../../../services/modal.service'
 export class MyModalComponent implements OnInit {
 
   @Input() requestedData
+  @Input() game
 
   constructor(private modalService: ModalService) { }
 

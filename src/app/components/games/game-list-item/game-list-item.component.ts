@@ -44,6 +44,7 @@ export class GameListItemComponent implements OnInit {
   }
 
   onOpenModal(data) {
+    this.requestedData = data
     this.modalService.open("app-games-modal")
   }
 }

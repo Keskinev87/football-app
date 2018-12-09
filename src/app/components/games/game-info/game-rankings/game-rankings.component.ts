@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Game } from 'src/app/components/models/game.model';
 
 @Component({
   selector: 'app-game-rankings',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameRankingsComponent implements OnInit {
 
+  @Input() game: Game
+  
   constructor() { }
 
   ngOnInit() {

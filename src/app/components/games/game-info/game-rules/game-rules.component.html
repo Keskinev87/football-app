@@ -1,3 +1,11 @@
-<p>
-  game-rules works!
-</p>
+<h4>Rules of the game</h4>
+
+<p>The game will award the following points: </p>
+<!-- TODO: Add popover help icons -->
+<ul class="list-group modal-list-light">
+  <li class="list-group-item">Exact result: <span class="pull-right">{{game.scoreRules.exactMatch}} pts</span></li>
+  <li class="list-group-item">Goal difference: <span class="pull-right">{{game.scoreRules.goalDiff}} pts</span></li> 
+  <li class="list-group-item">One goal deviation: <span class="pull-right">{{game.scoreRules.oneGoalDiff}} pts</span></li> 
+  <li class="list-group-item">Exact Tie: <span class="pull-right">{{game.scoreRules.exactTie}} pts</span></li> 
+  <li class="list-group-item">Tie:<span class="pull-right">{{game.scoreRules.tie}} pts </span></li> 
+</ul>

@@ -1,12 +1,21 @@
 <my-modal id="app-games-modal">
     <div class="my-modal col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
         
-        <div class="my-modal-body text-center">
-            <button class="btn btn-dark pull-right" (click)="onCloseModal()">X</button>
+        <div class="my-modal-body">
+            <button class="btn btn-light pull-right" (click)="onCloseModal()">X</button>
             <div *ngIf="requestedData == 'joingame'">
                 <app-games-join></app-games-join>
             </div>
-            <div *ngIf="requestedData == undefined">
+            <div *ngIf="requestedData =='rules'">
+                <app-game-rules [game] = "game"></app-game-rules>
+            </div>
+            <div *ngIf="requestedData =='prizes'">
+                <app-game-prizes></app-game-prizes>
+            </div>
+            <div *ngIf="requestedData =='rankings'">
+                <app-game-rankings [game] = "game"></app-game-rankings>
+            </div>
+            <div *ngIf="requestedData == ''">
                 <p> No data available</p>
             </div>
         </div>
