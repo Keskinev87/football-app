@@ -1,3 +1,5 @@
+import { ScoreRules } from './scoreRules.model'
+
 export class Game {
     constructor(
         public name: string,
@@ -5,7 +7,7 @@ export class Game {
         public description: string,
         public secretCode: number,
         public _id?: string,
-        public scoreRules?: object,
+        public scoreRules?: ScoreRules,
         public shareableUrl?: string,
         public competitions?: Array<number>,
         public matches?: Array<object>,
