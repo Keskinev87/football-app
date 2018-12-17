@@ -23,10 +23,14 @@ export class MatchPredictionGameComponent implements OnInit {
 
   userState: Observable<any>
 
+  trackByFn(index, item) {
+    return index // or item.id
+  }
+
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-
+    console.log("Game initialized")
     this.userState = this.store.select('users')
     
 

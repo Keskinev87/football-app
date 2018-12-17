@@ -28,23 +28,24 @@ export class MatchPredictionListComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromApp.AppState>, private router: Router) { }
 
   ngOnInit() {
+    console.log("List of games initialized")
     //get all games for this user and create a list with the matches that are pending for these games
     this.gamesState = this.store.select('games')
     
 
     //1. Check every X seconds if there are matches to be updated. 2. Try to update them by dispatching the action.
-    this.scheduler = timer(0, 10000)
+    // this.scheduler = timer(0, 10000)
     
-    this.updater = this.scheduler
-      .pipe(map(() => {
-        console.log("Update Matches")
-              this.store.dispatch(new MatchActions.TryUpdateLiveMatches())
-      }))
-      .subscribe()     
+    // this.updater = this.scheduler
+    //   .pipe(map(() => {
+    //     console.log("Update Matches")
+    //           this.store.dispatch(new MatchActions.TryUpdateLiveMatches())
+    //   }))
+    //   .subscribe()     
   }
 
   ngOnDestroy() {
-    this.updater.unsubscribe()
+    // this.updater.unsubscribe()
   }
 
   onGamesRedirect() {

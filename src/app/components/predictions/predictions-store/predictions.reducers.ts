@@ -2,13 +2,17 @@ import * as PredictionsActions from './predictions.actions'
 import { Prediction } from '../../models/prediction.model'
 
 export interface State {
-    myPredictions: Prediction[],
-    loading: boolean
+    myPredictions: {},
+    loading: boolean,
+    error: boolean,
+    errorMsg: string
 }
 
 const initialState: State = {
-    myPredictions: [],
-    loading: false
+    myPredictions: {},
+    loading: false,
+    error: false,
+    errorMsg:''
 }
 
 export function predictionsReducer (state = initialState, action: PredictionsActions.PredictionsActions):State {
@@ -24,11 +28,13 @@ export function predictionsReducer (state = initialState, action: PredictionsAct
                 loading: false
             }
         case PredictionsActions.SAVE_PREDICTION_SUCCESS:
-        console.log("Reducer Prediction: " + action.payload)
+        console.log("Predictions before")
+        console.log(state.myPredictions)
+        
+        state.myPredictions[action.payload.matchId] = action.payload
         console.log(state.myPredictions)
             return {
                 ...state,
-                myPredictions:[...state.myPredictions, action.payload],
                 loading: false
             }
         case PredictionsActions. TRY_GET_MY_PREDICTIONS:
@@ -53,13 +59,13 @@ export function predictionsReducer (state = initialState, action: PredictionsAct
                 loading: true
             }
         case PredictionsActions.EDIT_PREDICTION_SUCCESS:
-            const newPrediction = action.payload
-            const index = state.myPredictions.findIndex(x => x._id == newPrediction._id)
-            var predictions = state.myPredictions
-            predictions[index] = newPrediction
+            console.log("Predictions before")
+            console.log(state.myPredictions)
+            state.myPredictions[action.payload.matchId] = action.payload
+            console.log("Predictions after")
+            console.log(state.myPredictions)
             return {
                 ...state,
-                myPredictions: predictions,
                 loading: false
                 //TODO: update the prediction in the local state too
             }

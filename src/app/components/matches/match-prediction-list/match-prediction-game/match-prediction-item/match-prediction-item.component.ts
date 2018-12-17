@@ -18,11 +18,17 @@ import { User } from 'src/app/components/models/user.model';
 export class MatchPredictionItemComponent implements OnInit {
   @Input() match: Match
   @Input() game: Game
+  predictionState: Observable<{prediction: Prediction, error: boolean}>
 
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    
+    console.log("Match Item initialized")
+    console.log("Getting prediction for the match...")
+    this.predictionState = this.store.select('predictions')
+      .pipe(map((state:any) => {
+        return {prediction: state.myPredictions[this.match.id], error: state.error}
+      }))
   }
 
   ngOnDestroy() {

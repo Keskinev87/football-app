@@ -1,7 +1,7 @@
 <div class="panel">
     <div class="panel-heading match">
       <div class="row">
-        <small class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">{{match.utcDate | date }}</small>
+        <small class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">{{match.utcDate | date }}</small> 
         
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
             <app-live-score [match] = "match"></app-live-score>
@@ -24,7 +24,7 @@
                 </small>
         </div>
         <app-match-prediction 
-                [match] = "match" [game] = "game">
+                [match] = "match" [game] = "game" [prediction] = "(predictionState | async).prediction" [error] = "(predictionState | async).error">
         </app-match-prediction>
     </div>
     

@@ -1,7 +1,7 @@
 <div class="game-prediction-container">
     <h3 class="text-center">{{game.name}}</h3>
     <div *ngIf="(pendingMatches | async) != undefined && (pendingMatches | async).length > 0 as matches; else noMatches">
-        <app-match-prediction-item *ngFor="let match of (pendingMatches | async)" [match] = "match" [game] = "game"></app-match-prediction-item>
+        <app-match-prediction-item *ngFor="let match of (pendingMatches | async); trackBy: trackByFn" [match] = "match" [game] = "game"></app-match-prediction-item>
     </div>
     <ng-template #noMatches>
         <p class="text-center">No matches in the next two days</p>

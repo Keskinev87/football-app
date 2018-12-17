@@ -46,8 +46,16 @@ export class UsersEffects {
                             type: PredictionsActions.TRY_GET_MY_PREDICTIONS
                         }]
                     }), catchError(error => {
-                        this.router.navigate(['/login'])
-                        return of(new AuthActions.SigninFailed(error.status))
+                        if (error.error.error !== undefined) {
+                            this.router.navigate(['/login'])
+                            return of(new AuthActions.SigninFailed(error.error.error))
+                            
+                        } else {
+                            this.router.navigate(['/login'])
+                            return of(new AuthActions.SigninFailed("No connection to the server"))
+                        }
+                        
+                        
                     }))
             } else {
                 this.router.navigate(['/login'])

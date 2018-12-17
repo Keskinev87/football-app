@@ -66,7 +66,12 @@ export class AuthEffects {
                 ]
             }),catchError((error: any) => {
                 console.log("error")
-                return of(new AuthActions.SigninFailed(error.error.error || "No connection to the server!"))
+                if(error.error.error != undefined) {
+                    return of(new AuthActions.SigninFailed(error.error.error))
+                } else {
+                    return of(new AuthActions.SigninFailed("No connection to the server!"))
+                }
+                
             })
             )
         }))

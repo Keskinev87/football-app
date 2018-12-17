@@ -35,9 +35,15 @@ export class PredictionsEffects {
         .pipe(switchMap(() => {
             console.log("Predicitons Actions")
             return this.httpClient.get(environment.apiUrl + "/predictions/getMatchPredictionsForUser", {observe: 'body'}).pipe(map((predictions: Prediction[]) => {
+                console.time('To hashtable begin')
+                let myPredictions = {}
+                for (let prediction of predictions) {
+                    myPredictions[prediction.matchId] = prediction;
+                }
+                console.timeEnd('To hashtable begin')
                 return {
                     type: PredictionsActions.GET_MY_PREDICTIONS_SUCCESS,
-                    payload: predictions
+                    payload: myPredictions
                 }
             }), catchError(error => {
                 return of(new PredictionsActions.GetMyPredictionsFail())
